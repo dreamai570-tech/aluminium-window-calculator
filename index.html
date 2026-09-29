@@ -1,2856 +1,711 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Aluminium Quotation Pro</title>
-
-<style>
-*{
-  box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
-}
-
-html,body{
-  margin:0;
-  padding:0;
-  width:100%;
-  min-height:100%;
-  overflow-x:hidden;
-  font-family:Arial,Helvetica,sans-serif;
-  background:#0b1220;
-  color:#eaf0f7;
-}
-
-button,input,select,textarea{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-body{
-  display:flex;
-  justify-content:center;
-}
-
-.app{
-  width:100%;
-  max-width:430px;
-  min-height:100vh;
-  margin:0 auto;
-  padding:8px;
-  background:#0f172a;
-}
-
-/* HEADER */
-.header{
-  background:linear-gradient(135deg,#172554,#0f766e);
-  border-radius:18px;
-  padding:15px;
-  margin-bottom:8px;
-  box-shadow:0 8px 25px rgba(0,0,0,.25);
-}
-
-.header-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:8px;
-}
-
-.logo{
-  font-size:21px;
-  font-weight:900;
-}
-
-.subtitle{
-  font-size:11px;
-  opacity:.75;
-  margin-top:3px;
-}
-
-.header-actions{
-  display:flex;
-  gap:5px;
-}
-
-.icon-btn{
-  width:38px;
-  height:38px;
-  border:0;
-  border-radius:11px;
-  background:rgba(255,255,255,.12);
-  color:#fff;
-}
-
-/* TOOLBAR */
-.toolbar{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:6px;
-  margin-bottom:8px;
-}
-
-.toolbar button{
-  border:0;
-  border-radius:11px;
-  padding:10px 7px;
-  color:#fff;
-  background:#1e293b;
-  font-weight:700;
-  font-size:12px;
-}
-
-.toolbar button.primary{
-  background:#0ea5e9;
-}
-
-.toolbar button.green{
-  background:#059669;
-}
-
-.toolbar button.orange{
-  background:#d97706;
-}
-
-/* CARD */
-.card{
-  background:#111c30;
-  border:1px solid #24324a;
-  border-radius:16px;
-  padding:12px;
-  margin-bottom:8px;
-  box-shadow:0 5px 18px rgba(0,0,0,.16);
-}
-
-.card-title{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:10px;
-  font-size:14px;
-  font-weight:900;
-}
-
-.badge{
-  background:#172554;
-  color:#60a5fa;
-  padding:4px 7px;
-  border-radius:7px;
-  font-size:10px;
-}
-
-/* CUSTOMER */
-.customer-box{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:8px;
-  background:#0b1425;
-  border-radius:11px;
-  padding:9px;
-}
-
-.customer-info{
-  min-width:0;
-}
-
-.customer-name{
-  font-weight:800;
-  font-size:13px;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-
-.customer-sub{
-  font-size:10px;
-  color:#94a3b8;
-  margin-top:3px;
-}
-
-.small-btn{
-  border:0;
-  border-radius:8px;
-  padding:7px 9px;
-  background:#334155;
-  color:#fff;
-  font-size:11px;
-  font-weight:700;
-}
-
-/* FORM */
-.entry-grid,
-.form-grid{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:8px;
-}
-
-.field label{
-  display:block;
-  font-size:10px;
-  color:#94a3b8;
-  margin:0 0 4px 2px;
-  font-weight:700;
-}
-
-.field input,
-.field select,
-.field textarea{
-  width:100%;
-  min-width:0;
-  border:1px solid #334155;
-  outline:none;
-  background:#0b1425;
-  color:#fff;
-  border-radius:10px;
-  padding:11px;
-  font-size:13px;
-}
-
-.field input:focus,
-.field select:focus,
-.field textarea:focus{
-  border-color:#0ea5e9;
-}
-
-.field textarea{
-  min-height:70px;
-  resize:vertical;
-}
-
-.rate-preview{
-  margin-top:8px;
-  padding:9px;
-  background:#0b1425;
-  border-radius:10px;
-  border:1px solid #23314a;
-}
-
-.rate-title{
-  font-size:10px;
-  color:#94a3b8;
-  margin-bottom:6px;
-}
-
-.rate-chips{
-  display:flex;
-  flex-wrap:wrap;
-  gap:4px;
-}
-
-.rate-chip{
-  padding:5px 7px;
-  border-radius:6px;
-  background:#1e293b;
-  font-size:10px;
-}
-
-.rate-chip.active{
-  background:#075985;
-  color:#bae6fd;
-}
-
-/* ADD ITEM */
-.add-btn{
-  width:100%;
-  border:0;
-  border-radius:12px;
-  padding:13px;
-  margin-top:9px;
-  color:#fff;
-  background:linear-gradient(135deg,#0284c7,#0369a1);
-  font-size:14px;
-  font-weight:900;
-}
-
-/* TABLE */
-.table-wrap{
-  width:100%;
-  overflow-x:auto;
-  overflow-y:hidden;
-  border-radius:10px;
-  border:1px solid #27364e;
-  -webkit-overflow-scrolling:touch;
-}
-
-table{
-  width:1050px;
-  border-collapse:collapse;
-  font-size:10px;
-}
-
-th{
-  background:#172554;
-  color:#bfdbfe;
-  padding:8px 6px;
-  white-space:nowrap;
-  text-align:left;
-}
-
-td{
-  padding:7px 6px;
-  border-top:1px solid #26344b;
-  white-space:nowrap;
-}
-
-tr:nth-child(even) td{
-  background:rgba(255,255,255,.015);
-}
-
-.empty{
-  text-align:center;
-  padding:20px;
-  color:#64748b;
-}
-
-/* ACTIONS */
-.row-actions{
-  display:flex;
-  gap:4px;
-}
-
-.row-actions button{
-  border:0;
-  border-radius:6px;
-  padding:5px 7px;
-  color:#fff;
-  font-size:10px;
-}
-
-.edit{background:#0369a1}
-.copy{background:#475569}
-.delete{background:#b91c1c}
-
-/* TOTALS */
-.total-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:6px;
-}
-
-.total-box{
-  background:#0b1425;
-  border:1px solid #26344b;
-  border-radius:10px;
-  padding:9px;
-}
-
-.total-label{
-  color:#94a3b8;
-  font-size:10px;
-}
-
-.total-value{
-  margin-top:4px;
-  font-weight:900;
-  font-size:14px;
-}
-
-.grand{
-  grid-column:1/-1;
-  background:linear-gradient(135deg,#064e3b,#065f46);
-  border-color:#047857;
-}
-
-.grand .total-value{
-  font-size:22px;
-  color:#a7f3d0;
-}
-
-/* SUMMARY */
-.summary-row{
-  display:flex;
-  justify-content:space-between;
-  gap:8px;
-  padding:7px 0;
-  border-bottom:1px solid #23314a;
-  font-size:12px;
-}
-
-.summary-row:last-child{
-  border-bottom:0;
-}
-
-.summary-row span:first-child{
-  color:#94a3b8;
-}
-
-.summary-row strong{
-  text-align:right;
-}
-
-/* MODAL */
-.modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.72);
-  display:none;
-  align-items:flex-end;
-  justify-content:center;
-  z-index:1000;
-  padding:8px;
-}
-
-.modal.show{
-  display:flex;
-}
-
-.modal-box{
-  width:100%;
-  max-width:430px;
-  max-height:92vh;
-  overflow-y:auto;
-  background:#111c30;
-  border:1px solid #334155;
-  border-radius:18px;
-  padding:14px;
-}
-
-.modal-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:12px;
-}
-
-.modal-title{
-  font-size:16px;
-  font-weight:900;
-}
-
-.close{
-  border:0;
-  width:32px;
-  height:32px;
-  border-radius:9px;
-  background:#334155;
-  color:#fff;
-}
-
-.modal-actions{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:7px;
-  margin-top:12px;
-}
-
-.modal-actions button{
-  border:0;
-  border-radius:10px;
-  padding:11px;
-  color:#fff;
-  font-weight:800;
-  background:#334155;
-}
-
-.modal-actions .save{
-  background:#059669;
-}
-
-/* RATE MANAGER */
-.rate-manager{
-  overflow-x:auto;
-}
-
-.rate-table{
-  width:850px;
-  border-collapse:collapse;
-  font-size:10px;
-}
-
-.rate-table input{
-  width:75px;
-  padding:6px;
-  background:#0b1425;
-  color:#fff;
-  border:1px solid #334155;
-  border-radius:6px;
-}
-
-/* HISTORY */
-.history-item{
-  padding:10px;
-  background:#0b1425;
-  border:1px solid #26344b;
-  border-radius:10px;
-  margin-bottom:7px;
-}
-
-.history-top{
-  display:flex;
-  justify-content:space-between;
-  gap:8px;
-}
-
-.history-name{
-  font-weight:900;
-}
-
-.history-date{
-  font-size:9px;
-  color:#64748b;
-}
-
-.history-total{
-  margin-top:5px;
-  color:#6ee7b7;
-  font-weight:900;
-}
-
-/* CHECK APP */
-.check-item{
-  display:flex;
-  justify-content:space-between;
-  padding:8px;
-  margin-bottom:5px;
-  background:#0b1425;
-  border-radius:8px;
-  font-size:11px;
-}
-
-.pass{
-  color:#4ade80;
-  font-weight:900;
-}
-
-.fail{
-  color:#f87171;
-  font-weight:900;
-}
-
-/* FOOTER */
-.footer{
-  text-align:center;
-  padding:12px 5px;
-  color:#64748b;
-  font-size:9px;
-}
-
-/* PRINT */
-@media print{
-  body{
-    background:#fff;
-    color:#000;
-    font-size:14px;
-  }
-
-  .app{
-    max-width:none;
-    background:#fff;
-    padding:0;
-  }
-
-  .toolbar,
-  .header-actions,
-  .add-btn,
-  .row-actions,
-  .customer-box button,
-  .no-print{
-    display:none!important;
-  }
-
-  .header{
-    background:#fff;
-    box-shadow:none;
-    border:1px solid #000;
-    padding:10px;
-    border-radius:0;
-  }
-
-  .logo{
-    font-size:24px;
-    color:#000;
-  }
-
-  .subtitle{
-    color:#333;
-    opacity:1;
-    font-size:12px;
-  }
-
-  .card{
-    color:#000;
-    background:#fff;
-    border:1px solid #999;
-    box-shadow:none;
-    border-radius:0;
-    page-break-inside:avoid;
-  }
-
-  .card-title{
-    font-size:16px;
-  }
-
-  .badge{
-    background:#fff;
-    color:#000;
-    border:1px solid #000;
-  }
-
-  .customer-box{
-    background:#fff;
-    border:1px solid #999;
-  }
-
-  .customer-name{
-    font-size:15px;
-    color:#000;
-  }
-
-  .customer-sub{
-    color:#333;
-    font-size:12px;
-  }
-
-  .field label{
-    color:#333;
-    font-size:11px;
-  }
-
-  .field input,
-  .field select,
-  .field textarea{
-    background:#fff;
-    color:#000;
-    border:1px solid #ccc;
-    font-size:14px;
-    padding:6px;
-  }
-
-  .table-wrap{
-    overflow:visible;
-    border:1px solid #999;
-  }
-
-  table{
-    width:100%;
-    color:#000;
-    font-size:13px;
-  }
-
-  th{
-    background:#eee;
-    color:#000;
-    font-size:13px;
-    padding:8px 6px;
-  }
-
-  td{
-    color:#000;
-    font-size:13px;
-    padding:8px 6px;
-  }
-
-  .total-label{
-    color:#333;
-    font-size:12px;
-  }
-
-  .total-value{
-    font-size:17px;
-    color:#000;
-  }
-
-  .grand{
-    background:#eee;
-    border:1px solid #000;
-  }
-
-  .grand .total-value{
-    font-size:26px;
-    color:#000;
-  }
-
-  .summary-row{
-    font-size:14px;
-  }
-
-  .footer{
-    color:#666;
-    font-size:11px;
-  }
-}
-
-/* DESKTOP */
-@media(min-width:700px){
-  body{
-    padding:15px;
-  }
-
-  .app{
-    max-width:900px;
-    border-radius:20px;
-    padding:14px;
-  }
-
-  .entry-grid{
-    grid-template-columns:1.2fr 1fr 1fr;
-  }
-
-  .form-grid{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .toolbar{
-    grid-template-columns:repeat(4,1fr);
-  }
-
-  .modal{
-    align-items:center;
-  }
-}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#e4a11b" />
+  <link rel="icon" href="data:," />
+  <title>Aluminium Window Calculator</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@500;600;700&display=swap');
+
+    :root {
+      color-scheme: light dark;
+      --bg: #eceeed;
+      --surface: #ffffff;
+      --surface-2: #f4f5f3;
+      --ink: #161a19;
+      --muted: #59615f;
+      --line: #cbd0ce;
+      --line-strong: #979f9c;
+      --accent: #d89000;
+      --accent-deep: #7f5200;
+      --accent-soft: #fff1c9;
+      --steel: #2d514d;
+      --steel-soft: #dceae7;
+      --danger: #a43d2f;
+      --shadow: 0 16px 38px rgba(22, 26, 25, .09);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111514;
+        --surface: #1a201f;
+        --surface-2: #222a28;
+        --ink: #f1f3f1;
+        --muted: #aeb7b4;
+        --line: #3a4542;
+        --line-strong: #65716e;
+        --accent: #f0ad24;
+        --accent-deep: #ffd374;
+        --accent-soft: #3b3018;
+        --steel: #83b5ac;
+        --steel-soft: #203b37;
+        --danger: #ff9d8e;
+        --shadow: 0 18px 44px rgba(0, 0, 0, .28);
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      background:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px),
+        var(--bg);
+      background-size: 40px 40px;
+      color: var(--ink);
+      font-family: "IBM Plex Sans", "Noto Sans Arabic", sans-serif;
+    }
+
+    button, input, select { font: inherit; }
+    button { color: inherit; }
+    .app { width: min(1180px, 100%); margin: 0 auto; padding: 24px 20px 56px; }
+
+    .intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: end;
+      gap: 24px;
+      padding: 22px 0 20px;
+      border-bottom: 3px solid var(--ink);
+    }
+    .intro h1 { margin: 0 0 7px; font-size: clamp(28px, 5vw, 47px); line-height: 1.02; letter-spacing: -.035em; }
+    .intro p { margin: 0; max-width: 660px; color: var(--muted); font-size: 16px; }
+    .measure-tag { display: flex; align-items: center; gap: 10px; color: var(--steel); font-size: 13px; font-weight: 700; white-space: nowrap; }
+    .measure-tag::before { content: ""; width: 68px; height: 8px; border-top: 2px solid currentColor; border-bottom: 2px solid currentColor; }
+
+    .type-tabs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin: 18px 0; }
+    .type-tab {
+      min-height: 58px;
+      padding: 10px 14px;
+      border: 1px solid var(--line-strong);
+      border-bottom-width: 3px;
+      border-radius: 7px 7px 2px 2px;
+      background: var(--surface);
+      cursor: pointer;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: background .18s ease, border-color .18s ease;
+    }
+    .type-tab:hover { border-color: var(--ink); }
+    .type-tab[aria-selected="true"] { background: var(--accent-soft); border-color: var(--accent-deep); }
+    .type-tab svg { flex: 0 0 36px; width: 36px; height: 30px; stroke: currentColor; fill: none; stroke-width: 1.6; }
+    .type-tab strong { display: block; font-size: 16px; }
+    .type-tab small { display: block; color: var(--muted); margin-top: 2px; }
+
+    .workspace { display: grid; grid-template-columns: minmax(300px, 390px) minmax(0, 1fr); gap: 18px; align-items: start; }
+    .panel { background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); }
+    .controls { padding: 22px; border-radius: 6px 18px 6px 6px; position: sticky; top: 16px; }
+    .panel-title { margin: 0 0 18px; font-size: 19px; }
+    .field-group { padding: 18px 0; border-top: 1px solid var(--line); }
+    .field-group:first-of-type { border-top: 0; padding-top: 0; }
+    .field-group h3 { margin: 0 0 12px; font-size: 13px; color: var(--muted); letter-spacing: .04em; text-transform: uppercase; }
+    .unit-toggle { display: inline-grid; grid-template-columns: 1fr 1fr; padding: 3px; background: var(--surface-2); border: 1px solid var(--line); border-radius: 6px; margin-bottom: 14px; }
+    .unit-toggle button { border: 0; padding: 7px 14px; border-radius: 4px; background: transparent; cursor: pointer; font-weight: 600; }
+    .unit-toggle button.active { background: var(--ink); color: var(--surface); }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .field { min-width: 0; }
+    label { display: block; color: var(--muted); font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+    .input-wrap { display: flex; align-items: center; border: 1px solid var(--line-strong); border-radius: 5px; background: var(--surface-2); min-width: 0; }
+    .input-wrap:focus-within { outline: 3px solid var(--accent-soft); border-color: var(--accent-deep); }
+    input, select { width: 100%; min-width: 0; border: 0; background: transparent; color: var(--ink); padding: 11px 10px; outline: 0; }
+    .suffix { color: var(--muted); padding-right: 10px; font-size: 13px; white-space: nowrap; }
+    .mm-fields { display: none; }
+    .helper { color: var(--muted); font-size: 12px; line-height: 1.45; margin: 7px 0 0; }
+    .error { min-height: 18px; color: var(--danger); font-size: 12px; margin-top: 8px; }
+
+    .results { display: grid; gap: 14px; }
+    .blueprint {
+      min-height: 245px;
+      border-radius: 18px 6px 6px 6px;
+      padding: 22px;
+      background: var(--steel-soft);
+      border: 1px solid var(--steel);
+      display: grid;
+      grid-template-columns: minmax(220px, .9fr) 1.1fr;
+      gap: 24px;
+      align-items: center;
+      overflow: hidden;
+    }
+    .window-visual { min-height: 190px; display: grid; place-items: center; perspective: 900px; }
+    .window-drawing {
+      --frame-color: var(--steel);
+      --glass-color: rgba(222, 239, 240, .8);
+      width: min(100%, 330px);
+      aspect-ratio: 1.5;
+      border: 9px solid var(--frame-color);
+      position: relative;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.62) 0 13%, transparent 13% 48%, rgba(255,255,255,.28) 48% 55%, transparent 55%),
+        var(--glass-color);
+      box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--surface) 70%, transparent);
+      transition: transform .25s ease, box-shadow .25s ease, border-color .2s ease, background .2s ease;
+      transform-style: preserve-3d;
+    }
+    .window-drawing.view-3d { transform: rotateY(-13deg) rotateX(4deg); box-shadow: 15px 15px 0 color-mix(in srgb, var(--frame-color) 52%, transparent), 26px 28px 32px rgba(0,0,0,.19), inset 0 0 0 2px color-mix(in srgb, var(--surface) 70%, transparent); }
+    .window-drawing.view-3d::before, .window-drawing.view-3d::after { filter: drop-shadow(4px 4px 1px rgba(0,0,0,.18)); }
+    .window-drawing::before, .window-drawing::after { content: ""; position: absolute; background: var(--frame-color); z-index: 2; }
+    .window-drawing.sliding::before { width: 7px; height: 100%; left: calc(50% - 3px); top: 0; }
+    .window-drawing.sliding::after { width: 3px; height: 72%; left: 48%; top: 14%; background: var(--accent); }
+    .window-drawing.casement::before { width: 6px; height: 100%; left: calc(50% - 3px); top: 0; }
+    .window-drawing.casement::after { inset: 12% 8% 12% auto; width: 38%; height: 76%; border: 2px solid var(--accent); background: transparent; transform: skewY(-10deg); }
+    .window-drawing.fixed::before { width: 1px; height: 82%; left: 50%; top: 9%; background: color-mix(in srgb, var(--steel) 45%, transparent); }
+    .window-drawing.fixed::after { height: 1px; width: 86%; left: 7%; top: 50%; background: color-mix(in srgb, var(--steel) 45%, transparent); }
+    .dimension { position: absolute; color: var(--steel); font-weight: 700; font-size: 13px; letter-spacing: .02em; }
+    .dimension.w { bottom: -34px; width: 100%; text-align: center; }
+    .dimension.h { top: 50%; left: -58px; transform: translateY(-50%) rotate(-90deg); width: 95px; text-align: center; }
+    .blueprint-copy h2 { margin: 0 0 8px; font-size: clamp(25px, 4vw, 38px); letter-spacing: -.025em; }
+    .blueprint-copy p { margin: 0 0 18px; color: var(--muted); line-height: 1.5; }
+    .key-total { display: flex; align-items: baseline; gap: 9px; flex-wrap: wrap; }
+    .key-total strong { font-size: clamp(34px, 6vw, 58px); letter-spacing: -.04em; color: var(--steel); }
+    .key-total span { color: var(--muted); font-weight: 600; }
+
+    .metric-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .metric { padding: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 5px 12px 5px 5px; }
+    .metric span { display: block; color: var(--muted); font-size: 12px; margin-bottom: 5px; }
+    .metric strong { font-size: 23px; letter-spacing: -.025em; }
+
+    .detail { border-radius: 6px; overflow: hidden; }
+    .detail-head { display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 17px 20px; border-bottom: 1px solid var(--line); }
+    .detail-head h2 { margin: 0; font-size: 18px; }
+    .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .action {
+      border: 1px solid var(--line-strong);
+      border-radius: 5px;
+      background: var(--surface-2);
+      padding: 8px 11px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .action:hover { border-color: var(--ink); }
+    .action:focus-visible, .type-tab:focus-visible, .unit-toggle button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+    .check-row { display: flex; align-items: center; gap: 9px; min-height: 42px; color: var(--ink); font-size: 13px; font-weight: 600; }
+    .check-row input { width: 18px; height: 18px; accent-color: var(--accent); }
+    .sub-fields { display: grid; gap: 10px; margin-top: 10px; }
+    .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .profile-grid .wide { grid-column: 1 / -1; }
+    .material-head { display: grid; grid-template-columns: minmax(0, 1fr) 82px 105px; gap: 10px; padding: 9px 20px; background: var(--surface-2); color: var(--muted); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+    .material-head span:nth-child(n+2) { text-align: right; }
+    .cut-row .amount { text-align: right; font-variant-numeric: tabular-nums; font-weight: 700; color: var(--steel); }
+    .formula-note { color: var(--muted); font-size: 11px; line-height: 1.45; margin: 8px 0 0; }
+    .window-drawing.door { aspect-ratio: .72; max-width: 180px; }
+    .window-drawing.door::before { height: 7px; width: 100%; left: 0; top: 58%; }
+    .window-drawing.door::after { width: 3px; height: 22px; right: 12px; top: 50%; background: var(--accent); border-radius: 50%; }
+    .window-drawing.dg::before { width: 7px; height: 100%; left: calc(50% - 3px); top: 0; }
+    .window-drawing.dg::after { width: 78%; height: 5px; left: 11%; top: 50%; background: var(--accent); }
+    .is-hidden { display: none !important; }
+    .cut-list { padding: 4px 20px 12px; }
+    .cut-row { display: grid; grid-template-columns: minmax(0, 1fr) 82px 105px; gap: 10px; align-items: center; padding: 13px 0; border-bottom: 1px solid var(--line); }
+    .cut-row:last-child { border-bottom: 0; }
+    .cut-row .name { font-weight: 600; }
+    .cut-row .name small { display: block; color: var(--muted); font-weight: 400; margin-top: 2px; }
+    .qty { width: fit-content; padding: 4px 8px; border-radius: 3px; background: var(--surface-2); color: var(--muted); font-size: 12px; }
+    .measure { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+
+    .cost { padding: 20px; border-radius: 6px; }
+    .cost h2 { margin: 0 0 16px; font-size: 18px; }
+    .cost-line { display: flex; justify-content: space-between; gap: 20px; padding: 9px 0; color: var(--muted); }
+    .cost-line strong { color: var(--ink); font-variant-numeric: tabular-nums; }
+    .cost-total { border-top: 2px solid var(--ink); margin-top: 8px; padding-top: 15px; color: var(--ink); font-size: 19px; font-weight: 700; }
+    .cost-note { margin: 12px 0 0; color: var(--muted); font-size: 12px; }
+
+    .preview-tools { display: grid; gap: 12px; }
+    .view-toggle { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+    .view-toggle button { border: 1px solid var(--line-strong); background: var(--surface-2); border-radius: 5px; padding: 9px 10px; cursor: pointer; font-weight: 700; }
+    .view-toggle button.active { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+    .glass-chip { display: inline-flex; align-items: center; gap: 7px; margin-top: 8px; color: var(--muted); font-size: 12px; }
+    .glass-chip::before { content: ""; width: 17px; height: 17px; border: 1px solid var(--line-strong); border-radius: 3px; background: var(--glass-swatch, #dfeff1); }
+    .rate-card { border-radius: 6px; overflow: hidden; }
+    .rate-card summary { list-style: none; cursor: pointer; padding: 17px 20px; display: flex; justify-content: space-between; gap: 14px; align-items: center; font-weight: 700; }
+    .rate-card summary::-webkit-details-marker { display: none; }
+    .rate-card summary::after { content: "+"; color: var(--accent-deep); font-size: 22px; line-height: 1; }
+    .rate-card[open] summary::after { content: "−"; }
+    .rate-body { border-top: 1px solid var(--line); padding: 16px 20px 20px; }
+    .rate-profile { display: grid; grid-template-columns: minmax(0, 1fr) minmax(150px, .6fr); gap: 10px; margin-bottom: 13px; }
+    .rate-list { max-height: 330px; overflow-y: auto; border-top: 1px solid var(--line); }
+    .rate-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; padding: 10px 2px; border-bottom: 1px solid var(--line); align-items: center; }
+    .rate-row span { font-weight: 600; }
+    .rate-row strong { color: var(--steel); font-variant-numeric: tabular-nums; }
+    .rate-empty { margin: 14px 0 0; color: var(--muted); }
+    .quote-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .quote-meta .wide { grid-column: 1 / -1; }
+
+    .note { margin-top: 18px; padding: 18px 20px; border-left: 4px solid var(--accent); background: var(--surface); color: var(--muted); font-size: 13px; line-height: 1.6; }
+    .note strong { color: var(--ink); }
+    .toast { position: fixed; left: 50%; bottom: 22px; transform: translate(-50%, 20px); opacity: 0; pointer-events: none; background: var(--ink); color: var(--surface); padding: 10px 16px; border-radius: 5px; box-shadow: var(--shadow); transition: .2s ease; z-index: 5; }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+    @media (max-width: 820px) {
+      .app { padding: 16px 14px 42px; }
+      .intro { grid-template-columns: 1fr; gap: 12px; }
+      .measure-tag { display: none; }
+      .type-tabs { grid-template-columns: repeat(2, 1fr); }
+      .type-tab { min-height: 52px; }
+      .workspace { grid-template-columns: 1fr; }
+      .controls { position: static; border-radius: 6px 14px 6px 6px; }
+      .blueprint { grid-template-columns: 1fr; padding: 18px 18px 22px; }
+      .window-visual { min-height: 180px; padding: 0 30px; }
+      .blueprint-copy { border-top: 1px solid var(--steel); padding-top: 18px; }
+    }
+    @media (max-width: 520px) {
+      .intro h1 { font-size: 31px; }
+      .type-tab small { display: none; }
+      .row { grid-template-columns: 1fr; }
+      .metric-grid { grid-template-columns: 1fr; }
+      .metric { display: flex; justify-content: space-between; align-items: baseline; }
+      .metric span { margin: 0; }
+      .detail-head { align-items: flex-start; flex-direction: column; }
+      .actions { width: 100%; }
+      .action { flex: 1; }
+      .profile-grid, .quote-meta, .rate-profile { grid-template-columns: 1fr; }
+      .profile-grid .wide, .quote-meta .wide { grid-column: auto; }
+      .material-head { grid-template-columns: minmax(0, 1fr) 72px 88px; padding-inline: 14px; }
+      .cut-list { padding-inline: 14px; }
+      .cut-row { grid-template-columns: minmax(0, 1fr) 72px 88px; gap: 8px; }
+      .cut-row .name, .cut-row .qty, .cut-row .measure { grid-column: auto; grid-row: auto; }
+      .cut-row .measure { text-align: right; color: var(--ink); }
+      .cut-row .name small { font-size: 11px; }
+      .type-tab svg { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
+  </style>
 </head>
-
 <body>
-
-<div class="app">
-
-  <!-- HEADER -->
-  <header class="header">
-    <div class="header-top">
+  <main class="app">
+    <section class="intro">
       <div>
-        <div class="logo">Aluminium Quotation Pro</div>
-        <div class="subtitle">Professional quotation & rate management</div>
+        <h1>Size dein, material nikalein.</h1>
+        <p>Apni section rate list aur fabrication formulas se sliding, openable, fixed, door aur DG ka material aur cost nikalein.</p>
       </div>
+      <div class="measure-tag">Running feet + sq. ft.</div>
+    </section>
 
-      <div class="header-actions">
-        <button class="icon-btn" onclick="openModal('companyModal')">🏢</button>
-        <button class="icon-btn" onclick="openModal('customerModal')">👤</button>
-      </div>
-    </div>
-  </header>
-
-  <!-- TOOLBAR -->
-  <div class="toolbar">
-    <button class="primary" onclick="newQuotation()">＋ New</button>
-    <button onclick="saveQuotation()">💾 Save</button>
-    <button onclick="printQuotation()">🖨️ Print</button>
-    <button class="green" onclick="sendWhatsApp()">📱 WhatsApp</button>
-    <button onclick="openRateManager()">⚙️ Rates</button>
-    <button onclick="openHistory()">🕘 History</button>
-    <button class="orange" onclick="backupData()">⬇ Backup</button>
-    <button onclick="restoreInput.click()">⬆ Restore</button>
-    <button onclick="checkApp()">🧪 Check App</button>
-    <button onclick="openSummary()">📊 Summary</button>
-  </div>
-
-  <input type="file" id="restoreInput" accept=".json" style="display:none" onchange="restoreData(event)">
-
-  <!-- CUSTOMER -->
-  <section class="card">
-    <div class="card-title">
-      Customer
-      <span class="badge" id="quotationNo">QT-0001</span>
+    <div class="type-tabs" role="tablist" aria-label="Structure type">
+      <button class="type-tab" role="tab" aria-selected="true" data-type="sliding">
+        <svg viewBox="0 0 40 32" aria-hidden="true"><rect x="2" y="2" width="36" height="28"/><path d="M20 2v28M5 26h12M23 6h12"/></svg>
+        <span><strong>Sliding</strong><small>DC 75 / 95 / 100</small></span>
+      </button>
+      <button class="type-tab" role="tab" aria-selected="false" data-type="openable">
+        <svg viewBox="0 0 40 32" aria-hidden="true"><rect x="2" y="2" width="36" height="28"/><path d="M20 2v28M5 6l12 5v15M35 6l-12 5v15"/></svg>
+        <span><strong>Khulne wali</strong><small>Single / double palla</small></span>
+      </button>
+      <button class="type-tab" role="tab" aria-selected="false" data-type="fixed">
+        <svg viewBox="0 0 40 32" aria-hidden="true"><rect x="2" y="2" width="36" height="28"/><path d="M20 2v28M2 16h36"/></svg>
+        <span><strong>Fixed</strong><small>D-series frame</small></span>
+      </button>
+      <button class="type-tab" role="tab" aria-selected="false" data-type="door">
+        <svg viewBox="0 0 40 32" aria-hidden="true"><rect x="8" y="2" width="24" height="28"/><path d="M8 19h24M27 15h1"/></svg>
+        <span><strong>Door</strong><small>Single / double palla</small></span>
+      </button>
+      <button class="type-tab" role="tab" aria-selected="false" data-type="dg">
+        <svg viewBox="0 0 40 32" aria-hidden="true"><rect x="2" y="2" width="36" height="28"/><path d="M20 2v28M2 16h36"/></svg>
+        <span><strong>DG</strong><small>100 mm sliding</small></span>
+      </button>
     </div>
 
-    <div class="customer-box">
-      <div class="customer-info">
-        <div class="customer-name" id="customerName">Walk-in Customer</div>
-        <div class="customer-sub" id="customerPhone">No phone added</div>
-      </div>
-      <button class="small-btn" onclick="openModal('customerModal')">Edit</button>
-    </div>
-  </section>
-
-  <!-- ITEM ENTRY -->
-  <section class="card no-print">
-    <div class="card-title">
-      Add Quotation Item
-      <span class="badge">AUTO RATE</span>
-    </div>
-
-    <div class="entry-grid">
-
-      <div class="field">
-        <label>SECTION</label>
-        <select id="section" onchange="updateRate()">
-          <option value="">Select Section</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label>COLOUR</label>
-        <select id="colour" onchange="toggleCustomColour()">
-          <option>Champagne</option>
-          <option>White 9016</option>
-          <option>Matt Black</option>
-          <option>Silver</option>
-          <option>White</option>
-          <option>Brown</option>
-          <option>Golden</option>
-          <option>Wood</option>
-          <option>Custom</option>
-        </select>
-      </div>
-
-      <div class="field" id="customColourBox" style="display:none">
-        <label>CUSTOM COLOUR</label>
-        <input id="customColour" placeholder="Enter colour">
-      </div>
-
-      <div class="field">
-        <label>THICKNESS</label>
-        <select id="thickness" onchange="updateRate()">
-          <option value="0.9">0.9 mm</option>
-          <option value="1.1">1.1 mm</option>
-          <option value="1.2">1.2 mm</option>
-          <option value="1.5">1.5 mm</option>
-          <option value="1.6">1.6 mm</option>
-          <option value="1.9">1.9 mm</option>
-          <option value="2.0">2.0 mm</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label>LENGTH / SIZE</label>
-        <input id="size" placeholder="Example: 10 × 4" inputmode="text">
-      </div>
-
-      <div class="field">
-        <label>QUANTITY</label>
-        <input id="quantity" type="number" min="0" step="1" placeholder="Qty">
-      </div>
-
-      <div class="field">
-        <label>AUTO RATE</label>
-        <input id="rate" type="number" readonly placeholder="Auto">
-      </div>
-
-      <div class="field">
-        <label>DISCOUNT %</label>
-        <input id="itemDiscount" type="number" min="0" max="100" value="0">
-      </div>
-
-    </div>
-
-    <div class="rate-preview">
-      <div class="rate-title">Current rate by thickness</div>
-      <div class="rate-chips" id="rateChips"></div>
-    </div>
-
-    <button class="add-btn" onclick="addItem()">＋ ADD ITEM</button>
-  </section>
-
-  <!-- ITEMS TABLE -->
-  <section class="card">
-    <div class="card-title">
-      Quotation Items
-      <button class="small-btn" onclick="clearItems()">Clear All</button>
-    </div>
-
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Section</th>
-            <th>Colour</th>
-            <th>Thickness</th>
-            <th>Length / Size</th>
-            <th>Qty</th>
-            <th>Rate</th>
-            <th>Amount</th>
-            <th>Discount</th>
-            <th>After Discount</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody id="itemsBody">
-          <tr>
-            <td colspan="11" class="empty">No items added yet</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <!-- EXTRA CHARGES -->
-  <section class="card">
-    <div class="card-title">Charges & Adjustments</div>
-
-    <div class="form-grid">
-
-      <div class="field">
-        <label>GLOBAL DISCOUNT %</label>
-        <input id="globalDiscount" type="number" min="0" max="100" value="0" oninput="calculateTotals()">
-      </div>
-
-      <div class="field">
-        <label>TAX / GST %</label>
-        <input id="tax" type="number" min="0" value="0" oninput="calculateTotals()">
-      </div>
-
-      <div class="field">
-        <label>LABOUR</label>
-        <input id="labour" type="number" min="0" value="0" oninput="calculateTotals()">
-      </div>
-
-      <div class="field">
-        <label>FREIGHT</label>
-        <input id="freight" type="number" min="0" value="0" oninput="calculateTotals()">
-      </div>
-
-      <div class="field">
-        <label>PREVIOUS BALANCE</label>
-        <input id="previousBalance" type="number" value="0" oninput="calculateTotals()">
-      </div>
-
-      <div class="field">
-        <label>AMOUNT PAID</label>
-        <input id="paid" type="number" min="0" value="0" oninput="calculateTotals()">
-      </div>
-
-    </div>
-
-    <div class="field" style="margin-top:8px">
-      <label>NOTES</label>
-      <textarea id="notes" placeholder="Quotation notes..."></textarea>
-    </div>
-  </section>
-
-  <!-- TOTALS -->
-  <section class="card">
-    <div class="card-title">Quotation Total</div>
-
-    <div class="total-grid">
-
-      <div class="total-box">
-        <div class="total-label">Gross</div>
-        <div class="total-value" id="grossTotal">Rs 0</div>
-      </div>
-
-      <div class="total-box">
-        <div class="total-label">Item Discount</div>
-        <div class="total-value" id="itemDiscountTotal">Rs 0</div>
-      </div>
-
-      <div class="total-box">
-        <div class="total-label">After Item Discount</div>
-        <div class="total-value" id="netTotal">Rs 0</div>
-      </div>
-
-      <div class="total-box">
-        <div class="total-label">Global Discount</div>
-        <div class="total-value" id="globalDiscountTotal">Rs 0</div>
-      </div>
-
-      <div class="total-box">
-        <div class="total-label">Tax / GST</div>
-        <div class="total-value" id="taxTotal">Rs 0</div>
-      </div>
-
-      <div class="total-box">
-        <div class="total-label">Labour + Freight</div>
-        <div class="total-value" id="extraTotal">Rs 0</div>
-      </div>
-
-      <div class="total-box grand">
-        <div class="total-label">GRAND TOTAL</div>
-        <div class="total-value" id="grandTotal">Rs 0</div>
-      </div>
-
-      <div class="total-box">
-        <div class="total-label">Paid</div>
-        <div class="total-value" id="paidTotal">Rs 0</div>
-      </div>
-
-      <div class="total-box">
-        <div class="total-label">BALANCE</div>
-        <div class="total-value" id="balanceTotal">Rs 0</div>
-      </div>
-
-    </div>
-  </section>
-
-  <div class="footer">
-    Aluminium Quotation Pro • Data stored locally on this device
-  </div>
-
-</div>
-
-
-<!-- CUSTOMER MODAL -->
-<div class="modal" id="customerModal">
-  <div class="modal-box">
-
-    <div class="modal-head">
-      <div class="modal-title">Customer Details</div>
-      <button class="close" onclick="closeModal('customerModal')">✕</button>
-    </div>
-
-    <div class="form-grid">
-
-      <div class="field">
-        <label>NAME</label>
-        <input id="customerNameInput" placeholder="Customer name">
-      </div>
-
-      <div class="field">
-        <label>PHONE</label>
-        <input id="customerPhoneInput" type="tel" placeholder="03XXXXXXXXX">
-      </div>
-
-      <div class="field">
-        <label>EMAIL</label>
-        <input id="customerEmailInput" type="email" placeholder="Email">
-      </div>
-
-      <div class="field">
-        <label>ADDRESS</label>
-        <input id="customerAddressInput" placeholder="Address">
-      </div>
-
-    </div>
-
-    <div class="modal-actions">
-      <button onclick="closeModal('customerModal')">Cancel</button>
-      <button class="save" onclick="saveCustomer()">Save Customer</button>
-    </div>
-
-  </div>
-</div>
-
-
-<!-- COMPANY MODAL -->
-<div class="modal" id="companyModal">
-  <div class="modal-box">
-
-    <div class="modal-head">
-      <div class="modal-title">Company Details</div>
-      <button class="close" onclick="closeModal('companyModal')">✕</button>
-    </div>
-
-    <div class="form-grid">
-
-      <div class="field">
-        <label>COMPANY NAME</label>
-        <input id="companyName" placeholder="Your company">
-      </div>
-
-      <div class="field">
-        <label>PHONE</label>
-        <input id="companyPhone" placeholder="Phone">
-      </div>
-
-      <div class="field">
-        <label>EMAIL</label>
-        <input id="companyEmail" placeholder="Email">
-      </div>
-
-      <div class="field">
-        <label>ADDRESS</label>
-        <input id="companyAddress" placeholder="Address">
-      </div>
-
-    </div>
-
-    <div class="modal-actions">
-      <button onclick="closeModal('companyModal')">Cancel</button>
-      <button class="save" onclick="saveCompany()">Save Company</button>
-    </div>
-
-  </div>
-</div>
-
-
-<!-- RATE MANAGER -->
-<div class="modal" id="rateModal">
-  <div class="modal-box">
-
-    <div class="modal-head">
-      <div class="modal-title">Rate Manager</div>
-      <button class="close" onclick="closeModal('rateModal')">✕</button>
-    </div>
-
-    <button class="add-btn" style="margin-top:0" onclick="openAddRate()">
-      ＋ Add New Rate
-    </button>
-
-    <div class="rate-manager" style="margin-top:10px">
-      <table class="rate-table">
-        <thead>
-          <tr>
-            <th>Section</th>
-            <th>0.9</th>
-            <th>1.1</th>
-            <th>1.2</th>
-            <th>1.5</th>
-            <th>1.6</th>
-            <th>1.9</th>
-            <th>2.0</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody id="ratesBody"></tbody>
-      </table>
-    </div>
-
-  </div>
-</div>
-
-
-<!-- ADD RATE -->
-<div class="modal" id="addRateModal">
-  <div class="modal-box">
-
-    <div class="modal-head">
-      <div class="modal-title">Add New Rate</div>
-      <button class="close" onclick="closeModal('addRateModal')">✕</button>
-    </div>
-
-    <div class="field">
-      <label>SECTION NAME</label>
-      <input id="newRateName" placeholder="Example: D-60">
-    </div>
-
-    <div class="field" style="margin-top:8px">
-      <label>0.9 / 1.1 / 1.2 MM RATE</label>
-      <input id="newRateGroup1" type="number" placeholder="Rate">
-    </div>
-
-    <div class="field" style="margin-top:8px">
-      <label>1.5 / 1.6 MM RATE</label>
-      <input id="newRateGroup2" type="number" placeholder="Rate">
-    </div>
-
-    <div class="field" style="margin-top:8px">
-      <label>1.9 / 2.0 MM RATE</label>
-      <input id="newRateGroup3" type="number" placeholder="Rate">
-    </div>
-
-    <div class="modal-actions">
-      <button onclick="closeModal('addRateModal')">Cancel</button>
-      <button class="save" onclick="saveNewRate()">Save Rate</button>
-    </div>
-
-  </div>
-</div>
-
-
-<!-- HISTORY -->
-<div class="modal" id="historyModal">
-  <div class="modal-box">
-
-    <div class="modal-head">
-      <div class="modal-title">Quotation History</div>
-      <button class="close" onclick="closeModal('historyModal')">✕</button>
-    </div>
-
-    <div id="historyBody"></div>
-
-  </div>
-</div>
-
-
-<!-- SUMMARY -->
-<div class="modal" id="summaryModal">
-  <div class="modal-box">
-
-    <div class="modal-head">
-      <div class="modal-title">Quotation Summary</div>
-      <button class="close" onclick="closeModal('summaryModal')">✕</button>
-    </div>
-
-    <div id="summaryBody"></div>
-
-  </div>
-</div>
-
-
-<!-- CHECK APP -->
-<div class="modal" id="checkModal">
-  <div class="modal-box">
-
-    <div class="modal-head">
-      <div class="modal-title">🧪 App Check</div>
-      <button class="close" onclick="closeModal('checkModal')">✕</button>
-    </div>
-
-    <div id="checkBody"></div>
-
-  </div>
-</div>
-
-
-<script>
-
-/* =========================================================
-   DEFAULT RATES
-========================================================= */
-
-const DEFAULT_RATES = [
- ["DC-26F",880,1049,1244],
- ["DC-30F",754,911,1067],
- ["M-23",354,445,542],
- ["M-28",431,534,645],
- ["M-24",420,497,605],
- ["M-24A",371,474,572],
- ["DC-26C",776,957,1141],
- ["DC-30C",674,817,965],
- ["M-26F",680,811,955],
- ["M-26",582,710,836],
- ["M-30F",612,713,836],
- ["M-30",522,610,716],
- ["AA-23",534,699,863],
- ["AA-28",613,767,942],
- ["D-50",553,707,851],
- ["D-50A",490,584,710],
- ["D-50B",0,888,1093],
- ["D-51A",453,559,674],
- ["D-51F",530,665,804],
- ["D-54A",397,484,580],
- ["D-54F",486,582,702],
- ["D-46",861,1087,1333],
- ["D-48A",578,715,921],
- ["D-59",537,628,746],
- ["D-59A",550,676,821],
- ["D-40",480,542,667],
- ["DG-26A",0,1293,1580],
- ["DG-26",867,1120,1351],
- ["DG-26F",933,1233,1484],
- ["DG-23",513,638,759],
- ["DG-51A",0,735,886],
- ["DG-23A",572,691,821],
- ["HD-1",0,821,995],
- ["HD-2",0,821,995],
- ["HD-3",0,1273,1472],
- ["D-48B",0,595,0],
- ["D-29",274,0,0],
- ["B6",137,0,0]
-];
-
-let rates = [];
-let items = [];
-let customer = {};
-let company = {};
-let editingIndex = -1;
-
-
-/* =========================================================
-   INIT
-========================================================= */
-
-document.addEventListener("DOMContentLoaded",()=>{
-  loadData();
-  populateSections();
-  renderItems();
-  calculateTotals();
-  updateCustomerDisplay();
-  updateRate();
-  loadCompanyFields();
-});
-
-
-/* =========================================================
-   STORAGE
-========================================================= */
-
-function normalizeRates(raw){
-  if(!Array.isArray(raw)) return null;
-  const out = [];
-  raw.forEach(r => {
-    if(Array.isArray(r) && r.length >= 4){
-      out.push([String(r[0]), Number(r[1])||0, Number(r[2])||0, Number(r[3])||0]);
-    }else if(r && typeof r === "object" && r.section){
-      out.push([String(r.section), Number(r.g1)||0, Number(r.g2)||0, Number(r.g3)||0]);
-    }
-  });
-  return out;
-}
-
-function defaultRates(){
-  return DEFAULT_RATES.map(r => [r[0], r[1], r[2], r[3]]);
-}
-
-function loadData(){
-
-  try{
-    const saved = localStorage.getItem("aluminium_rates");
-    const parsed = saved ? normalizeRates(JSON.parse(saved)) : null;
-    rates = (parsed && parsed.length > 0) ? parsed : defaultRates();
-    if(!parsed || parsed.length === 0){
-      localStorage.setItem("aluminium_rates", JSON.stringify(rates));
-    }
-  }catch(e){
-    rates = defaultRates();
-  }
-
-  try{
-    customer = JSON.parse(
-      localStorage.getItem("quotation_customer") || "{}"
-    );
-  }catch(e){ customer = {}; }
-
-  try{
-    company = JSON.parse(
-      localStorage.getItem("quotation_company") || "{}"
-    );
-  }catch(e){ company = {}; }
-
-  try{
-    const draft = JSON.parse(
-      localStorage.getItem("quotation_draft") || "null"
-    );
-
-    if(draft){
-      items = draft.items || [];
-
-      setValue("globalDiscount",draft.globalDiscount);
-      setValue("tax",draft.tax);
-      setValue("labour",draft.labour);
-      setValue("freight",draft.freight);
-      setValue("previousBalance",draft.previousBalance);
-      setValue("paid",draft.paid !== undefined ? draft.paid : draft.amountPaid);
-      setValue("notes",draft.notes);
-    }
-  }catch(e){}
-}
-
-function saveDraft(){
-
-  const draft = {
-    items,
-    globalDiscount:getNumber("globalDiscount"),
-    tax:getNumber("tax"),
-    labour:getNumber("labour"),
-    freight:getNumber("freight"),
-    previousBalance:getNumber("previousBalance"),
-    paid:getNumber("paid"),
-    notes:document.getElementById("notes").value
-  };
-
-  localStorage.setItem(
-    "quotation_draft",
-    JSON.stringify(draft)
-  );
-}
-
-
-/* =========================================================
-   HELPERS
-========================================================= */
-
-function getNumber(id){
-  return Number(document.getElementById(id).value) || 0;
-}
-
-function setValue(id,value){
-  if(value !== undefined && value !== null){
-    document.getElementById(id).value = value;
-  }
-}
-
-function money(value){
-  return "Rs " + Number(value || 0).toLocaleString("en-PK",{
-    maximumFractionDigits:2
-  });
-}
-
-function escapeHtml(value){
-  return String(value ?? "")
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-}
-
-
-/* =========================================================
-   RATES
-========================================================= */
-
-function rateGroup(thickness){
-
-  const t = Number(thickness);
-
-  if(t <= 1.2) return 1;
-  if(t <= 1.6) return 2;
-  return 3;
-}
-
-function getRate(section,thickness){
-
-  const row = rates.find(r=>r[0] === section);
-
-  if(!row) return 0;
-
-  const group = rateGroup(thickness);
-
-  return Number(row[group]) || 0;
-}
-
-function populateSections(){
-
-  const select = document.getElementById("section");
-
-  const current = select.value;
-
-  select.innerHTML =
-    `<option value="">Select Section</option>` +
-    rates.map(r=>
-      `<option value="${escapeHtml(r[0])}">${escapeHtml(r[0])}</option>`
-    ).join("");
-
-  if(current){
-    select.value = current;
-  }
-}
-
-function updateRate(){
-
-  const section = document.getElementById("section").value;
-  const thickness = document.getElementById("thickness").value;
-
-  const rate = getRate(section,thickness);
-
-  document.getElementById("rate").value =
-    section ? rate : "";
-
-  renderRateChips();
-}
-
-function renderRateChips(){
-
-  const section = document.getElementById("section").value;
-  const box = document.getElementById("rateChips");
-
-  const thicknesses = [
-    ["0.9",1],
-    ["1.1",1],
-    ["1.2",1],
-    ["1.5",2],
-    ["1.6",2],
-    ["1.9",3],
-    ["2.0",3]
-  ];
-
-  box.innerHTML = thicknesses.map(t=>{
-
-    const value = section
-      ? getRate(section,t[0])
-      : 0;
-
-    const active =
-      t[0] === document.getElementById("thickness").value;
-
-    return `
-      <div class="rate-chip ${active ? "active":""}">
-        ${t[0]} = ${value}
-      </div>
-    `;
-
-  }).join("");
-}
-
-
-/* =========================================================
-   COLOUR
-========================================================= */
-
-function toggleCustomColour(){
-
-  const value =
-    document.getElementById("colour").value;
-
-  document.getElementById("customColourBox").style.display =
-    value === "Custom" ? "block" : "none";
-}
-
-function selectedColour(){
-
-  const colour =
-    document.getElementById("colour").value;
-
-  if(colour === "Custom"){
-    return document.getElementById("customColour").value.trim() || "Custom";
-  }
-
-  return colour;
-}
-
-
-/* =========================================================
-   SIZE CALCULATION
-========================================================= */
-
-function parseSize(value){
-
-  value = String(value || "").trim();
-
-  if(!value) return 0;
-
-  const parts = value
-    .replace(/×/g,"x")
-    .replace(/\*/g,"x")
-    .split(/x/i)
-    .map(v=>Number(v.trim()))
-    .filter(v=>!isNaN(v) && v > 0);
-
-  if(parts.length >= 2){
-    return parts[0] * parts[1];
-  }
-
-  const n = Number(value);
-
-  return isNaN(n) ? 0 : n;
-}
-
-
-/* =========================================================
-   ADD ITEM
-========================================================= */
-
-function addItem(){
-
-  const section =
-    document.getElementById("section").value;
-
-  const size =
-    document.getElementById("size").value.trim();
-
-  const quantity =
-    getNumber("quantity");
-
-  const thickness =
-    document.getElementById("thickness").value;
-
-  const rate =
-    getNumber("rate");
-
-  const discount =
-    getNumber("itemDiscount");
-
-  if(!section){
-    alert("Please select Section.");
-    return;
-  }
-
-  if(!size){
-    alert("Please enter Length / Size.");
-    return;
-  }
-
-  if(quantity <= 0){
-    alert("Please enter Quantity.");
-    return;
-  }
-
-  if(rate <= 0){
-    alert("Rate is not available for this section/thickness.");
-    return;
-  }
-
-  const area = parseSize(size);
-
-  if(area <= 0){
-    alert("Invalid Length / Size.");
-    return;
-  }
-
-  const amount =
-    area * quantity * rate;
-
-  const discountAmount =
-    amount * discount / 100;
-
-  const afterDiscount =
-    amount - discountAmount;
-
-  const item = {
-    section,
-    colour:selectedColour(),
-    thickness,
-    size,
-    area,
-    quantity,
-    rate,
-    discount,
-    amount,
-    discountAmount,
-    afterDiscount
-  };
-
-  if(editingIndex >= 0){
-
-    items[editingIndex] = item;
-    editingIndex = -1;
-
-  }else{
-
-    items.push(item);
-
-  }
-
-  renderItems();
-  calculateTotals();
-
-  /*
-    After adding:
-    Section blank
-    Size blank
-    Quantity blank
-    Rate blank
-
-    Colour / Thickness / Discount remain selected
-  */
-
-  document.getElementById("section").value = "";
-  document.getElementById("size").value = "";
-  document.getElementById("quantity").value = "";
-  document.getElementById("rate").value = "";
-
-  renderRateChips();
-}
-
-
-/* =========================================================
-   RENDER ITEMS
-========================================================= */
-
-function renderItems(){
-
-  const body =
-    document.getElementById("itemsBody");
-
-  if(items.length === 0){
-
-    body.innerHTML = `
-      <tr>
-        <td colspan="11" class="empty">
-          No items added yet
-        </td>
-      </tr>
-    `;
-
-    return;
-  }
-
-  body.innerHTML = items.map((item,index)=>{
-
-    return `
-      <tr>
-
-        <td>${index+1}</td>
-
-        <td>${escapeHtml(item.section)}</td>
-
-        <td>${escapeHtml(item.colour)}</td>
-
-        <td>${escapeHtml(item.thickness)} mm</td>
-
-        <td>${escapeHtml(item.size)}</td>
-
-        <td>${item.quantity}</td>
-
-        <td>${money(item.rate)}</td>
-
-        <td>${money(item.amount)}</td>
-
-        <td>${item.discount}%</td>
-
-        <td>${money(item.afterDiscount)}</td>
-
-        <td>
-          <div class="row-actions">
-            <button class="edit" onclick="editItem(${index})">Edit</button>
-            <button class="copy" onclick="copyItem(${index})">Copy</button>
-            <button class="delete" onclick="deleteItem(${index})">Del</button>
-          </div>
-        </td>
-
-      </tr>
-    `;
-
-  }).join("");
-}
-
-
-/* =========================================================
-   EDIT / COPY / DELETE
-========================================================= */
-
-function editItem(index){
-
-  const item = items[index];
-
-  document.getElementById("section").value =
-    item.section;
-
-  document.getElementById("colour").value =
-    [
-      "Champagne",
-      "White 9016",
-      "Matt Black",
-      "Silver",
-      "White",
-      "Brown",
-      "Golden",
-      "Wood"
-    ].includes(item.colour)
-      ? item.colour
-      : "Custom";
-
-  toggleCustomColour();
-
-  if(document.getElementById("colour").value === "Custom"){
-    document.getElementById("customColour").value =
-      item.colour;
-  }
-
-  document.getElementById("thickness").value =
-    item.thickness;
-
-  document.getElementById("size").value =
-    item.size;
-
-  document.getElementById("quantity").value =
-    item.quantity;
-
-  document.getElementById("itemDiscount").value =
-    item.discount;
-
-  editingIndex = index;
-
-  updateRate();
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-}
-
-function copyItem(index){
-
-  const copy =
-    JSON.parse(JSON.stringify(items[index]));
-
-  items.push(copy);
-
-  renderItems();
-  calculateTotals();
-}
-
-function deleteItem(index){
-
-  if(!confirm("Delete this item?")) return;
-
-  items.splice(index,1);
-
-  renderItems();
-  calculateTotals();
-}
-
-function clearItems(){
-
-  if(!items.length) return;
-
-  if(!confirm("Clear all quotation items?")) return;
-
-  items = [];
-
-  renderItems();
-  calculateTotals();
-}
-
-
-/* =========================================================
-   TOTALS
-========================================================= */
-
-function calculateTotals(){
-
-  let gross = 0;
-  let itemDiscount = 0;
-
-  items.forEach(item=>{
-    gross += Number(item.amount) || 0;
-    itemDiscount += Number(item.discountAmount) || 0;
-  });
-
-  const net =
-    gross - itemDiscount;
-
-  const globalDiscountPercent =
-    getNumber("globalDiscount");
-
-  const globalDiscountAmount =
-    net * globalDiscountPercent / 100;
-
-  const afterGlobal =
-    net - globalDiscountAmount;
-
-  const taxPercent =
-    getNumber("tax");
-
-  const taxAmount =
-    afterGlobal * taxPercent / 100;
-
-  const labour =
-    getNumber("labour");
-
-  const freight =
-    getNumber("freight");
-
-  const previousBalance =
-    getNumber("previousBalance");
-
-  const paid =
-    getNumber("paid");
-
-  const grandTotal =
-    afterGlobal +
-    taxAmount +
-    labour +
-    freight +
-    previousBalance;
-
-  const balance =
-    grandTotal - paid;
-
-  document.getElementById("grossTotal").textContent =
-    money(gross);
-
-  document.getElementById("itemDiscountTotal").textContent =
-    money(itemDiscount);
-
-  document.getElementById("netTotal").textContent =
-    money(net);
-
-  document.getElementById("globalDiscountTotal").textContent =
-    money(globalDiscountAmount);
-
-  document.getElementById("taxTotal").textContent =
-    money(taxAmount);
-
-  document.getElementById("extraTotal").textContent =
-    money(labour + freight);
-
-  document.getElementById("grandTotal").textContent =
-    money(grandTotal);
-
-  document.getElementById("paidTotal").textContent =
-    money(paid);
-
-  document.getElementById("balanceTotal").textContent =
-    money(balance);
-
-  saveDraft();
-}
-
-
-/* =========================================================
-   CUSTOMER
-========================================================= */
-
-function saveCustomer(){
-
-  customer = {
-    name:document.getElementById("customerNameInput").value.trim(),
-    phone:document.getElementById("customerPhoneInput").value.trim(),
-    email:document.getElementById("customerEmailInput").value.trim(),
-    address:document.getElementById("customerAddressInput").value.trim()
-  };
-
-  localStorage.setItem(
-    "quotation_customer",
-    JSON.stringify(customer)
-  );
-
-  updateCustomerDisplay();
-
-  closeModal("customerModal");
-}
-
-function updateCustomerDisplay(){
-
-  document.getElementById("customerName").textContent =
-    customer.name || "Walk-in Customer";
-
-  document.getElementById("customerPhone").textContent =
-    customer.phone || "No phone added";
-
-  document.getElementById("customerNameInput").value =
-    customer.name || "";
-
-  document.getElementById("customerPhoneInput").value =
-    customer.phone || "";
-
-  document.getElementById("customerEmailInput").value =
-    customer.email || "";
-
-  document.getElementById("customerAddressInput").value =
-    customer.address || "";
-}
-
-
-/* =========================================================
-   COMPANY
-========================================================= */
-
-function saveCompany(){
-
-  company = {
-    name:document.getElementById("companyName").value.trim(),
-    phone:document.getElementById("companyPhone").value.trim(),
-    email:document.getElementById("companyEmail").value.trim(),
-    address:document.getElementById("companyAddress").value.trim()
-  };
-
-  localStorage.setItem(
-    "quotation_company",
-    JSON.stringify(company)
-  );
-
-  closeModal("companyModal");
-}
-
-function loadCompanyFields(){
-
-  setValue("companyName",company.name);
-  setValue("companyPhone",company.phone);
-  setValue("companyEmail",company.email);
-  setValue("companyAddress",company.address);
-}
-
-
-/* =========================================================
-   RATE MANAGER
-========================================================= */
-
-function openRateManager(){
-
-  renderRates();
-
-  openModal("rateModal");
-}
-
-function renderRates(){
-
-  const body =
-    document.getElementById("ratesBody");
-
-  body.innerHTML = rates.map((r,index)=>{
-
-    return `
-      <tr>
-
-        <td>${escapeHtml(r[0])}</td>
-
-        <td><input type="number" value="${r[1]}"
-          onchange="updateRateValue(${index},1,this.value)"></td>
-
-        <td><input type="number" value="${r[1]}"
-          onchange="updateRateValue(${index},1,this.value)"></td>
-
-        <td><input type="number" value="${r[1]}"
-          onchange="updateRateValue(${index},1,this.value)"></td>
-
-        <td><input type="number" value="${r[2]}"
-          onchange="updateRateValue(${index},2,this.value)"></td>
-
-        <td><input type="number" value="${r[2]}"
-          onchange="updateRateValue(${index},2,this.value)"></td>
-
-        <td><input type="number" value="${r[3]}"
-          onchange="updateRateValue(${index},3,this.value)"></td>
-
-        <td><input type="number" value="${r[3]}"
-          onchange="updateRateValue(${index},3,this.value)"></td>
-
-        <td>
-          <button
-            class="small-btn"
-            onclick="deleteRate(${index})">
-            Delete
-          </button>
-        </td>
-
-      </tr>
-    `;
-
-  }).join("");
-}
-
-function updateRateValue(index,group,value){
-
-  rates[index][group] =
-    Number(value) || 0;
-
-  localStorage.setItem(
-    "aluminium_rates",
-    JSON.stringify(rates)
-  );
-
-  updateRate();
-}
-
-function deleteRate(index){
-
-  if(!confirm("Delete this rate?")) return;
-
-  rates.splice(index,1);
-
-  localStorage.setItem(
-    "aluminium_rates",
-    JSON.stringify(rates)
-  );
-
-  populateSections();
-  renderRates();
-  updateRate();
-}
-
-function openAddRate(){
-
-  closeModal("rateModal");
-
-  document.getElementById("newRateName").value = "";
-  document.getElementById("newRateGroup1").value = "";
-  document.getElementById("newRateGroup2").value = "";
-  document.getElementById("newRateGroup3").value = "";
-
-  openModal("addRateModal");
-}
-
-function saveNewRate(){
-
-  const name =
-    document.getElementById("newRateName").value.trim();
-
-  const g1 =
-    getNumber("newRateGroup1");
-
-  const g2 =
-    getNumber("newRateGroup2");
-
-  const g3 =
-    getNumber("newRateGroup3");
-
-  if(!name){
-    alert("Enter section name.");
-    return;
-  }
-
-  if(rates.some(r=>r[0].toLowerCase() === name.toLowerCase())){
-    alert("This section already exists.");
-    return;
-  }
-
-  rates.push([name,g1,g2,g3]);
-
-  localStorage.setItem(
-    "aluminium_rates",
-    JSON.stringify(rates)
-  );
-
-  populateSections();
-
-  closeModal("addRateModal");
-
-  openRateManager();
-}
-
-
-/* =========================================================
-   NEW QUOTATION
-========================================================= */
-
-function newQuotation(){
-
-  if(items.length){
-
-    if(!confirm(
-      "Start a new quotation? Current items will be cleared."
-    )) return;
-
-  }
-
-  items = [];
-  editingIndex = -1;
-
-  document.getElementById("quotationNo").textContent =
-    generateQuotationNo();
-
-  document.getElementById("section").value = "";
-  document.getElementById("size").value = "";
-  document.getElementById("quantity").value = "";
-  document.getElementById("rate").value = "";
-
-  document.getElementById("globalDiscount").value = 0;
-  document.getElementById("tax").value = 0;
-  document.getElementById("labour").value = 0;
-  document.getElementById("freight").value = 0;
-  document.getElementById("previousBalance").value = 0;
-  document.getElementById("paid").value = 0;
-  document.getElementById("notes").value = "";
-
-  renderItems();
-  calculateTotals();
-}
-
-function generateQuotationNo(){
-
-  const now = new Date();
-
-  return "QT-" +
-    now.getFullYear().toString().slice(-2) +
-    String(now.getMonth()+1).padStart(2,"0") +
-    String(now.getDate()).padStart(2,"0") +
-    "-" +
-    String(Date.now()).slice(-4);
-}
-
-
-/* =========================================================
-   SAVE / HISTORY
-========================================================= */
-
-function saveQuotation(){
-
-  const gross =
-    items.reduce((sum,i)=>sum + Number(i.amount || 0),0);
-
-  const globalDiscount =
-    getNumber("globalDiscount");
-
-  const tax =
-    getNumber("tax");
-
-  const labour =
-    getNumber("labour");
-
-  const freight =
-    getNumber("freight");
-
-  const previousBalance =
-    getNumber("previousBalance");
-
-  const paid =
-    getNumber("paid");
-
-  const itemDiscount =
-    items.reduce(
-      (sum,i)=>sum + Number(i.discountAmount || 0),
-      0
-    );
-
-  const net =
-    gross - itemDiscount;
-
-  const afterGlobal =
-    net - net * globalDiscount / 100;
-
-  const taxAmount =
-    afterGlobal * tax / 100;
-
-  const grand =
-    afterGlobal +
-    taxAmount +
-    labour +
-    freight +
-    previousBalance;
-
-  const record = {
-
-    id:Date.now(),
-
-    quotationNo:
-      document.getElementById("quotationNo").textContent,
-
-    date:new Date().toLocaleString(),
-
-    customer:{...customer},
-
-    items:JSON.parse(JSON.stringify(items)),
-
-    totals:{
-      gross,
-      itemDiscount,
-      net,
-      globalDiscount,
-      tax,
-      labour,
-      freight,
-      previousBalance,
-      paid,
-      grand,
-      balance:grand-paid
-    },
-
-    notes:
-      document.getElementById("notes").value
-
-  };
-
-  const history =
-    JSON.parse(
-      localStorage.getItem("quotation_history") || "[]"
-    );
-
-  history.unshift(record);
-
-  localStorage.setItem(
-    "quotation_history",
-    JSON.stringify(history.slice(0,100))
-  );
-
-  alert("Quotation saved successfully.");
-}
-
-function openHistory(){
-
-  renderHistory();
-
-  openModal("historyModal");
-}
-
-function renderHistory(){
-
-  const body =
-    document.getElementById("historyBody");
-
-  const history =
-    JSON.parse(
-      localStorage.getItem("quotation_history") || "[]"
-    );
-
-  if(!history.length){
-
-    body.innerHTML =
-      `<div class="empty">No quotation history.</div>`;
-
-    return;
-  }
-
-  body.innerHTML =
-    history.map((h,index)=>`
-
-      <div class="history-item">
-
-        <div class="history-top">
-          <div class="history-name">
-            ${escapeHtml(h.customer?.name || "Walk-in Customer")}
+    <div class="workspace">
+      <section class="panel controls" aria-labelledby="inputTitle">
+        <h2 class="panel-title" id="inputTitle">Window details</h2>
+
+        <div class="field-group">
+          <h3>Measurement unit</h3>
+          <div class="unit-toggle" aria-label="Measurement unit">
+            <button type="button" class="active" data-unit="imperial">Feet / inch</button>
+            <button type="button" data-unit="metric">Millimeter</button>
           </div>
 
-          <div class="history-date">
-            ${escapeHtml(h.date)}
+          <div class="imperial-fields">
+            <div class="row">
+              <div class="field">
+                <label for="widthFt">Chorai — Width</label>
+                <div class="input-wrap"><input id="widthFt" type="number" min="0" step="1" value="4" inputmode="decimal"><span class="suffix">ft</span></div>
+              </div>
+              <div class="field">
+                <label for="widthIn">Extra inch</label>
+                <div class="input-wrap"><input id="widthIn" type="number" min="0" max="11.99" step="0.25" value="0" inputmode="decimal"><span class="suffix">in</span></div>
+              </div>
+            </div>
+            <div class="row" style="margin-top:10px">
+              <div class="field">
+                <label for="heightFt">Unchai — Height</label>
+                <div class="input-wrap"><input id="heightFt" type="number" min="0" step="1" value="4" inputmode="decimal"><span class="suffix">ft</span></div>
+              </div>
+              <div class="field">
+                <label for="heightIn">Extra inch</label>
+                <div class="input-wrap"><input id="heightIn" type="number" min="0" max="11.99" step="0.25" value="0" inputmode="decimal"><span class="suffix">in</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mm-fields">
+            <div class="row">
+              <div class="field">
+                <label for="widthMm">Chorai — Width</label>
+                <div class="input-wrap"><input id="widthMm" type="number" min="1" step="1" value="1219" inputmode="decimal"><span class="suffix">mm</span></div>
+              </div>
+              <div class="field">
+                <label for="heightMm">Unchai — Height</label>
+                <div class="input-wrap"><input id="heightMm" type="number" min="1" step="1" value="1219" inputmode="decimal"><span class="suffix">mm</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="error" id="sizeError" role="status"></div>
+        </div>
+
+        <div class="field-group" id="panelGroup">
+          <h3>Configuration</h3>
+          <div class="profile-grid">
+            <div class="field" id="trackField">
+              <label for="panelCount" id="panelLabel">Track quantity</label>
+              <div class="input-wrap"><select id="panelCount"><option value="2">2 Track</option><option value="3">3 Track</option></select></div>
+            </div>
+            <div class="field">
+              <label for="quantity">Window quantity</label>
+              <div class="input-wrap"><input id="quantity" type="number" min="1" step="1" value="1" inputmode="numeric"><span class="suffix">pcs</span></div>
+            </div>
+            <div class="field wide">
+              <label for="thickness">Thickness & section</label>
+              <div class="input-wrap"><select id="thickness"></select></div>
+            </div>
+            <div class="field wide">
+              <label for="colorCategory">Pricing category</label>
+              <div class="input-wrap"><select id="colorCategory"><option>Dull/Silver</option><option selected>Champagne/PC</option><option>Sahara/Brown</option><option>Multi/Black</option><option>Wood Coat</option></select></div>
+            </div>
+            <div class="field">
+              <label for="frameColor">Visual frame colour</label>
+              <div class="input-wrap"><select id="frameColor"><option value="#aeb4b2">Silver</option><option value="#b89962" selected>Champagne</option><option value="#694638">Brown</option><option value="#242827">Black</option><option value="#7b4d2f">Wood</option><option value="#f1f0e9">White</option></select></div>
+            </div>
+            <div class="field">
+              <label for="glassColor">Glass colour</label>
+              <div class="input-wrap"><select id="glassColor"><option value="rgba(218,238,242,.82)" selected>Clear blue</option><option value="rgba(121,159,171,.78)">Reflective blue</option><option value="rgba(75,92,88,.78)">Smoke grey</option><option value="rgba(104,141,104,.76)">Green</option><option value="rgba(122,87,58,.7)">Bronze</option><option value="rgba(236,238,232,.9)">Frosted</option></select></div>
+              <span class="glass-chip" id="glassChip">Clear blue</span>
+            </div>
+          </div>
+          <div class="sub-fields" id="profileFields"></div>
+        </div>
+
+        <div class="field-group">
+          <h3>Design dividers / grilles</h3>
+          <div class="profile-grid">
+            <div class="field"><label for="dividerWQty">Horizontal qty</label><div class="input-wrap"><input id="dividerWQty" type="number" min="0" step="1" value="0" inputmode="numeric"></div></div>
+            <div class="field"><label for="dividerHQty">Vertical qty</label><div class="input-wrap"><input id="dividerHQty" type="number" min="0" step="1" value="0" inputmode="numeric"></div></div>
+            <div class="field wide"><label for="dividerType">Divider section</label><div class="input-wrap"><select id="dividerType"></select></div></div>
           </div>
         </div>
 
-        <div class="history-date">
-          ${escapeHtml(h.quotationNo)}
+        <div class="field-group" id="archGroup">
+          <h3>Arch / golai</h3>
+          <label class="check-row"><input id="hasArch" type="checkbox"> Arch material shamil karein</label>
+          <div class="sub-fields is-hidden" id="archFields">
+            <div class="profile-grid">
+              <div class="field"><label for="archType">Arch type</label><div class="input-wrap"><select id="archType"><option>Full Round</option><option>Kamani</option></select></div></div>
+              <div class="field" id="archHeightField"><label for="archHeight">Kamani height</label><div class="input-wrap"><input id="archHeight" type="number" min="0" step="0.1" value="1" inputmode="decimal"><span class="suffix">ft</span></div></div>
+              <div class="field"><label for="archFrame">Arch frame</label><div class="input-wrap"><select id="archFrame"><option>D-54A</option><option>D-51A</option><option>D-42</option></select></div></div>
+              <div class="field"><label for="archThickness">Arch thickness</label><div class="input-wrap"><select id="archThickness"><option>1.2mm</option><option>1.6mm</option><option>2.0mm</option></select></div></div>
+            </div>
+          </div>
         </div>
 
-        <div class="history-total">
-          ${money(h.totals.grand)}
+        <div class="field-group">
+          <h3>Business profile</h3>
+          <div class="quote-meta">
+            <div class="field"><label for="businessName">Business name</label><div class="input-wrap"><input id="businessName" type="text" placeholder="Your aluminium shop"></div></div>
+            <div class="field"><label for="businessPhone">Phone</label><div class="input-wrap"><input id="businessPhone" type="tel" placeholder="03xx xxxxxxx"></div></div>
+            <div class="field wide"><label for="businessAddress">Address</label><div class="input-wrap"><input id="businessAddress" type="text" placeholder="Shop address (optional)"></div></div>
+          </div>
+          <p class="helper">Yeh details isi session ki PDF quotation mein shamil hongi.</p>
         </div>
 
-        <div class="modal-actions">
-
-          <button onclick="loadHistory(${index})">
-            Open
-          </button>
-
-          <button onclick="deleteHistory(${index})">
-            Delete
-          </button>
-
+        <div class="field-group">
+          <h3>Quotation details</h3>
+          <div class="quote-meta">
+            <div class="field"><label for="customerName">Customer</label><div class="input-wrap"><input id="customerName" type="text" placeholder="Name (optional)"></div></div>
+            <div class="field"><label for="quoteRef">Reference</label><div class="input-wrap"><input id="quoteRef" type="text" placeholder="Q-001"></div></div>
+            <div class="field wide"><label for="projectName">Project / location</label><div class="input-wrap"><input id="projectName" type="text" placeholder="Optional"></div></div>
+          </div>
         </div>
 
-      </div>
+        <div class="field-group">
+          <h3>Billing</h3>
+          <div class="profile-grid">
+            <div class="field"><label for="glassRate">Glass / sheet</label><div class="input-wrap"><input id="glassRate" type="number" min="0" step="1" value="0" inputmode="decimal"><span class="suffix">Rs/sq.ft</span></div></div>
+            <div class="field"><label for="hardwareRate">Hardware</label><div class="input-wrap"><input id="hardwareRate" type="number" min="0" step="1" value="0" inputmode="decimal"><span class="suffix">Rs/item</span></div></div>
+            <div class="field"><label for="laborRate">Labour</label><div class="input-wrap"><input id="laborRate" type="number" min="0" step="1" value="0" inputmode="decimal"><span class="suffix">Rs/sq.ft</span></div></div>
+            <div class="field"><label for="discountPct">Material discount</label><div class="input-wrap"><input id="discountPct" type="number" min="0" max="100" step="0.1" value="0" inputmode="decimal"><span class="suffix">%</span></div></div>
+            <div class="field wide"><label for="additional">Additional charges</label><div class="input-wrap"><input id="additional" type="number" min="0" step="1" value="0" inputmode="decimal"><span class="suffix">Rs</span></div></div>
+          </div>
+          <p class="helper">Aluminium section rates supplied in your rate list are applied automatically.</p>
+        </div>
+      </section>
 
-    `).join("");
-}
+      <section class="results" aria-live="polite">
+        <div class="blueprint">
+          <div class="window-visual" aria-hidden="true">
+            <div class="window-drawing sliding" id="windowDrawing">
+              <span class="dimension w" id="visualWidth">4′ 0″</span>
+              <span class="dimension h" id="visualHeight">4′ 0″</span>
+            </div>
+          </div>
+          <div class="blueprint-copy">
+            <h2 id="resultTitle">Sliding window</h2>
+            <p id="resultDesc">Section-wise material, running feet aur cost.</p>
+            <div class="key-total"><strong id="grandTotal">Rs 0</strong><span>estimated total</span></div>
+            <div class="preview-tools" style="margin-top:18px">
+              <div class="view-toggle" aria-label="Preview view">
+                <button type="button" class="active" data-view="flat">Front view</button>
+                <button type="button" data-view="3d">3D view</button>
+              </div>
+            </div>
+          </div>
+        </div>
 
-function loadHistory(index){
+        <div class="metric-grid">
+          <div class="metric"><span>Total aluminium</span><strong id="aluTotal">—</strong></div>
+          <div class="metric"><span>Total area</span><strong id="glassTotal">—</strong></div>
+          <div class="metric"><span>Average rate</span><strong id="hardwareUnits">—</strong></div>
+        </div>
 
-  const history =
-    JSON.parse(
-      localStorage.getItem("quotation_history") || "[]"
-    );
+        <section class="panel detail" aria-labelledby="cutTitle">
+          <div class="detail-head">
+            <h2 id="cutTitle">Material & cut list</h2>
+            <div class="actions">
+              <button class="action" type="button" id="copyBtn">Copy</button>
+              <button class="action" type="button" id="csvBtn">CSV</button>
+              <button class="action" type="button" id="billBtn">Bill PDF</button>
+              <button class="action" type="button" id="materialBtn">Material PDF</button>
+            </div>
+          </div>
+          <div class="material-head"><span>Section / rate</span><span>Run ft</span><span>Amount</span></div>
+          <div class="cut-list" id="cutList"></div>
+        </section>
 
-  const h = history[index];
+        <details class="panel rate-card" id="rateCard">
+          <summary>Profile rate list</summary>
+          <div class="rate-body">
+            <div class="rate-profile">
+              <div class="field"><label for="rateSearch">Search profile</label><div class="input-wrap"><input id="rateSearch" type="search" placeholder="e.g. D-54F, M-24"></div></div>
+              <div class="field"><label for="rateCategory">Colour category</label><div class="input-wrap"><select id="rateCategory"><option>Dull/Silver</option><option selected>Champagne/PC</option><option>Sahara/Brown</option><option>Multi/Black</option><option>Wood Coat</option></select></div></div>
+            </div>
+            <div class="rate-list" id="rateList"></div>
+          </div>
+        </details>
 
-  if(!h) return;
-
-  items =
-    JSON.parse(JSON.stringify(h.items || []));
-
-  customer =
-    JSON.parse(JSON.stringify(h.customer || {}));
-
-  document.getElementById("quotationNo").textContent =
-    h.quotationNo || generateQuotationNo();
-
-  setValue("globalDiscount",h.totals.globalDiscount);
-  setValue("tax",h.totals.tax);
-  setValue("labour",h.totals.labour);
-  setValue("freight",h.totals.freight);
-  setValue("previousBalance",h.totals.previousBalance);
-  setValue("paid",h.totals.paid);
-  setValue("notes",h.notes || "");
-
-  updateCustomerDisplay();
-  renderItems();
-  calculateTotals();
-
-  closeModal("historyModal");
-}
-
-function deleteHistory(index){
-
-  if(!confirm("Delete this quotation from history?")) return;
-
-  const history =
-    JSON.parse(
-      localStorage.getItem("quotation_history") || "[]"
-    );
-
-  history.splice(index,1);
-
-  localStorage.setItem(
-    "quotation_history",
-    JSON.stringify(history)
-  );
-
-  renderHistory();
-}
-
-
-/* =========================================================
-   SUMMARY
-========================================================= */
-
-function openSummary(){
-
-  const gross =
-    items.reduce((s,i)=>s+Number(i.amount||0),0);
-
-  const itemDiscount =
-    items.reduce((s,i)=>s+Number(i.discountAmount||0),0);
-
-  const net =
-    gross-itemDiscount;
-
-  const gd =
-    net*getNumber("globalDiscount")/100;
-
-  const afterGD =
-    net-gd;
-
-  const tax =
-    afterGD*getNumber("tax")/100;
-
-  const grand =
-    afterGD+
-    tax+
-    getNumber("labour")+
-    getNumber("freight")+
-    getNumber("previousBalance");
-
-  const paid =
-    getNumber("paid");
-
-  const balance =
-    grand-paid;
-
-  document.getElementById("summaryBody").innerHTML = `
-
-    <div class="summary-row">
-      <span>Customer</span>
-      <strong>${escapeHtml(customer.name || "Walk-in Customer")}</strong>
+        <section class="panel cost" aria-labelledby="costTitle">
+          <h2 id="costTitle">Cost breakdown</h2>
+          <div class="cost-line"><span>Aluminium material</span><strong id="aluCost">Rs 0</strong></div>
+          <div class="cost-line" id="discountLine"><span>Discount</span><strong id="discountCost">− Rs 0</strong></div>
+          <div class="cost-line"><span>Glass / sheet</span><strong id="glassCost">Rs 0</strong></div>
+          <div class="cost-line"><span>Hardware</span><strong id="hardwareCost">Rs 0</strong></div>
+          <div class="cost-line"><span>Labour</span><strong id="laborCost">Rs 0</strong></div>
+          <div class="cost-line"><span>Additional charges</span><strong id="additionalCost">Rs 0</strong></div>
+          <div class="cost-line cost-total"><span>Grand total</span><strong id="totalCost">Rs 0</strong></div>
+          <p class="cost-note">Average per sq.ft: <strong id="averageRate">Rs 0</strong></p>
+        </section>
+      </section>
     </div>
 
-    <div class="summary-row">
-      <span>Total Items</span>
-      <strong>${items.length}</strong>
-    </div>
+    <aside class="note">
+      <strong>Calculation basis:</strong> section rates aur formulas aapke diye hue Aluminium Pro Max rate list se liye gaye hain. F-frame allowances, sliding track sections, divider beading, DG sections aur arch ki curve length isi tareeqay ke mutabiq calculate hoti hai. Production cutting se pehle physical section aur joint allowance verify karein.
+    </aside>
+  </main>
+  <div class="toast" id="toast" role="status"></div>
 
-    <div class="summary-row">
-      <span>Gross</span>
-      <strong>${money(gross)}</strong>
-    </div>
+  <script src="data:application/javascript;base64,KGZ1bmN0aW9uICgpIHsKICAndXNlIHN0cmljdCc7CgogIHZhciBkZWZhdWx0UmF0ZXMgPSB7CiAgICAgICAgIkRDLTMwIEYgMS4ybW0iOiB7ICJEdWxsL1NpbHZlciI6IDc1MiwgIkNoYW1wYWduZS9QQyI6IDc1NCwgIlNhaGFyYS9Ccm93biI6IDgwNywgIk11bHRpL0JsYWNrIjogODQ0LCAiV29vZCBDb2F0IjogOTQzIH0sCiAgICAgICAgIkRDLTI2IEYgMS4ybW0iOiB7ICJEdWxsL1NpbHZlciI6IDg3OCwgIkNoYW1wYWduZS9QQyI6IDg4MCwgIlNhaGFyYS9Ccm93biI6IDk0MiwgIk11bHRpL0JsYWNrIjogOTg2LCAiV29vZCBDb2F0IjogMTEwMCB9LAogICAgICAgICJEQy0zMCBGIDEuNm1tIjogeyAiRHVsbC9TaWx2ZXIiOiA5MDksICJDaGFtcGFnbmUvUEMiOiA5MTEsICJTYWhhcmEvQnJvd24iOiA5NzUsICJNdWx0aS9CbGFjayI6IDEwMjAsICJXb29kIENvYXQiOiAxMTM5IH0sCiAgICAgICAgIkRDLTI2IEYgMS42bW0iOiB7ICJEdWxsL1NpbHZlciI6IDEwNDcsICJDaGFtcGFnbmUvUEMiOiAxMDQ5LCAiU2FoYXJhL0Jyb3duIjogMTEyMiwgIk11bHRpL0JsYWNrIjogMTE3NSwgIldvb2QgQ29hdCI6IDEzMTEgfSwKICAgICAgICAiREMtMzAgRiAyLjBtbSI6IHsgIkR1bGwvU2lsdmVyIjogMTA2NSwgIkNoYW1wYWduZS9QQyI6IDEwNjcsICJTYWhhcmEvQnJvd24iOiAxMTQyLCAiTXVsdGkvQmxhY2siOiAxMTk1LCAiV29vZCBDb2F0IjogMTMzNCB9LAogICAgICAgICJEQy0yNiBGIDIuMG1tIjogeyAiRHVsbC9TaWx2ZXIiOiAxMjQyLCAiQ2hhbXBhZ25lL1BDIjogMTI0NCwgIlNhaGFyYS9Ccm93biI6IDEzMzEsICJNdWx0aS9CbGFjayI6IDEzOTMsICJXb29kIENvYXQiOiAxNTU1IH0sCiAgICAgICAgCiAgICAgICAgIkRDLTMwIDEuMm1tIjogeyAiRHVsbC9TaWx2ZXIiOiA2ODIsICJDaGFtcGFnbmUvUEMiOiA2ODQsICJTYWhhcmEvQnJvd24iOiA3MzIsICJNdWx0aS9CbGFjayI6IDc2NiwgIldvb2QgQ29hdCI6IDg1NSB9LAogICAgICAgICJEQy0yNiAxLjJtbSI6IHsgIkR1bGwvU2lsdmVyIjogNzc1LCAiQ2hhbXBhZ25lL1BDIjogNzc3LCAiU2FoYXJhL0Jyb3duIjogODMxLCAiTXVsdGkvQmxhY2siOiA4NzAsICJXb29kIENvYXQiOiA5NzEgfSwKICAgICAgICAiREMtMzAgMS42bW0iOiB7ICJEdWxsL1NpbHZlciI6IDg2NywgIkNoYW1wYWduZS9QQyI6IDg2OSwgIlNhaGFyYS9Ccm93biI6IDkzMCwgIk11bHRpL0JsYWNrIjogOTczLCAiV29vZCBDb2F0IjogMTA4NiB9LCAKICAgICAgICAiREMtMjYgMS42bW0iOiB7ICJEdWxsL1NpbHZlciI6IDEwMDksICJDaGFtcGFnbmUvUEMiOiAxMDExLCAiU2FoYXJhL0Jyb3duIjogMTA4MiwgIk11bHRpL0JsYWNrIjogMTEzMiwgIldvb2QgQ29hdCI6IDEyNjQgfSwgCiAgICAgICAgIkRDLTMwIDIuMG1tIjogeyAiRHVsbC9TaWx2ZXIiOiAxMDMxLCAiQ2hhbXBhZ25lL1BDIjogMTAzMywgIlNhaGFyYS9Ccm93biI6IDExMDUsICJNdWx0aS9CbGFjayI6IDExNTcsICJXb29kIENvYXQiOiAxMjkxIH0sIAogICAgICAgICJEQy0yNiAyLjBtbSI6IHsgIkR1bGwvU2lsdmVyIjogMTE5NiwgIkNoYW1wYWduZS9QQyI6IDExOTgsICJTYWhhcmEvQnJvd24iOiAxMjgyLCAiTXVsdGkvQmxhY2siOiAxMzQyLCAiV29vZCBDb2F0IjogMTQ5OCB9LCAKCiAgICAgICAgIkRDLTMwQiAxLjJtbSI6IHsgIkR1bGwvU2lsdmVyIjogNjE0LCAiQ2hhbXBhZ25lL1BDIjogNjE2LCAiU2FoYXJhL0Jyb3duIjogNjU5LCAiTXVsdGkvQmxhY2siOiA2OTAsICJXb29kIENvYXQiOiA3NzAgfSwKICAgICAgICAiREMtMjZCIDEuMm1tIjogeyAiRHVsbC9TaWx2ZXIiOiA3MjQsICJDaGFtcGFnbmUvUEMiOiA3MjYsICJTYWhhcmEvQnJvd24iOiA3NzcsICJNdWx0aS9CbGFjayI6IDgxMywgIldvb2QgQ29hdCI6IDkwOCB9LAogICAgICAgICJEQy0zMEIgMS42bW0iOiB7ICJEdWxsL1NpbHZlciI6IDc1NywgIkNoYW1wYWduZS9QQyI6IDc1OSwgIlNhaGFyYS9Ccm93biI6IDgxMiwgIk11bHRpL0JsYWNrIjogODUwLCAiV29vZCBDb2F0IjogOTQ5IH0sCiAgICAgICAgIkRDLTI2QiAxLjZtbSI6IHsgIkR1bGwvU2lsdmVyIjogOTAwLCAiQ2hhbXBhZ25lL1BDIjogOTAyLCAiU2FoYXJhL0Jyb3duIjogOTY1LCAiTXVsdGkvQmxhY2siOiAxMDEwLCAiV29vZCBDb2F0IjogMTEyOCB9LAogICAgICAgICJEQy0zMEIgMi4wbW0iOiB7ICJEdWxsL1NpbHZlciI6IDkwMCwgIkNoYW1wYWduZS9QQyI6IDkwMiwgIlNhaGFyYS9Ccm93biI6IDk2NSwgIk11bHRpL0JsYWNrIjogMTAxMCwgIldvb2QgQ29hdCI6IDExMjggfSwKICAgICAgICAiREMtMjZCIDIuMG1tIjogeyAiRHVsbC9TaWx2ZXIiOiAxMDY1LCAiQ2hhbXBhZ25lL1BDIjogMTA2NywgIlNhaGFyYS9Ccm93biI6IDExNDIsICJNdWx0aS9CbGFjayI6IDExOTUsICJXb29kIENvYXQiOiAxMzM0IH0sCgogICAgICAgICJEQy0zMEMgMS4ybW0iOiB7ICJEdWxsL1NpbHZlciI6IDY3MiwgIkNoYW1wYWduZS9QQyI6IDY3NCwgIlNhaGFyYS9Ccm93biI6IDcyMSwgIk11bHRpL0JsYWNrIjogNzU1LCAiV29vZCBDb2F0IjogODQzIH0sCiAgICAgICAgIkRDLTI2QyAxLjJtbSI6IHsgIkR1bGwvU2lsdmVyIjogNzc0LCAiQ2hhbXBhZ25lL1BDIjogNzc2LCAiU2FoYXJhL0Jyb3duIjogODMwLCAiTXVsdGkvQmxhY2siOiA4NjksICJXb29kIENvYXQiOiA5NzAgfSwKICAgICAgICAiREMtMzBDIDEuNm1tIjogeyAiRHVsbC9TaWx2ZXIiOiA4MTUsICJDaGFtcGFnbmUvUEMiOiA4MTcsICJTYWhhcmEvQnJvd24iOiA4NzQsICJNdWx0aS9CbGFjayI6IDkxNSwgIldvb2QgQ29hdCI6IDEwMjEgfSwKICAgICAgICAiREMtMjZDIDEuNm1tIjogeyAiRHVsbC9TaWx2ZXIiOiA5NTUsICJDaGFtcGFnbmUvUEMiOiA5NTcsICJTYWhhcmEvQnJvd24iOiAxMDI0LCAiTXVsdGkvQmxhY2siOiAxMDcyLCAiV29vZCBDb2F0IjogMTE5NiB9LAogICAgICAgICJEQy0zMEMgMi4wbW0iOiB7ICJEdWxsL1NpbHZlciI6IDk2MywgIkNoYW1wYWduZS9QQyI6IDk2NSwgIlNhaGFyYS9Ccm93biI6IDExMzMsICJNdWx0aS9CbGFjayI6IDExODEsICJXb29kIENvYXQiOiAxMjA2IH0sCiAgICAgICAgIkRDLTI2QyAyLjBtbSI6IHsgIkR1bGwvU2lsdmVyIjogMTEzOSwgIkNoYW1wYWduZS9QQyI6IDExNDEsICJTYWhhcmEvQnJvd24iOiAxMjIxLCAiTXVsdGkvQmxhY2siOiAxMjc4LCAiV29vZCBDb2F0IjogMTQyNiB9LAoKICAgICAgICAiTS0zMCBGIDEuMm1tIjogeyAiRHVsbC9TaWx2ZXIiOiA2MTAsICJDaGFtcGFnbmUvUEMiOiA2MTIsICJTYWhhcmEvQnJvd24iOiA2NTUsICJNdWx0aS9CbGFjayI6IDY4NSwgIldvb2QgQ29hdCI6IDc2NSB9LAogICAgICAgICJNLTI2IEYgMS4ybW0iOiB7ICJEdWxsL1NpbHZlciI6IDY3OCwgIkNoYW1wYWduZS9QQyI6IDY4MCwgIlNhaGFyYS9Ccm93biI6IDcyOCwgIk11bHRpL0JsYWNrIjogNzYyLCAiV29vZCBDb2F0IjogODUwIH0sCiAgICAgICAgIk0tMzAgRiAxLjZtbSI6IHsgIkR1bGwvU2lsdmVyIjogNzExLCAiQ2hhbXBhZ25lL1BDIjogNzEzLCAiU2FoYXJhL0Jyb3duIjogNzYzLCAiTXVsdGkvQmxhY2siOiA3OTksICJXb29kIENvYXQiOiA4OTEgfSwKICAgICAgICAiTS0yNiBGIDEuNm1tIjogeyAiRHVsbC9TaWx2ZXIiOiA4MDksICJDaGFtcGFnbmUvUEMiOiA4MTEsICJTYWhhcmEvQnJvd24iOiA4NjgsICJNdWx0aS9CbGFjayI6IDkwOCwgIldvb2QgQ29hdCI6IDEwMTQgfSwKICAgICAgICAiTS0zMCBGIDIuMG1tIjogeyAiRHVsbC9TaWx2ZXIiOiA4MzQsICJDaGFtcGFnbmUvUEMiOiA4MzYsICJTYWhhcmEvQnJvd24iOiA4OTUsICJNdWx0aS9CbGFjayI6IDkzNiwgIldvb2QgQ29hdCI6IDEwNDUgfSwKICAgICAgICAiTS0yNiBGIDIuMG1tIjogeyAiRHVsbC9TaWx2ZXIiOiA5NTMsICJDaGFtcGFnbmUvUEMiOiA5NTUsICJTYWhhcmEvQnJvd24iOiAxMDIyLCAiTXVsdGkvQmxhY2siOiAxMDcwLCAiV29vZCBDb2F0IjogMTE5NCB9LAoKICAgICAgICAiTS0zMCAxLjJtbSI6IHsgIkR1bGwvU2lsdmVyIjogNTIwLCAiQ2hhbXBhZ25lL1BDIjogNTIyLCAiU2FoYXJhL0Jyb3duIjogNTU5LCAiTXVsdGkvQmxhY2siOiA1ODUsICJXb29kIENvYXQiOiA2NTMgfSwKICAgICAgICAiTS0yNiAxLjJtbSI6IHsgIkR1bGwvU2lsdmVyIjogNTgwLCAiQ2hhbXBhZ25lL1BDIjogNTgyLCAiU2FoYXJhL0Jyb3duIjogNjIzLCAiTXVsdGkvQmxhY2siOiA2NTIsICJXb29kIENvYXQiOiA3MjggfSwKICAgICAgICAiTS0zMCAxLjZtbSI6IHsgIkR1bGwvU2lsdmVyIjogNjA4LCAiQ2hhbXBhZ25lL1BDIjogNjEwLCAiU2FoYXJhL0Jyb3duIjogNjUzLCAiTXVsdGkvQmxhY2siOiA2ODMsICJXb29kIENvYXQiOiA3NjMgfSwKICAgICAgICAiTS0yNiAxLjZtbSI6IHsgIkR1bGwvU2lsdmVyIjogNzA4LCAiQ2hhbXBhZ25lL1BDIjogNzEwLCAiU2FoYXJhL0Jyb3duIjogNzYwLCAiTXVsdGkvQmxhY2siOiA3OTUsICJXb29kIENvYXQiOiA4ODggfSwKICAgICAgICAiTS0zMCAyLjBtbSI6IHsgIkR1bGwvU2lsdmVyIjogNzE0LCAiQ2hhbXBhZ25lL1BDIjogNzE2LCAiU2FoYXJhL0Jyb3duIjogNzY2LCAiTXVsdGkvQmxhY2siOiA4MDIsICJXb29kIENvYXQiOiA4OTUgfSwKICAgICAgICAiTS0yNiAyLjBtbSI6IHsgIkR1bGwvU2lsdmVyIjogODM0LCAiQ2hhbXBhZ25lL1BDIjogODM2LCAiU2FoYXJhL0Jyb3duIjogODk1LCAiTXVsdGkvQmxhY2siOiA5MzYsICJXb29kIENvYXQiOiAxMDQ1IH0sCgogICAgICAgICJNLTIzIDEuMm1tIjogeyAiRHVsbC9TaWx2ZXIiOiAzNTIsICJDaGFtcGFnbmUvUEMiOiAzNTQsICJTYWhhcmEvQnJvd24iOiAzNzksICJNdWx0aS9CbGFjayI6IDM5NiwgIldvb2QgQ29hdCI6IDQ0MyB9LAogICAgICAgICJNLTI4IDEuMm1tIjogeyAiRHVsbC9TaWx2ZXIiOiA0MjksICJDaGFtcGFnbmUvUEMiOiA0MzEsICJTYWhhcmEvQnJvd24iOiA0NjEsICJNdWx0aS9CbGFjayI6IDQ4MywgIldvb2QgQ29hdCI6IDUzOSB9LAogICAgICAgICJNLTI0IDEuMm1tIjogeyAiRHVsbC9TaWx2ZXIiOiA0MTgsICJDaGFtcGFnbmUvUEMiOiA0MjAsICJTYWhhcmEvQnJvd24iOiA0NDksICJNdWx0aS9CbGFjayI6IDQ3MCwgIldvb2QgQ29hdCI6IDUyNSB9LAogICAgICAgICJNLTIzIDEuNm1tIjogeyAiRHVsbC9TaWx2ZXIiOiA0NDMsICJDaGFtcGFnbmUvUEMiOiA0NDUsICJTYWhhcmEvQnJvd24iOiA0NzYsICJNdWx0aS9CbGFjayI6IDQ5OCwgIldvb2QgQ29hdCI6IDU1NiB9LAogICAgICAgICJNLTI4IDEuNm1tIjogeyAiRHVsbC9TaWx2ZXIiOiA1MzIsICJDaGFtcGFnbmUvUEMiOiA1MzQsICJTYWhhcmEvQnJvd24iOiA1NzEsICJNdWx0aS9CbGFjayI6IDU5OCwgIldvb2QgQ29hdCI6IDY2OCB9LAogICAgICAgICJNLTI0IDEuNm1tIjogeyAiRHVsbC9TaWx2ZXIiOiA0OTUsICJDaGFtcGFnbmUvUEMiOiA0OTcsICJTYWhhcmEvQnJvd24iOiA1MzIsICJNdWx0aS9CbGFjayI6IDU1NywgIldvb2QgQ29hdCI6IDYyMSB9LAogICAgICAgICJNLTIzIDIuMG1tIjogeyAiRHVsbC9TaWx2ZXIiOiA1NDAsICJDaGFtcGFnbmUvUEMiOiA1NDIsICJTYWhhcmEvQnJvd24iOiA1ODAsICJNdWx0aS9CbGFjayI6IDYwNywgIldvb2QgQ29hdCI6IDY3OCB9LAogICAgICAgICJNLTI4IDIuMG1tIjogeyAiRHVsbC9TaWx2ZXIiOiA2NDMsICJDaGFtcGFnbmUvUEMiOiA2NDUsICJTYWhhcmEvQnJvd24iOiA2OTAsICJNdWx0aS9CbGFjayI6IDcyMiwgIldvb2QgQ29hdCI6IDgwNiB9LAogICAgICAgICJNLTI0IDIuMG1tIjogeyAiRHVsbC9TaWx2ZXIiOiA2MDMsICJDaGFtcGFnbmUvUEMiOiA2MDUsICJTYWhhcmEvQnJvd24iOiA2NDcsICJNdWx0aS9CbGFjayI6IDY3OCwgIldvb2QgQ29hdCI6IDc1NiB9LAoKICAgICAgICAiTS0yNEEgMS4ybW0iOiB7ICJEdWxsL1NpbHZlciI6IDM2OSwgIkNoYW1wYWduZS9QQyI6IDM3MSwgIlNhaGFyYS9Ccm93biI6IDM5NywgIk11bHRpL0JsYWNrIjogNDE2LCAiV29vZCBDb2F0IjogNDY0IH0sCiAgICAgICAgIk0tMjRBIDEuNm1tIjogeyAiRHVsbC9TaWx2ZXIiOiA0NzIsICJDaGFtcGFnbmUvUEMiOiA0NzQsICJTYWhhcmEvQnJvd24iOiA1MDcsICJNdWx0aS9CbGFjayI6IDUzMSwgIldvb2QgQ29hdCI6IDU5MyB9LAogICAgICAgICJNLTI0QSAyLjBtbSI6IHsgIkR1bGwvU2lsdmVyIjogNTcwLCAiQ2hhbXBhZ25lL1BDIjogNTcyLCAiU2FoYXJhL0Jyb3duIjogNjEyLCAiTXVsdGkvQmxhY2siOiA2NDEsICJXb29kIENvYXQiOiA3MTUgfSwKICAgICAgICAiTS0yNEYgMS4ybW0iOiB7ICJEdWxsL1NpbHZlciI6IDI3MiwgIkNoYW1wYWduZS9QQyI6IDI3NCwgIlNhaGFyYS9Ccm93biI6IDI5MywgIk11bHRpL0JsYWNrIjogMzA3LCAiV29vZCBDb2F0IjogMzQzIH0sCgogICAgICAgICJELTU0RiAxLjJtbSI6IHsgIkR1bGwvU2lsdmVyIjogNDg0LCAiQ2hhbXBhZ25lL1BDIjogNDg2LCAiU2FoYXJhL0Jyb3duIjogNTIwLCAiTXVsdGkvQmxhY2siOiA1NDQsICJXb29kIENvYXQiOiA2MDggfSwKICAgICAgICAiRC01NEYgMS42bW0iOiB7ICJEdWxsL1NpbHZlciI6IDU4MCwgIkNoYW1wYWduZS9QQyI6IDU4MiwgIlNhaGFyYS9Ccm93biI6IDYyMywgIk11bHRpL0JsYWNrIjogNjUyLCAiV29vZCBDb2F0IjogNzI4IH0sCiAgICAgICAgIkQtNTRGIDIuMG1tIjogeyAiRHVsbC9TaWx2ZXIiOiA3MDAsICJDaGFtcGFnbmUvUEMiOiA3MDIsICJTYWhhcmEvQnJvd24iOiA3NTEsICJNdWx0aS9CbGFjayI6IDc4NiwgIldvb2QgQ29hdCI6IDg3OCB9LAogICAgICAgIAogICAgICAgICJELTUxRiAxLjJtbSI6IHsgIkR1bGwvU2lsdmVyIjogNTI4LCAiQ2hhbXBhZ25lL1BDIjogNTMwLCAiU2FoYXJhL0Jyb3duIjogNTY3LCAiTXVsdGkvQmxhY2siOiA1OTQsICJXb29kIENvYXQiOiA2NjMgfSwKICAgICAgICAiRC01MUYgMS42bW0iOiB7ICJEdWxsL1NpbHZlciI6IDY2MywgIkNoYW1wYWduZS9QQyI6IDY2NSwgIlNhaGFyYS9Ccm93biI6IDcxMiwgIk11bHRpL0JsYWNrIjogNzQ1LCAiV29vZCBDb2F0IjogODMxIH0sCiAgICAgICAgIkQtNTFGIDIuMG1tIjogeyAiRHVsbC9TaWx2ZXIiOiA4MDIsICJDaGFtcGFnbmUvUEMiOiA4MDQsICJTYWhhcmEvQnJvd24iOiA4NjAsICJNdWx0aS9CbGFjayI6IDkwMCwgIldvb2QgQ29hdCI6IDEwMDUgfSwKICAgICAgICAKICAgICAgICAiRC01NEEgMS4ybW0iOiB7ICJEdWxsL1NpbHZlciI6IDM5NSwgIkNoYW1wYWduZS9QQyI6IDM5NywgIlNhaGFyYS9Ccm93biI6IDQyNSwgIk11bHRpL0JsYWNrIjogNDQ1LCAiV29vZCBDb2F0IjogNDk2IH0sCiAgICAgICAgIkQtNTRBIDEuNm1tIjogeyAiRHVsbC9TaWx2ZXIiOiA0ODIsICJDaGFtcGFnbmUvUEMiOiA0ODQsICJTYWhhcmEvQnJvd24iOiA1MTgsICJNdWx0aS9CbGFjayI6IDU0MiwgIldvb2QgQ29hdCI6IDYwNSB9LAogICAgICAgICJELTU0QSAyLjBtbSI6IHsgIkR1bGwvU2lsdmVyIjogNTc4LCAiQ2hhbXBhZ25lL1BDIjogNTgwLCAiU2FoYXJhL0Jyb3duIjogNjIxLCAiTXVsdGkvQmxhY2siOiA2NTAsICJXb29kIENvYXQiOiA3MjUgfSwKICAgICAgICAKICAgICAgICAiRC01MUEgMS4ybW0iOiB7ICJEdWxsL1NpbHZlciI6IDQ1MSwgIkNoYW1wYWduZS9QQyI6IDQ1MywgIlNhaGFyYS9Ccm93biI6IDQ4NSwgIk11bHRpL0JsYWNrIjogNTA3LCAiV29vZCBDb2F0IjogNTY2IH0sCiAgICAgICAgIkQtNTFBIDEuNm1tIjogeyAiRHVsbC9TaWx2ZXIiOiA1NTcsICJDaGFtcGFnbmUvUEMiOiA1NTksICJTYWhhcmEvQnJvd24iOiA1OTgsICJNdWx0aS9CbGFjayI6IDYyNiwgIldvb2QgQ29hdCI6IDY5OSB9LAogICAgICAgICJELTUxQSAyLjBtbSI6IHsgIkR1bGwvU2lsdmVyIjogNjcyLCAiQ2hhbXBhZ25lL1BDIjogNjc0LCAiU2FoYXJhL0Jyb3duIjogNzIxLCAiTXVsdGkvQmxhY2siOiA3NTUsICJXb29kIENvYXQiOiA4NDMgfSwKICAgICAgICAKICAgICAgICAiRC01MCAxLjJtbSI6IHsgIkR1bGwvU2lsdmVyIjogNTUxLCAiQ2hhbXBhZ25lL1BDIjogNTUzLCAiU2FoYXJhL0Jyb3duIjogNTkyLCAiTXVsdGkvQmxhY2siOiA2MTksICJXb29kIENvYXQiOiA2OTEgfSwKICAgICAgICAiRC01MCAxLjZtbSI6IHsgIkR1bGwvU2lsdmVyIjogNzA1LCAiQ2hhbXBhZ25lL1BDIjogNzA3LCAiU2FoYXJhL0Jyb3duIjogNzU2LCAiTXVsdGkvQmxhY2siOiA3OTIsICJXb29kIENvYXQiOiA4ODQgfSwKICAgICAgICAiRC01MCAyLjBtbSI6IHsgIkR1bGwvU2lsdmVyIjogODQ5LCAiQ2hhbXBhZ25lL1BDIjogODUxLCAiU2FoYXJhL0Jyb3duIjogOTExLCAiTXVsdGkvQmxhY2siOiA5NTMsICJXb29kIENvYXQiOiAxMDY0IH0sCiAgICAgICAgCiAgICAgICAgIkQtNTBBIDEuMm1tIjogeyAiRHVsbC9TaWx2ZXIiOiA0ODgsICJDaGFtcGFnbmUvUEMiOiA0OTAsICJTYWhhcmEvQnJvd24iOiA1MjQsICJNdWx0aS9CbGFjayI6IDU0OSwgIldvb2QgQ29hdCI6IDYxMyB9LAogICAgICAgICJELTUwQSAxLjZtbSI6IHsgIkR1bGwvU2lsdmVyIjogNTgyLCAiQ2hhbXBhZ25lL1BDIjogNTg0LCAiU2FoYXJhL0Jyb3duIjogNjI1LCAiTXVsdGkvQmxhY2siOiA2NTQsICJXb29kIENvYXQiOiA3MzAgfSwKICAgICAgICAiRC01MEEgMi4wbW0iOiB7ICJEdWxsL1NpbHZlciI6IDcwOCwgIkNoYW1wYWduZS9QQyI6IDcxMCwgIlNhaGFyYS9Ccm93biI6IDc2MCwgIk11bHRpL0JsYWNrIjogNzk1LCAiV29vZCBDb2F0IjogODg4IH0sCiAgICAgICAgCiAgICAgICAgIkQtNTBCIDEuNm1tIjogeyAiRHVsbC9TaWx2ZXIiOiA4ODYsICJDaGFtcGFnbmUvUEMiOiA4ODgsICJTYWhhcmEvQnJvd24iOiA5NTAsICJNdWx0aS9CbGFjayI6IDk5NSwgIldvb2QgQ29hdCI6IDExMTAgfSwKICAgICAgICAiRC01MEIgMi4wbW0iOiB7ICJEdWxsL1NpbHZlciI6IDEwOTEsICJDaGFtcGFnbmUvUEMiOiAxMDkzLCAiU2FoYXJhL0Jyb3duIjogMTE3MCwgIk11bHRpL0JsYWNrIjogMTIyNCwgIldvb2QgQ29hdCI6IDEzNjYgfSwKICAgICAgICAKICAgICAgICAiRC00NiAxLjJtbSI6IHsgIkR1bGwvU2lsdmVyIjogODU5LCAiQ2hhbXBhZ25lL1BDIjogODYxLCAiU2FoYXJhL0Jyb3duIjogOTIxLCAiTXVsdGkvQmxhY2siOiA5NjQsICJXb29kIENvYXQiOiAxMDc2IH0sCiAgICAgICAgIkQtNDYgMS42bW0iOiB7ICJEdWxsL1NpbHZlciI6IDEwODUsICJDaGFtcGFnbmUvUEMiOiAxMDg3LCAiU2FoYXJhL0Jyb3duIjogMTE2MywgIk11bHRpL0JsYWNrIjogMTIxNywgIldvb2QgQ29hdCI6IDEzNTkgfSwKICAgICAgICAiRC00NiAyLjBtbSI6IHsgIkR1bGwvU2lsdmVyIjogMTMzMSwgIkNoYW1wYWduZS9QQyI6IDEzMzMsICJTYWhhcmEvQnJvd24iOiAxNDI2LCAiTXVsdGkvQmxhY2siOiAxNDkzLCAiV29vZCBDb2F0IjogMTY2NiB9LAogICAgICAgIAogICAgICAgICJELTQwIDEuMm1tIjogeyAiRHVsbC9TaWx2ZXIiOiA0NzgsICJDaGFtcGFnbmUvUEMiOiA0ODAsICJTYWhhcmEvQnJvd24iOiA1MTQsICJNdWx0aS9CbGFjayI6IDUzOCwgIldvb2QgQ29hdCI6IDYwMCB9LAogICAgICAgICJELTQwIDEuNm1tIjogeyAiRHVsbC9TaWx2ZXIiOiA1NDAsICJDaGFtcGFnbmUvUEMiOiA1NDIsICJTYWhhcmEvQnJvd24iOiA1ODAsICJNdWx0aS9CbGFjayI6IDYwNywgIldvb2QgQ29hdCI6IDY3OCB9LAogICAgICAgICJELTQwIDIuMG1tIjogeyAiRHVsbC9TaWx2ZXIiOiA2NjUsICJDaGFtcGFnbmUvUEMiOiA2NjcsICJTYWhhcmEvQnJvd24iOiA3MTQsICJNdWx0aS9CbGFjayI6IDc0NywgIldvb2QgQ29hdCI6IDgzNCB9LAogICAgICAgIAogICAgICAgICJELTU5IDEuMm1tIjogeyAiRHVsbC9TaWx2ZXIiOiA1MzUsICJDaGFtcGFnbmUvUEMiOiA1MzcsICJTYWhhcmEvQnJvd24iOiA1NzUsICJNdWx0aS9CbGFjayI6IDYwMSwgIldvb2QgQ29hdCI6IDY3MSB9LAogICAgICAgICJELTU5IDEuNm1tIjogeyAiRHVsbC9TaWx2ZXIiOiA2MjYsICJDaGFtcGFnbmUvUEMiOiA2MjgsICJTYWhhcmEvQnJvd24iOiA2NzIsICJNdWx0aS9CbGFjayI6IDcwMywgIldvb2QgQ29hdCI6IDc4NSB9LAogICAgICAgICJELTU5IDIuMG1tIjogeyAiRHVsbC9TaWx2ZXIiOiA3NDQsICJDaGFtcGFnbmUvUEMiOiA3NDYsICJTYWhhcmEvQnJvd24iOiA3OTgsICJNdWx0aS9CbGFjayI6IDgzNiwgIldvb2QgQ29hdCI6IDkzMyB9LAoKICAgICAgICAiRC01OUEgMS4ybW0iOiB7ICJEdWxsL1NpbHZlciI6IDU0OCwgIkNoYW1wYWduZS9QQyI6IDU1MCwgIlNhaGFyYS9Ccm93biI6IDU4OSwgIk11bHRpL0JsYWNrIjogNjE2LCAiV29vZCBDb2F0IjogNjg4IH0sCiAgICAgICAgIkQtNTlBIDEuNm1tIjogeyAiRHVsbC9TaWx2ZXIiOiA2NzQsICJDaGFtcGFnbmUvUEMiOiA2NzYsICJTYWhhcmEvQnJvd24iOiA3MjMsICJNdWx0aS9CbGFjayI6IDc1NywgIldvb2QgQ29hdCI6IDg0NSB9LAogICAgICAgICJELTU5QSAyLjBtbSI6IHsgIkR1bGwvU2lsdmVyIjogODE5LCAiQ2hhbXBhZ25lL1BDIjogODIxLCAiU2FoYXJhL0Jyb3duIjogODc4LCAiTXVsdGkvQmxhY2siOiA5MjAsICJXb29kIENvYXQiOiAxMDI2IH0sCgogICAgICAgICJELTQxIDEuMm1tIjogeyAiRHVsbC9TaWx2ZXIiOiAxODIsICJDaGFtcGFnbmUvUEMiOiAxODMsICJTYWhhcmEvQnJvd24iOiAxOTYsICJNdWx0aS9CbGFjayI6IDIwNSwgIldvb2QgQ29hdCI6IDIyOSB9LAogICAgICAgICJELTQyIDEuMm1tIjogeyAiRHVsbC9TaWx2ZXIiOiAzMTgsICJDaGFtcGFnbmUvUEMiOiAzMjAsICJTYWhhcmEvQnJvd24iOiAzNDIsICJNdWx0aS9CbGFjayI6IDM1OCwgIldvb2QgQ29hdCI6IDQwMCB9LAogICAgICAgICJELTQyRiAxLjJtbSI6IHsgIkR1bGwvU2lsdmVyIjogNDA2LCAiQ2hhbXBhZ25lL1BDIjogNDA4LCAiU2FoYXJhL0Jyb3duIjogNDM3LCAiTXVsdGkvQmxhY2siOiA0NTgsICJXb29kIENvYXQiOiA1MTAgfSwKICAgICAgICAiRC01MiAxLjJtbSI6IHsgIkR1bGwvU2lsdmVyIjogNDMyLCAiQ2hhbXBhZ25lL1BDIjogNDM0LCAiU2FoYXJhL0Jyb3duIjogNDY0LCAiTXVsdGkvQmxhY2siOiA0ODYsICJXb29kIENvYXQiOiA1NDMgfSwKICAgICAgICAiRC0yOSAxLjJtbSI6IHsgIkR1bGwvU2lsdmVyIjogMjczLCAiQ2hhbXBhZ25lL1BDIjogMjc0LCAiU2FoYXJhL0Jyb3duIjogMjkzLCAiTXVsdGkvQmxhY2siOiAzMDcsICJXb29kIENvYXQiOiAzNDMgfSwKICAgICAgICAKICAgICAgICAiRC01NyA0bW0iOiB7ICJEdWxsL1NpbHZlciI6IDkzNCwgIkNoYW1wYWduZS9QQyI6IDkzNiwgIlNhaGFyYS9Ccm93biI6IDEwMDIsICJNdWx0aS9CbGFjayI6IDEwNDgsICJXb29kIENvYXQiOiAxMTcwIH0sCiAgICAgICAgIkQtNTggNG1tIjogeyAiRHVsbC9TaWx2ZXIiOiA1NzAsICJDaGFtcGFnbmUvUEMiOiA1NzIsICJTYWhhcmEvQnJvd24iOiA2MTIsICJNdWx0aS9CbGFjayI6IDY0MSwgIldvb2QgQ29hdCI6IDcxNSB9LAoKICAgICAgICAiREctMjYgRiAxLjJtbSI6IHsgIkR1bGwvU2lsdmVyIjogOTE1LCAiQ2hhbXBhZ25lL1BDIjogOTMzLCAiU2FoYXJhL0Jyb3duIjogOTk4LCAiTXVsdGkvQmxhY2siOiAxMDQ1LCAiV29vZCBDb2F0IjogMTE2NyB9LAogICAgICAgICJERy0yNiAxLjJtbSI6IHsgIkR1bGwvU2lsdmVyIjogODY1LCAiQ2hhbXBhZ25lL1BDIjogODY3LCAiU2FoYXJhL0Jyb3duIjogOTI4LCAiTXVsdGkvQmxhY2siOiA5NzEsICJXb29kIENvYXQiOiAxMDg0IH0sIAogICAgICAgIAogICAgICAgICJERy0yMyAxLjJtbSI6IHsgIkR1bGwvU2lsdmVyIjogNTExLCAiQ2hhbXBhZ25lL1BDIjogNTEzLCAiU2FoYXJhL0Jyb3duIjogNTQ5LCAiTXVsdGkvQmxhY2siOiA1NzUsICJXb29kIENvYXQiOiA2NDEgfSwKICAgICAgICAiREctMjNBIDEuMm1tIjogeyAiRHVsbC9TaWx2ZXIiOiA1NzAsICJDaGFtcGFnbmUvUEMiOiA1NzIsICJTYWhhcmEvQnJvd24iOiA2MTIsICJNdWx0aS9CbGFjayI6IDY0MSwgIldvb2QgQ29hdCI6IDcxNSB9LAoKICAgICAgICAiREctMjggMS4ybW0iOiB7ICJEdWxsL1NpbHZlciI6IDIyMCwgIkNoYW1wYWduZS9QQyI6IDIyMiwgIlNhaGFyYS9Ccm93biI6IDIzOCwgIk11bHRpL0JsYWNrIjogMjQ5LCAiV29vZCBDb2F0IjogMjc4IH0sIAogICAgICAgIAogICAgICAgICJERy0yOSAxLjJtbSI6IHsgIkR1bGwvU2lsdmVyIjogMzUxLCAiQ2hhbXBhZ25lL1BDIjogMzUyLCAiU2FoYXJhL0Jyb3duIjogMzc3LCAiTXVsdGkvQmxhY2siOiAzOTQsICJXb29kIENvYXQiOiA0NDAgfSwgCgogICAgICAgICJERy0yNiBGIDEuNm1tIjogeyAiRHVsbC9TaWx2ZXIiOiAxMjMxLCAiQ2hhbXBhZ25lL1BDIjogMTIzMywgIlNhaGFyYS9Ccm93biI6IDEzMTksICJNdWx0aS9CbGFjayI6IDEzODEsICJXb29kIENvYXQiOiAxNTQxIH0sCiAgICAgICAgIkRHLTI2IDEuNm1tIjogeyAiRHVsbC9TaWx2ZXIiOiAxMTE4LCAiQ2hhbXBhZ25lL1BDIjogMTEyMCwgIlNhaGFyYS9Ccm93biI6IDExOTgsICJNdWx0aS9CbGFjayI6IDEyNTQsICJXb29kIENvYXQiOiAxNDAwIH0sCiAgICAgICAgIkRHLTI2QSAxLjZtbSI6IHsgIkR1bGwvU2lsdmVyIjogMTIzMSwgIkNoYW1wYWduZS9QQyI6IDEyMzMsICJTYWhhcmEvQnJvd24iOiAxMzE5LCAiTXVsdGkvQmxhY2siOiAxMzgxLCAiV29vZCBDb2F0IjogMTU0MSB9LAogICAgICAgIAogICAgICAgICJERy0yMyAxLjZtbSI6IHsgIkR1bGwvU2lsdmVyIjogNjM2LCAiQ2hhbXBhZ25lL1BDIjogNjM4LCAiU2FoYXJhL0Jyb3duIjogNjgzLCAiTXVsdGkvQmxhY2siOiA3MTUsICJXb29kIENvYXQiOiA3OTggfSwKICAgICAgICAiREctMjNBIDEuNm1tIjogeyAiRHVsbC9TaWx2ZXIiOiA2ODksICJDaGFtcGFnbmUvUEMiOiA2OTEsICJTYWhhcmEvQnJvd24iOiA3MzksICJNdWx0aS9CbGFjayI6IDc3NCwgIldvb2QgQ29hdCI6IDg2NCB9LAoKICAgICAgICAiREctMjYgRiAyLjBtbSI6IHsgIkR1bGwvU2lsdmVyIjogMTQ4MiwgIkNoYW1wYWduZS9QQyI6IDE0ODQsICJTYWhhcmEvQnJvd24iOiAxNTg4LCAiTXVsdGkvQmxhY2siOiAxNjYyLCAiV29vZCBDb2F0IjogMTg1NSB9LAogICAgICAgICJERy0yNiAyLjBtbSI6IHsgIkR1bGwvU2lsdmVyIjogMTM0OSwgIkNoYW1wYWduZS9QQyI6IDEzNTEsICJTYWhhcmEvQnJvd24iOiAxNDQ2LCAiTXVsdGkvQmxhY2siOiAxNTEzLCAiV29vZCBDb2F0IjogMTY4OSB9LAogICAgICAgICJERy0yNkEgMi4wbW0iOiB7ICJEdWxsL1NpbHZlciI6IDE1NjAsICJDaGFtcGFnbmUvUEMiOiAxNTYyLCAiU2FoYXJhL0Jyb3duIjogMTY3MSwgIk11bHRpL0JsYWNrIjogMTc0OSwgIldvb2QgQ29hdCI6IDE5NTMgfSwKICAgICAgICAKICAgICAgICAiREctMjMgMi4wbW0iOiB7ICJEdWxsL1NpbHZlciI6IDc1NywgIkNoYW1wYWduZS9QQyI6IDc1OSwgIlNhaGFyYS9Ccm93biI6IDgxMiwgIk11bHRpL0JsYWNrIjogODUwLCAiV29vZCBDb2F0IjogOTQ5IH0sCiAgICAgICAgIkRHLTIzQSAyLjBtbSI6IHsgIkR1bGwvU2lsdmVyIjogODE5LCAiQ2hhbXBhZ25lL1BDIjogODIxLCAiU2FoYXJhL0Jyb3duIjogODc4LCAiTXVsdGkvQmxhY2siOiA5MjAsICJXb29kIENvYXQiOiAxMDI2IH0sCiAgICAgICAgCiAgICAgICAgIkouQiAxLjJtbSI6IHsgIkR1bGwvU2lsdmVyIjogODAsICJDaGFtcGFnbmUvUEMiOiA4MCwgIlNhaGFyYS9Ccm93biI6IDgwLCAiTXVsdGkvQmxhY2siOiA4MCwgIldvb2QgQ29hdCI6IDgwIH0sCiAgICAgICAgIkouQiAxLjZtbSI6IHsgIkR1bGwvU2lsdmVyIjogODAsICJDaGFtcGFnbmUvUEMiOiA4MCwgIlNhaGFyYS9Ccm93biI6IDgwLCAiTXVsdGkvQmxhY2siOiA4MCwgIldvb2QgQ29hdCI6IDgwIH0sCiAgICAgICAgIkouQiAyLjBtbSI6IHsgIkR1bGwvU2lsdmVyIjogODAsICJDaGFtcGFnbmUvUEMiOiA4MCwgIlNhaGFyYS9Ccm93biI6IDgwLCAiTXVsdGkvQmxhY2siOiA4MCwgIldvb2QgQ29hdCI6IDgwIH0sCiAgICB9OwoKICB2YXIgc3RhdGUgPSB7IHR5cGU6ICdzbGlkaW5nJywgdW5pdDogJ2ltcGVyaWFsJywgdmlldzogJ2ZsYXQnLCBsYXN0OiBudWxsIH07CiAgdmFyICQgPSBmdW5jdGlvbiAoaWQpIHsgcmV0dXJuIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKGlkKTsgfTsKICB2YXIgY29sb3JzID0gWydEdWxsL1NpbHZlcicsJ0NoYW1wYWduZS9QQycsJ1NhaGFyYS9Ccm93bicsJ011bHRpL0JsYWNrJywnV29vZCBDb2F0J107CiAgdmFyIHRoaWNrbmVzc2VzID0gewogICAgc2xpZGluZzogWycxLjJtbSo3NW1tJywnMS42bW0qNzVtbScsJzIuMG1tKjc1bW0nLCcxLjJtbSo3NW1tIEYnLCcxLjZtbSo3NW1tIEYnLCcyLjBtbSo3NW1tIEYnLCcxLjJtbSo5NW1tJywnMS42bW0qOTVtbScsJzIuMG1tKjk1bW0nLCcxLjJtbSoxMDBtbScsJzEuNm1tKjEwMG1tJywnMi4wbW0qMTAwbW0nLCcxLjJtbSoxMDBtbSBGJywnMS42bW0qMTAwbW0gRicsJzIuMG1tKjEwMG1tIEYnLCcxLjJtbSoxMDBtbSBDJywnMS42bW0qMTAwbW0gQycsJzIuMG1tKjEwMG1tIEMnXSwKICAgIHN0YW5kYXJkOiBbJzEuMm1tJywnMS42bW0nLCcyLjBtbSddLAogICAgZGc6IFsnMS4ybW0qMTAwbW0nLCcxLjZtbSoxMDBtbScsJzIuMG1tKjEwMG1tJ10KICB9OwogIHZhciBwcm9maWxlQ29uZmlnID0gewogICAgZml4ZWQ6IFsKICAgICAgeyBpZDonZml4ZWRGcmFtZScsIGxhYmVsOidGaXhlZCBmcmFtZScsIG9wdGlvbnM6WydELTU0RicsJ0QtNTFGJywnRC01NEEnLCdELTUxQScsJ0QtNDJGJywnRC00MiddIH0KICAgIF0sCiAgICBvcGVuYWJsZTogWwogICAgICB7IGlkOidvcGVuYWJsZUZyYW1lJywgbGFiZWw6J0ZyYW1lJywgb3B0aW9uczpbJ0QtNTRGJywnRC01MUYnLCdELTQyRicsJ0QtNTRBJywnRC01MUEnLCdELTQyJ10gfSwKICAgICAgeyBpZDonb3BlbmFibGVQYWxsYScsIGxhYmVsOidQYWxsYScsIG9wdGlvbnM6WydELTUwQScsJ0QtNTAnLCdELTUwQiddIH0KICAgIF0sCiAgICBkb29yOiBbCiAgICAgIHsgaWQ6J2Rvb3JGcmFtZScsIGxhYmVsOidGcmFtZScsIG9wdGlvbnM6WydELTU0RicsJ0QtNTFGJywnRC01NEEnLCdELTUxQSddIH0sCiAgICAgIHsgaWQ6J2Rvb3JQYWxsYScsIGxhYmVsOidQYWxsYScsIG9wdGlvbnM6WydELTUwQScsJ0QtNTAnLCdELTUwQiddIH0sCiAgICAgIHsgaWQ6J2Rvb3JNaWRSYWlsJywgbGFiZWw6J01pZCByYWlsJywgb3B0aW9uczpbJ0QtNTInLCdELTQ2J10gfSwKICAgICAgeyBpZDonZG9vckJvdHRvbVJhaWwnLCBsYWJlbDonQm90dG9tIHJhaWwnLCBvcHRpb25zOlsnRC00NicsJ0QtNTgnLCdELTU3J10gfQogICAgXSwKICAgIGRnOiBbCiAgICAgIHsgaWQ6J2RnRnJhbWUnLCBsYWJlbDonREcgZnJhbWUnLCBvcHRpb25zOlsnREctMjYgRicsJ0RHLTI2JywnREctMjZBJ10gfSwKICAgICAgeyBpZDonZGdQYWxsYScsIGxhYmVsOidERyBwYWxsYScsIG9wdGlvbnM6WydERy0yMycsJ0RHLTIzQSddIH0KICAgIF0sCiAgICBzbGlkaW5nOiBbXQogIH07CgogIGZ1bmN0aW9uIG51bShpZCkgewogICAgdmFyIGVsID0gJChpZCksIHZhbHVlID0gZWwgPyBwYXJzZUZsb2F0KGVsLnZhbHVlKSA6IDA7CiAgICByZXR1cm4gTnVtYmVyLmlzRmluaXRlKHZhbHVlKSA/IE1hdGgubWF4KDAsIHZhbHVlKSA6IDA7CiAgfQoKICBmdW5jdGlvbiBkaW1lbnNpb25zKCkgewogICAgaWYgKHN0YXRlLnVuaXQgPT09ICdtZXRyaWMnKSByZXR1cm4geyB3Om51bSgnd2lkdGhNbScpLzMwNC44LCBoOm51bSgnaGVpZ2h0TW0nKS8zMDQuOCB9OwogICAgcmV0dXJuIHsgdzpudW0oJ3dpZHRoRnQnKStudW0oJ3dpZHRoSW4nKS8xMiwgaDpudW0oJ2hlaWdodEZ0JykrbnVtKCdoZWlnaHRJbicpLzEyIH07CiAgfQoKICBmdW5jdGlvbiBmdEluKGZlZXQpIHsKICAgIGlmICghTnVtYmVyLmlzRmluaXRlKGZlZXQpIHx8IGZlZXQgPD0gMCkgcmV0dXJuICcw4oCyIDDigLMnOwogICAgdmFyIHdob2xlPU1hdGguZmxvb3IoZmVldCksIGluY2hlcz1NYXRoLnJvdW5kKChmZWV0LXdob2xlKSo0OCkvNDsKICAgIGlmIChpbmNoZXM+PTEyKSB7IHdob2xlKz0xOyBpbmNoZXM9MDsgfQogICAgcmV0dXJuIHdob2xlKyfigLIgJysoaW5jaGVzJTEgPyBpbmNoZXMudG9GaXhlZCgyKS5yZXBsYWNlKC8wKyQvLCcnKS5yZXBsYWNlKC9cLiQvLCcnKSA6IGluY2hlcy50b0ZpeGVkKDApKSsn4oCzJzsKICB9CiAgZnVuY3Rpb24gbWVhc3VyZShmZWV0KSB7IHJldHVybiBzdGF0ZS51bml0PT09J21ldHJpYycgPyBNYXRoLnJvdW5kKGZlZXQqMzA0LjgpKycgbW0nIDogZnRJbihmZWV0KTsgfQogIGZ1bmN0aW9uIG1vbmV5KHYpIHsgcmV0dXJuICdScyAnK01hdGgucm91bmQodikudG9Mb2NhbGVTdHJpbmcoJ2VuLVBLJyk7IH0KICBmdW5jdGlvbiBkZWModixwKSB7IHJldHVybiBOdW1iZXIodikudG9GaXhlZChwKS5yZXBsYWNlKC9cLjArJC8sJycpOyB9CiAgZnVuY3Rpb24gb3B0aW9ucyh2YWx1ZXMsIHNlbGVjdGVkKSB7IHJldHVybiB2YWx1ZXMubWFwKGZ1bmN0aW9uKHYpeyByZXR1cm4gJzxvcHRpb24nKyh2PT09c2VsZWN0ZWQ/JyBzZWxlY3RlZCc6JycpKyc+Jyt2Kyc8L29wdGlvbj4nOyB9KS5qb2luKCcnKTsgfQoKICBmdW5jdGlvbiBzZXRTZWxlY3RPcHRpb25zKGlkLCB2YWx1ZXMsIHByZWZlcnJlZCkgewogICAgdmFyIGVsPSQoaWQpLCBjdXJyZW50PWVsLnZhbHVlOwogICAgZWwuaW5uZXJIVE1MPW9wdGlvbnModmFsdWVzLCB2YWx1ZXMuaW5kZXhPZihjdXJyZW50KT4tMSA/IGN1cnJlbnQgOiBwcmVmZXJyZWQgfHwgdmFsdWVzWzBdKTsKICB9CgogIGZ1bmN0aW9uIHJlbmRlclByb2ZpbGVGaWVsZHMoKSB7CiAgICB2YXIgbGlzdD1wcm9maWxlQ29uZmlnW3N0YXRlLnR5cGVdIHx8IFtdOwogICAgJCgncHJvZmlsZUZpZWxkcycpLmlubmVySFRNTD1saXN0Lmxlbmd0aCA/ICc8ZGl2IGNsYXNzPSJwcm9maWxlLWdyaWQiPicrbGlzdC5tYXAoZnVuY3Rpb24oZil7CiAgICAgIHJldHVybiAnPGRpdiBjbGFzcz0iZmllbGQiPjxsYWJlbCBmb3I9IicrZi5pZCsnIj4nK2YubGFiZWwrJzwvbGFiZWw+PGRpdiBjbGFzcz0iaW5wdXQtd3JhcCI+PHNlbGVjdCBpZD0iJytmLmlkKyciPicrb3B0aW9ucyhmLm9wdGlvbnMsZi5vcHRpb25zWzBdKSsnPC9zZWxlY3Q+PC9kaXY+PC9kaXY+JzsKICAgIH0pLmpvaW4oJycpKyc8L2Rpdj4nIDogJzxwIGNsYXNzPSJoZWxwZXIiPkZyYW1lIGF1ciBwYWxsYSBzZWN0aW9ucyB0aGlja25lc3Mgc2VsZWN0aW9uIHNlIGF1dG9tYXRpYyBjaG9vc2UgaG9uZ2UuPC9wPic7CgogICAgdmFyIHRoaWNrTGlzdD1zdGF0ZS50eXBlPT09J3NsaWRpbmcnID8gdGhpY2tuZXNzZXMuc2xpZGluZyA6IChzdGF0ZS50eXBlPT09J2RnJyA/IHRoaWNrbmVzc2VzLmRnIDogdGhpY2tuZXNzZXMuc3RhbmRhcmQpOwogICAgc2V0U2VsZWN0T3B0aW9ucygndGhpY2tuZXNzJyx0aGlja0xpc3QsdGhpY2tMaXN0WzBdKTsKICAgIHZhciBkaXZpZGVyT3B0aW9uczsKICAgIGlmIChzdGF0ZS50eXBlPT09J3NsaWRpbmcnIHx8IHN0YXRlLnR5cGU9PT0nZGcnKSBkaXZpZGVyT3B0aW9ucz1bJ00tMjRBJywnTS0yNEYnLCdKLkInLCdELTU5QSddOwogICAgZWxzZSBpZiAoc3RhdGUudHlwZT09PSdkb29yJykgZGl2aWRlck9wdGlvbnM9WydELTUyJywnRC00NicsJ0QtNTlBJ107CiAgICBlbHNlIGRpdmlkZXJPcHRpb25zPVsnRC00MCcsJ0QtNTknLCdELTU5QScsJ0QtNTInXTsKICAgIHNldFNlbGVjdE9wdGlvbnMoJ2RpdmlkZXJUeXBlJyxkaXZpZGVyT3B0aW9ucyxkaXZpZGVyT3B0aW9uc1swXSk7CgogICAgdmFyIHBhbmVsPSQoJ3BhbmVsQ291bnQnKTsKICAgICQoJ3RyYWNrRmllbGQnKS5jbGFzc0xpc3QudG9nZ2xlKCdpcy1oaWRkZW4nLHN0YXRlLnR5cGU9PT0nZml4ZWQnKTsKICAgIGlmIChzdGF0ZS50eXBlPT09J3NsaWRpbmcnKSB7CiAgICAgICQoJ3BhbmVsTGFiZWwnKS50ZXh0Q29udGVudD0nVHJhY2sgcXVhbnRpdHknOwogICAgICBwYW5lbC5pbm5lckhUTUw9JzxvcHRpb24gdmFsdWU9IjIiPjIgVHJhY2s8L29wdGlvbj48b3B0aW9uIHZhbHVlPSIzIj4zIFRyYWNrPC9vcHRpb24+JzsKICAgIH0gZWxzZSBpZiAoc3RhdGUudHlwZT09PSdkZycpIHsKICAgICAgJCgncGFuZWxMYWJlbCcpLnRleHRDb250ZW50PSdUcmFjayBxdWFudGl0eSc7CiAgICAgIHBhbmVsLmlubmVySFRNTD0nPG9wdGlvbiB2YWx1ZT0iMiI+MiBUcmFjazwvb3B0aW9uPic7CiAgICB9IGVsc2UgaWYgKHN0YXRlLnR5cGU9PT0nb3BlbmFibGUnIHx8IHN0YXRlLnR5cGU9PT0nZG9vcicpIHsKICAgICAgJCgncGFuZWxMYWJlbCcpLnRleHRDb250ZW50PSdQYWxsYSBxdWFudGl0eSc7CiAgICAgIHBhbmVsLmlubmVySFRNTD0nPG9wdGlvbiB2YWx1ZT0iMSI+U2luZ2xlIHBhbGxhPC9vcHRpb24+PG9wdGlvbiB2YWx1ZT0iMiI+RG91YmxlIHBhbGxhPC9vcHRpb24+JzsKICAgICAgJCgndHJhY2tGaWVsZCcpLmNsYXNzTGlzdC5yZW1vdmUoJ2lzLWhpZGRlbicpOwogICAgfQogICAgJCgnYXJjaEdyb3VwJykuY2xhc3NMaXN0LnRvZ2dsZSgnaXMtaGlkZGVuJyxzdGF0ZS50eXBlPT09J2RnJyk7CiAgfQoKICBmdW5jdGlvbiBmZXRjaFJhdGUoYmFzZVNlYywgdGhpY2ssIGNhdGVnb3J5KSB7CiAgICB2YXIga2V5PWJhc2VTZWMrJyAnK3RoaWNrLCBkYXRhPWRlZmF1bHRSYXRlc1trZXldOwogICAgaWYgKCFkYXRhKSB7IGtleT1iYXNlU2VjKycgMS4ybW0nOyBkYXRhPWRlZmF1bHRSYXRlc1trZXldOyB9CiAgICBpZiAoIWRhdGEpIHsga2V5PWJhc2VTZWMrJyA0bW0nOyBkYXRhPWRlZmF1bHRSYXRlc1trZXldOyB9CiAgICByZXR1cm4geyBzZWN0aW9uOmJhc2VTZWMrJyAoJysoa2V5LnNwbGl0KCcgJykucG9wKCkgfHwgdGhpY2spKycpJywgcmF0ZTpkYXRhID8gKGRhdGFbY2F0ZWdvcnldIHx8IDApIDogMCB9OwogIH0KCiAgZnVuY3Rpb24gYWRkTWF0ZXJpYWwobGlzdCwgYmFzZSwgdGhpY2ssIGZlZXQsIGNhdGVnb3J5KSB7CiAgICB2YXIgcm93PWZldGNoUmF0ZShiYXNlLHRoaWNrLGNhdGVnb3J5KTsKICAgIHJvdy5mdD1NYXRoLm1heCgwLGZlZXQpOwogICAgcm93LmFtb3VudD1yb3cuZnQqcm93LnJhdGU7CiAgICBsaXN0LnB1c2gocm93KTsKICB9CgogIGZ1bmN0aW9uIGNhbGN1bGF0ZSgpIHsKICAgIHZhciBkPWRpbWVuc2lvbnMoKSwgdmFsaWQ9ZC53Pj0wLjUgJiYgZC5oPj0wLjU7CiAgICAkKCdzaXplRXJyb3InKS50ZXh0Q29udGVudD12YWxpZCA/ICcnIDogJ1dpZHRoIGF1ciBoZWlnaHQga2FtIGF6IGthbSA2IGluY2ggaG9uaSBjaGFoaXllLic7CiAgICB2YXIgdz1NYXRoLm1heChkLncsMC41KSwgaD1NYXRoLm1heChkLmgsMC41KSwgcT1NYXRoLm1heCgxLE1hdGgucm91bmQobnVtKCdxdWFudGl0eScpKXx8MSk7CiAgICB2YXIgdGhpY2tuZXNzPSQoJ3RoaWNrbmVzcycpLnZhbHVlIHx8ICcxLjJtbSc7CiAgICB2YXIgbWF0Y2g9dGhpY2tuZXNzLm1hdGNoKC8oXGRcLlxkKW1tLyksIHRoaWNrPW1hdGNoID8gbWF0Y2hbMV0rJ21tJyA6ICcxLjJtbSc7CiAgICB2YXIgY2F0ZWdvcnk9JCgnY29sb3JDYXRlZ29yeScpLnZhbHVlIHx8IGNvbG9yc1sxXTsKICAgIHZhciBpc0Y9dGhpY2tuZXNzLmluZGV4T2YoJ0YnKT4tMSwgaXNDPXRoaWNrbmVzcy5pbmRleE9mKCdDJyk+LTE7CiAgICB2YXIgcGFsbGFDb3VudD1zdGF0ZS50eXBlPT09J2ZpeGVkJyA/IDEgOiAocGFyc2VJbnQoJCgncGFuZWxDb3VudCcpLnZhbHVlLDEwKXx8MSk7CiAgICB2YXIgZGl2Vz1udW0oJ2RpdmlkZXJXUXR5JyksIGRpdkg9bnVtKCdkaXZpZGVySFF0eScpOwogICAgdmFyIHRvdGFsRGl2aWRlckZ0PShkaXZXKncpKyhkaXZIKmgqcGFsbGFDb3VudCk7CiAgICB2YXIgbGlzdD1bXTsKCiAgICBpZiAoc3RhdGUudHlwZT09PSdkZycpIHsKICAgICAgdmFyIGRnRnJhbWU9JCgnZGdGcmFtZScpLnZhbHVlLCBkZ1BhbGxhPSQoJ2RnUGFsbGEnKS52YWx1ZTsKICAgICAgdmFyIGRnRnJhbWVGdD1kZ0ZyYW1lLmluZGV4T2YoJ0YnKT4tMSA/ICgodyswLjI1KSoyKSsoKGgrMC4yNSkqMikgOiAodyoyKSsoaCoyKTsKICAgICAgYWRkTWF0ZXJpYWwobGlzdCxkZ0ZyYW1lLHRoaWNrLGRnRnJhbWVGdCpxLGNhdGVnb3J5KTsKICAgICAgYWRkTWF0ZXJpYWwobGlzdCxkZ1BhbGxhLHRoaWNrLCgoaCo0KSsodyoyKSkqcSxjYXRlZ29yeSk7CiAgICAgIGFkZE1hdGVyaWFsKGxpc3QsJ0RHLTI4Jyx0aGljaywoaCoyKSpxLGNhdGVnb3J5KTsKICAgICAgYWRkTWF0ZXJpYWwobGlzdCwnREctMjknLHRoaWNrLCgoaCoyKSt3KSpxLGNhdGVnb3J5KTsKICAgIH0gZWxzZSBpZiAoc3RhdGUudHlwZT09PSdmaXhlZCcpIHsKICAgICAgdmFyIGZpeGVkRnJhbWU9JCgnZml4ZWRGcmFtZScpLnZhbHVlOwogICAgICB2YXIgZml4ZWRGdD1maXhlZEZyYW1lLmluZGV4T2YoJ0YnKT4tMSA/ICgodyswLjI1KSoyKSsoKGgrMC4yNSkqMikgOiAodyoyKSsoaCoyKTsKICAgICAgYWRkTWF0ZXJpYWwobGlzdCxmaXhlZEZyYW1lLHRoaWNrLGZpeGVkRnQqcSxjYXRlZ29yeSk7CiAgICAgIGFkZE1hdGVyaWFsKGxpc3QsJ0QtNDEnLHRoaWNrLCgodyoyKSsoaCoyKSkqcSxjYXRlZ29yeSk7CiAgICB9IGVsc2UgaWYgKHN0YXRlLnR5cGU9PT0nb3BlbmFibGUnKSB7CiAgICAgIHZhciBvcGVuRnJhbWU9JCgnb3BlbmFibGVGcmFtZScpLnZhbHVlLCBvcGVuUGFsbGE9JCgnb3BlbmFibGVQYWxsYScpLnZhbHVlOwogICAgICB2YXIgb3BlbkZyYW1lRnQ9b3BlbkZyYW1lLmluZGV4T2YoJ0YnKT4tMSA/ICgodyswLjUpKjIpKygoaCswLjUpKjIpIDogKHcqMikrKGgqMik7CiAgICAgIHZhciBvcGVuUGFsbGFGdD0odyoyKSsoaCoocGFsbGFDb3VudCoyKSk7CiAgICAgIGFkZE1hdGVyaWFsKGxpc3Qsb3BlbkZyYW1lLHRoaWNrLG9wZW5GcmFtZUZ0KnEsY2F0ZWdvcnkpOwogICAgICBhZGRNYXRlcmlhbChsaXN0LG9wZW5QYWxsYSx0aGljayxvcGVuUGFsbGFGdCpxLGNhdGVnb3J5KTsKICAgIH0gZWxzZSBpZiAoc3RhdGUudHlwZT09PSdkb29yJykgewogICAgICB2YXIgZG9vckZyYW1lPSQoJ2Rvb3JGcmFtZScpLnZhbHVlLCBkb29yUGFsbGE9JCgnZG9vclBhbGxhJykudmFsdWU7CiAgICAgIHZhciBkb29yRnJhbWVGdD0oZG9vckZyYW1lPT09J0QtNTRGJ3x8ZG9vckZyYW1lPT09J0QtNTFGJykgPyAodyswLjUpKzIqKGgrMC41KSA6IHcrKDIqaCk7CiAgICAgIHZhciBkb29yUGFsbGFGdD13KyhoKihwYWxsYUNvdW50KjIpKTsKICAgICAgYWRkTWF0ZXJpYWwobGlzdCxkb29yRnJhbWUsdGhpY2ssZG9vckZyYW1lRnQqcSxjYXRlZ29yeSk7CiAgICAgIGFkZE1hdGVyaWFsKGxpc3QsZG9vclBhbGxhLHRoaWNrLGRvb3JQYWxsYUZ0KnEsY2F0ZWdvcnkpOwogICAgICBhZGRNYXRlcmlhbChsaXN0LCQoJ2Rvb3JNaWRSYWlsJykudmFsdWUsdGhpY2ssdypxLGNhdGVnb3J5KTsKICAgICAgYWRkTWF0ZXJpYWwobGlzdCwkKCdkb29yQm90dG9tUmFpbCcpLnZhbHVlLHRoaWNrLHcqcSxjYXRlZ29yeSk7CiAgICB9IGVsc2UgewogICAgICB2YXIgaXM3NT10aGlja25lc3MuaW5kZXhPZignNzVtbScpPi0xLCBpczk1PXRoaWNrbmVzcy5pbmRleE9mKCc5NW1tJyk+LTE7CiAgICAgIHZhciB0b3BTaWRlRnQ9aXNGID8gdysoaCoyKSsxIDogdysoaCoyKSwgYm90dG9tRnQ9aXNGID8gdyswLjUgOiB3OwogICAgICB2YXIgdG9wU2VjPWlzRiA/ICdEQy0zMCBGJzonREMtMzAnLCBib3R0b21TZWM9aXNGID8gJ0RDLTI2IEYnOidEQy0yNic7CiAgICAgIGlmIChpczc1KSB7IHRvcFNlYz1pc0Y/J00tMzAgRic6J00tMzAnOyBib3R0b21TZWM9aXNGPydNLTI2IEYnOidNLTI2JzsgfQogICAgICBlbHNlIGlmIChpczk1KSB7IHRvcFNlYz0nREMtMzBCJzsgYm90dG9tU2VjPSdEQy0yNkInOyB0b3BTaWRlRnQ9dysoaCoyKTsgYm90dG9tRnQ9dzsgfQogICAgICBlbHNlIGlmIChpc0MpIHsgdG9wU2VjPSdEQy0zMEMnOyBib3R0b21TZWM9J0RDLTI2Qyc7IH0KICAgICAgYWRkTWF0ZXJpYWwobGlzdCx0b3BTZWMsdGhpY2ssdG9wU2lkZUZ0KnEsY2F0ZWdvcnkpOwogICAgICBhZGRNYXRlcmlhbChsaXN0LGJvdHRvbVNlYyx0aGljayxib3R0b21GdCpxLGNhdGVnb3J5KTsKICAgICAgYWRkTWF0ZXJpYWwobGlzdCwnTS0yMycsdGhpY2ssKGgqMikqcSxjYXRlZ29yeSk7CiAgICAgIGFkZE1hdGVyaWFsKGxpc3QsJ00tMjgnLHRoaWNrLChoKjIpKnEsY2F0ZWdvcnkpOwogICAgICBhZGRNYXRlcmlhbChsaXN0LCdNLTI0Jyx0aGljaywodyoyKSpxLGNhdGVnb3J5KTsKICAgICAgaWYgKCFpczc1KSBhZGRNYXRlcmlhbChsaXN0LCdELTI5Jyx0aGljaywodysoaCoyKSkqcSxjYXRlZ29yeSk7CiAgICB9CgogICAgaWYgKHRvdGFsRGl2aWRlckZ0PjApIHsKICAgICAgdmFyIGRpdmlkZXI9JCgnZGl2aWRlclR5cGUnKS52YWx1ZTsKICAgICAgYWRkTWF0ZXJpYWwobGlzdCxkaXZpZGVyLHRoaWNrLHRvdGFsRGl2aWRlckZ0KnEsY2F0ZWdvcnkpOwogICAgICBpZiAoZGl2aWRlcj09PSdELTQwJ3x8ZGl2aWRlcj09PSdELTU5J3x8ZGl2aWRlcj09PSdELTU5QScpIGFkZE1hdGVyaWFsKGxpc3QsJ0QtNDEnLHRoaWNrLHRvdGFsRGl2aWRlckZ0KjIqcSxjYXRlZ29yeSk7CiAgICB9CgogICAgdmFyIGFoPTA7CiAgICBpZiAoc3RhdGUudHlwZSE9PSdkZycgJiYgJCgnaGFzQXJjaCcpLmNoZWNrZWQpIHsKICAgICAgYWg9JCgnYXJjaFR5cGUnKS52YWx1ZT09PSdGdWxsIFJvdW5kJyA/IHcvMiA6IE1hdGgubWluKG51bSgnYXJjaEhlaWdodCcpLHcvMik7CiAgICAgIGlmIChhaD4wKSB7CiAgICAgICAgdmFyIHJhZGl1cz0oYWgvMikrKCh3KncpLyg4KmFoKSk7CiAgICAgICAgdmFyIHRoZXRhPTIqTWF0aC5hc2luKE1hdGgubWluKDEsdy8oMipyYWRpdXMpKSk7CiAgICAgICAgdmFyIGFyY2hNYXQ9KHJhZGl1cyp0aGV0YSkrMSt3OwogICAgICAgIHZhciBhcmNoVGhpY2s9JCgnYXJjaFRoaWNrbmVzcycpLnZhbHVlOwogICAgICAgIGFkZE1hdGVyaWFsKGxpc3QsJCgnYXJjaEZyYW1lJykudmFsdWUsYXJjaFRoaWNrLGFyY2hNYXQqcSxjYXRlZ29yeSk7CiAgICAgICAgYWRkTWF0ZXJpYWwobGlzdCwnRC00MScsYXJjaFRoaWNrLGFyY2hNYXQqcSxjYXRlZ29yeSk7CiAgICAgIH0KICAgIH0KCiAgICB2YXIgY29tYmluZWQ9e307CiAgICBsaXN0LmZvckVhY2goZnVuY3Rpb24ocm93KXsKICAgICAgaWYoIWNvbWJpbmVkW3Jvdy5zZWN0aW9uXSkgY29tYmluZWRbcm93LnNlY3Rpb25dPXtzZWN0aW9uOnJvdy5zZWN0aW9uLHJhdGU6cm93LnJhdGUsZnQ6MCxhbW91bnQ6MH07CiAgICAgIGNvbWJpbmVkW3Jvdy5zZWN0aW9uXS5mdCs9cm93LmZ0OyBjb21iaW5lZFtyb3cuc2VjdGlvbl0uYW1vdW50Kz1yb3cuYW1vdW50OwogICAgfSk7CiAgICB2YXIgbWF0ZXJpYWxzPU9iamVjdC5rZXlzKGNvbWJpbmVkKS5tYXAoZnVuY3Rpb24oayl7cmV0dXJuIGNvbWJpbmVkW2tdO30pOwogICAgdmFyIG1hdGVyaWFsRnQ9bWF0ZXJpYWxzLnJlZHVjZShmdW5jdGlvbihzLHIpe3JldHVybiBzK3IuZnQ7fSwwKTsKICAgIHZhciBtYXRlcmlhbFN1YnRvdGFsPW1hdGVyaWFscy5yZWR1Y2UoZnVuY3Rpb24ocyxyKXtyZXR1cm4gcytyLmFtb3VudDt9LDApOwogICAgdmFyIHRvdGFsSGVpZ2h0PWgrYWgsIHNxZnQ9dyp0b3RhbEhlaWdodCpxOwogICAgdmFyIGRpc2NvdW50PW1hdGVyaWFsU3VidG90YWwqTWF0aC5taW4oMTAwLG51bSgnZGlzY291bnRQY3QnKSkvMTAwOwogICAgdmFyIGdsYXNzQ29zdD1zcWZ0Km51bSgnZ2xhc3NSYXRlJyk7CiAgICB2YXIgaGFyZHdhcmVDb3N0PXEqbnVtKCdoYXJkd2FyZVJhdGUnKTsKICAgIHZhciBsYWJvckNvc3Q9c3FmdCpudW0oJ2xhYm9yUmF0ZScpOwogICAgdmFyIGFkZGl0aW9uYWw9bnVtKCdhZGRpdGlvbmFsJyk7CiAgICB2YXIgZ3JhbmQ9bWF0ZXJpYWxTdWJ0b3RhbC1kaXNjb3VudCtnbGFzc0Nvc3QraGFyZHdhcmVDb3N0K2xhYm9yQ29zdCthZGRpdGlvbmFsOwogICAgdmFyIGF2ZXJhZ2U9c3FmdD4wID8gZ3JhbmQvc3FmdCA6IDA7CgogICAgc3RhdGUubGFzdD17ZDpkLHc6dyxoOmgscTpxLGFoOmFoLHRvdGFsSGVpZ2h0OnRvdGFsSGVpZ2h0LHNxZnQ6c3FmdCx0aGlja25lc3M6dGhpY2tuZXNzLGNhdGVnb3J5OmNhdGVnb3J5LGdsYXNzTmFtZTokKCdnbGFzc0NvbG9yJykub3B0aW9uc1skKCdnbGFzc0NvbG9yJykuc2VsZWN0ZWRJbmRleF0udGV4dCxtYXRlcmlhbHM6bWF0ZXJpYWxzLG1hdGVyaWFsRnQ6bWF0ZXJpYWxGdCxtYXRlcmlhbFN1YnRvdGFsOm1hdGVyaWFsU3VidG90YWwsZGlzY291bnQ6ZGlzY291bnQsZ2xhc3NDb3N0OmdsYXNzQ29zdCxoYXJkd2FyZUNvc3Q6aGFyZHdhcmVDb3N0LGxhYm9yQ29zdDpsYWJvckNvc3QsYWRkaXRpb25hbDphZGRpdGlvbmFsLGdyYW5kOmdyYW5kLGF2ZXJhZ2U6YXZlcmFnZX07CiAgICByZW5kZXIoKTsKICB9CgogIGZ1bmN0aW9uIHR5cGVOYW1lKCkgewogICAgcmV0dXJuIHtzbGlkaW5nOidTbGlkaW5nIHdpbmRvdycsb3BlbmFibGU6J09wZW5hYmxlIHdpbmRvdycsZml4ZWQ6J0ZpeGVkIHdpbmRvdycsZG9vcjonQWx1bWluaXVtIGRvb3InLGRnOidERyBzbGlkaW5nIHdpbmRvdyd9W3N0YXRlLnR5cGVdOwogIH0KCiAgZnVuY3Rpb24gcmVuZGVyKCkgewogICAgdmFyIHI9c3RhdGUubGFzdDsKICAgICQoJ3Zpc3VhbFdpZHRoJykudGV4dENvbnRlbnQ9bWVhc3VyZShyLmQudyk7CiAgICAkKCd2aXN1YWxIZWlnaHQnKS50ZXh0Q29udGVudD1tZWFzdXJlKHIudG90YWxIZWlnaHQpOwogICAgJCgnd2luZG93RHJhd2luZycpLmNsYXNzTmFtZT0nd2luZG93LWRyYXdpbmcgJysoc3RhdGUudHlwZT09PSdvcGVuYWJsZSc/J2Nhc2VtZW50JzpzdGF0ZS50eXBlKSsoc3RhdGUudmlldz09PSczZCc/JyB2aWV3LTNkJzonJyk7CiAgICAkKCd3aW5kb3dEcmF3aW5nJykuc3R5bGUuc2V0UHJvcGVydHkoJy0tZnJhbWUtY29sb3InLCQoJ2ZyYW1lQ29sb3InKS52YWx1ZSk7CiAgICAkKCd3aW5kb3dEcmF3aW5nJykuc3R5bGUuc2V0UHJvcGVydHkoJy0tZ2xhc3MtY29sb3InLCQoJ2dsYXNzQ29sb3InKS52YWx1ZSk7CiAgICAkKCdnbGFzc0NoaXAnKS50ZXh0Q29udGVudD1yLmdsYXNzTmFtZTsKICAgICQoJ2dsYXNzQ2hpcCcpLnN0eWxlLnNldFByb3BlcnR5KCctLWdsYXNzLXN3YXRjaCcsJCgnZ2xhc3NDb2xvcicpLnZhbHVlKTsKICAgICQoJ3Jlc3VsdFRpdGxlJykudGV4dENvbnRlbnQ9dHlwZU5hbWUoKSsnIMK3ICcrci5xKycgcGNzJzsKICAgICQoJ3Jlc3VsdERlc2MnKS50ZXh0Q29udGVudD1yLnRoaWNrbmVzcysnIMK3ICcrci5jYXRlZ29yeSsnIMK3ICcrci5nbGFzc05hbWUrKHIuYWg+MD8nIMK3IGFyY2ggJytkZWMoci5haCwyKSsnIGZ0JzonJyk7CiAgICAkKCdncmFuZFRvdGFsJykudGV4dENvbnRlbnQ9bW9uZXkoci5ncmFuZCk7CiAgICAkKCdhbHVUb3RhbCcpLnRleHRDb250ZW50PWRlYyhyLm1hdGVyaWFsRnQsMSkrJyByLmZ0JzsKICAgICQoJ2dsYXNzVG90YWwnKS50ZXh0Q29udGVudD1kZWMoci5zcWZ0LDEpKycgc3EuZnQnOwogICAgJCgnaGFyZHdhcmVVbml0cycpLnRleHRDb250ZW50PW1vbmV5KHIuYXZlcmFnZSkrJy9zcS5mdCc7CiAgICAkKCdhbHVDb3N0JykudGV4dENvbnRlbnQ9bW9uZXkoci5tYXRlcmlhbFN1YnRvdGFsKTsKICAgICQoJ2Rpc2NvdW50Q29zdCcpLnRleHRDb250ZW50PSfiiJIgJyttb25leShyLmRpc2NvdW50KTsKICAgICQoJ2Rpc2NvdW50TGluZScpLmNsYXNzTGlzdC50b2dnbGUoJ2lzLWhpZGRlbicsci5kaXNjb3VudDw9MCk7CiAgICAkKCdnbGFzc0Nvc3QnKS50ZXh0Q29udGVudD1tb25leShyLmdsYXNzQ29zdCk7CiAgICAkKCdoYXJkd2FyZUNvc3QnKS50ZXh0Q29udGVudD1tb25leShyLmhhcmR3YXJlQ29zdCk7CiAgICAkKCdsYWJvckNvc3QnKS50ZXh0Q29udGVudD1tb25leShyLmxhYm9yQ29zdCk7CiAgICAkKCdhZGRpdGlvbmFsQ29zdCcpLnRleHRDb250ZW50PW1vbmV5KHIuYWRkaXRpb25hbCk7CiAgICAkKCd0b3RhbENvc3QnKS50ZXh0Q29udGVudD1tb25leShyLmdyYW5kKTsKICAgICQoJ2F2ZXJhZ2VSYXRlJykudGV4dENvbnRlbnQ9bW9uZXkoci5hdmVyYWdlKTsKICAgICQoJ2N1dExpc3QnKS5pbm5lckhUTUw9ci5tYXRlcmlhbHMubWFwKGZ1bmN0aW9uKHJvdyl7CiAgICAgIHJldHVybiAnPGRpdiBjbGFzcz0iY3V0LXJvdyI+PGRpdiBjbGFzcz0ibmFtZSI+Jytyb3cuc2VjdGlvbisnPHNtYWxsPicrbW9uZXkocm93LnJhdGUpKycgLyByLmZ0PC9zbWFsbD48L2Rpdj48ZGl2IGNsYXNzPSJtZWFzdXJlIj4nK2RlYyhyb3cuZnQsMSkrJzwvZGl2PjxkaXYgY2xhc3M9ImFtb3VudCI+Jyttb25leShyb3cuYW1vdW50KSsnPC9kaXY+PC9kaXY+JzsKICAgIH0pLmpvaW4oJycpOwogIH0KCiAgZnVuY3Rpb24gc2V0VHlwZSh0eXBlKSB7CiAgICBzdGF0ZS50eXBlPXR5cGU7CiAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCcudHlwZS10YWInKS5mb3JFYWNoKGZ1bmN0aW9uKHRhYil7dGFiLnNldEF0dHJpYnV0ZSgnYXJpYS1zZWxlY3RlZCcsU3RyaW5nKHRhYi5kYXRhc2V0LnR5cGU9PT10eXBlKSk7fSk7CiAgICByZW5kZXJQcm9maWxlRmllbGRzKCk7CiAgICBjYWxjdWxhdGUoKTsKICB9CgogIGZ1bmN0aW9uIHNldFVuaXQodW5pdCkgewogICAgdmFyIGJlZm9yZT1kaW1lbnNpb25zKCk7IHN0YXRlLnVuaXQ9dW5pdDsKICAgIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoJy51bml0LXRvZ2dsZSBidXR0b24nKS5mb3JFYWNoKGZ1bmN0aW9uKGIpe2IuY2xhc3NMaXN0LnRvZ2dsZSgnYWN0aXZlJyxiLmRhdGFzZXQudW5pdD09PXVuaXQpO30pOwogICAgZG9jdW1lbnQucXVlcnlTZWxlY3RvcignLmltcGVyaWFsLWZpZWxkcycpLnN0eWxlLmRpc3BsYXk9dW5pdD09PSdpbXBlcmlhbCc/Jyc6J25vbmUnOwogICAgZG9jdW1lbnQucXVlcnlTZWxlY3RvcignLm1tLWZpZWxkcycpLnN0eWxlLmRpc3BsYXk9dW5pdD09PSdtZXRyaWMnPydibG9jayc6J25vbmUnOwogICAgaWYodW5pdD09PSdtZXRyaWMnKSB7ICQoJ3dpZHRoTW0nKS52YWx1ZT1NYXRoLnJvdW5kKGJlZm9yZS53KjMwNC44KTsgJCgnaGVpZ2h0TW0nKS52YWx1ZT1NYXRoLnJvdW5kKGJlZm9yZS5oKjMwNC44KTsgfQogICAgZWxzZSB7IHZhciB3Zj1NYXRoLmZsb29yKGJlZm9yZS53KSxoZj1NYXRoLmZsb29yKGJlZm9yZS5oKTsgJCgnd2lkdGhGdCcpLnZhbHVlPXdmOyAkKCd3aWR0aEluJykudmFsdWU9TWF0aC5yb3VuZCgoYmVmb3JlLnctd2YpKjQ4KS80OyAkKCdoZWlnaHRGdCcpLnZhbHVlPWhmOyAkKCdoZWlnaHRJbicpLnZhbHVlPU1hdGgucm91bmQoKGJlZm9yZS5oLWhmKSo0OCkvNDsgfQogICAgY2FsY3VsYXRlKCk7CiAgfQoKICBmdW5jdGlvbiBzdW1tYXJ5VGV4dCgpIHsKICAgIHZhciByPXN0YXRlLmxhc3QsIGxpbmVzPVsnQUxVTUlOSVVNIE1BVEVSSUFMIEVTVElNQVRFJywoJCgnYnVzaW5lc3NOYW1lJykudmFsdWUudHJpbSgpfHwnQnVzaW5lc3MgcHJvZmlsZSBub3QgZW50ZXJlZCcpLCgkKCdidXNpbmVzc1Bob25lJykudmFsdWUudHJpbSgpfHwnJyksKCQoJ2J1c2luZXNzQWRkcmVzcycpLnZhbHVlLnRyaW0oKXx8JycpLCcnLHR5cGVOYW1lKCksJ0N1c3RvbWVyOiAnKygkKCdjdXN0b21lck5hbWUnKS52YWx1ZS50cmltKCl8fCfigJQnKSwnUmVmZXJlbmNlOiAnKygkKCdxdW90ZVJlZicpLnZhbHVlLnRyaW0oKXx8J+KAlCcpLCdQcm9qZWN0OiAnKygkKCdwcm9qZWN0TmFtZScpLnZhbHVlLnRyaW0oKXx8J+KAlCcpLCdTaXplOiAnK21lYXN1cmUoci53KSsnIFcgw5cgJyttZWFzdXJlKHIudG90YWxIZWlnaHQpKycgSCcsJ1F0eTogJytyLnEsJ1NlY3Rpb246ICcrci50aGlja25lc3MsJ1JhdGUgY2F0ZWdvcnk6ICcrci5jYXRlZ29yeSwnR2xhc3M6ICcrci5nbGFzc05hbWUsJycsJ01BVEVSSUFMJ107CiAgICByLm1hdGVyaWFscy5mb3JFYWNoKGZ1bmN0aW9uKHJvdyl7bGluZXMucHVzaChyb3cuc2VjdGlvbisnOiAnK2RlYyhyb3cuZnQsMikrJyByLmZ0IMOXICcrbW9uZXkocm93LnJhdGUpKycgPSAnK21vbmV5KHJvdy5hbW91bnQpKTt9KTsKICAgIGxpbmVzLnB1c2goJycsJ01hdGVyaWFsIHN1YnRvdGFsOiAnK21vbmV5KHIubWF0ZXJpYWxTdWJ0b3RhbCksJ0Rpc2NvdW50OiDiiJIgJyttb25leShyLmRpc2NvdW50KSwnQXJlYTogJytkZWMoci5zcWZ0LDIpKycgc3EuZnQnLCdHbGFzcyAvIHNoZWV0OiAnK21vbmV5KHIuZ2xhc3NDb3N0KSwnSGFyZHdhcmU6ICcrbW9uZXkoci5oYXJkd2FyZUNvc3QpLCdMYWJvdXI6ICcrbW9uZXkoci5sYWJvckNvc3QpLCdBZGRpdGlvbmFsOiAnK21vbmV5KHIuYWRkaXRpb25hbCksJ0dyYW5kIHRvdGFsOiAnK21vbmV5KHIuZ3JhbmQpLCdBdmVyYWdlOiAnK21vbmV5KHIuYXZlcmFnZSkrJyAvIHNxLmZ0Jyk7CiAgICByZXR1cm4gbGluZXMuam9pbignXG4nKTsKICB9CgogIGZ1bmN0aW9uIHJlbmRlclJhdGVMaXN0KCkgewogICAgdmFyIHF1ZXJ5PSgkKCdyYXRlU2VhcmNoJykudmFsdWV8fCcnKS50cmltKCkudG9Mb3dlckNhc2UoKTsKICAgIHZhciBjYXRlZ29yeT0kKCdyYXRlQ2F0ZWdvcnknKS52YWx1ZTsKICAgIHZhciBrZXlzPU9iamVjdC5rZXlzKGRlZmF1bHRSYXRlcykuZmlsdGVyKGZ1bmN0aW9uKGtleSl7cmV0dXJuICFxdWVyeSB8fCBrZXkudG9Mb3dlckNhc2UoKS5pbmRleE9mKHF1ZXJ5KT4tMTt9KS5zb3J0KCk7CiAgICAkKCdyYXRlTGlzdCcpLmlubmVySFRNTD1rZXlzLmxlbmd0aCA/IGtleXMubWFwKGZ1bmN0aW9uKGtleSl7CiAgICAgIHJldHVybiAnPGRpdiBjbGFzcz0icmF0ZS1yb3ciPjxzcGFuPicra2V5Kyc8L3NwYW4+PHN0cm9uZz4nK21vbmV5KGRlZmF1bHRSYXRlc1trZXldW2NhdGVnb3J5XXx8MCkrJyAvIHIuZnQ8L3N0cm9uZz48L2Rpdj4nOwogICAgfSkuam9pbignJykgOiAnPHAgY2xhc3M9InJhdGUtZW1wdHkiPklzIHNlYXJjaCBrYSBwcm9maWxlIG5haGkgbWlsYS48L3A+JzsKICB9CgogIGZ1bmN0aW9uIHNldFZpZXcodmlldykgewogICAgc3RhdGUudmlldz12aWV3OwogICAgZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbCgnW2RhdGEtdmlld10nKS5mb3JFYWNoKGZ1bmN0aW9uKGJ1dHRvbil7YnV0dG9uLmNsYXNzTGlzdC50b2dnbGUoJ2FjdGl2ZScsYnV0dG9uLmRhdGFzZXQudmlldz09PXZpZXcpO30pOwogICAgcmVuZGVyKCk7CiAgfQoKICBmdW5jdGlvbiBhc2NpaSh0ZXh0KSB7CiAgICByZXR1cm4gU3RyaW5nKHRleHQpLnJlcGxhY2UoL1vigJPigJTiiJJdL2csJy0nKS5yZXBsYWNlKC/Dly9nLCd4JykucmVwbGFjZSgvW+KAsuKAmV0vZywiJyIpLnJlcGxhY2UoL1vigLPigJzigJ1dL2csJyInKS5ub3JtYWxpemUoJ05GS0QnKS5yZXBsYWNlKC9bXlx4MjAtXHg3RV0vZywnJyk7CiAgfQoKICBmdW5jdGlvbiBwZGZFc2NhcGUodGV4dCkgeyByZXR1cm4gYXNjaWkodGV4dCkucmVwbGFjZSgvXFwvZywnXFxcXCcpLnJlcGxhY2UoL1woL2csJ1xcKCcpLnJlcGxhY2UoL1wpL2csJ1xcKScpOyB9CgogIGZ1bmN0aW9uIG1ha2VQZGYobGluZXMpIHsKICAgIHZhciBwYWdlcz1bXSwgcGVyUGFnZT0zNDsKICAgIGZvcih2YXIgaT0wO2k8bGluZXMubGVuZ3RoO2krPXBlclBhZ2UpIHBhZ2VzLnB1c2gobGluZXMuc2xpY2UoaSxpK3BlclBhZ2UpKTsKICAgIHZhciBwYWdlU3RhcnQ9NCwgb2JqZWN0cz1bbnVsbCwnPDwgL1R5cGUgL0NhdGFsb2cgL1BhZ2VzIDIgMCBSID4+JyxudWxsLCc8PCAvVHlwZSAvRm9udCAvU3VidHlwZSAvVHlwZTEgL0Jhc2VGb250IC9IZWx2ZXRpY2EgPj4nXTsKICAgIHZhciBraWRzPVtdOwogICAgcGFnZXMuZm9yRWFjaChmdW5jdGlvbihwYWdlLGluZGV4KXsKICAgICAgdmFyIHBhZ2VPYmo9cGFnZVN0YXJ0KyhpbmRleCoyKSwgY29udGVudE9iaj1wYWdlT2JqKzE7CiAgICAgIGtpZHMucHVzaChwYWdlT2JqKycgMCBSJyk7CiAgICAgIHZhciBjb250ZW50PSdCVFxuL0YxIDEzIFRmXG40OCA3OTAgVGRcbic7CiAgICAgIHBhZ2UuZm9yRWFjaChmdW5jdGlvbihsaW5lLGxpbmVJbmRleCl7CiAgICAgICAgaWYobGluZUluZGV4KSBjb250ZW50Kz0nMCAtMjEgVGRcbic7CiAgICAgICAgY29udGVudCs9JygnK3BkZkVzY2FwZShsaW5lKSsnKSBUalxuJzsKICAgICAgfSk7CiAgICAgIGNvbnRlbnQrPSdFVCc7CiAgICAgIG9iamVjdHNbcGFnZU9ial09Jzw8IC9UeXBlIC9QYWdlIC9QYXJlbnQgMiAwIFIgL01lZGlhQm94IFswIDAgNTk1IDg0Ml0gL1Jlc291cmNlcyA8PCAvRm9udCA8PCAvRjEgMyAwIFIgPj4gPj4gL0NvbnRlbnRzICcrY29udGVudE9iaisnIDAgUiA+Pic7CiAgICAgIG9iamVjdHNbY29udGVudE9ial09Jzw8IC9MZW5ndGggJytjb250ZW50Lmxlbmd0aCsnID4+XG5zdHJlYW1cbicrY29udGVudCsnXG5lbmRzdHJlYW0nOwogICAgfSk7CiAgICBvYmplY3RzWzJdPSc8PCAvVHlwZSAvUGFnZXMgL0tpZHMgWycra2lkcy5qb2luKCcgJykrJ10gL0NvdW50ICcrcGFnZXMubGVuZ3RoKycgPj4nOwogICAgdmFyIHBkZj0nJVBERi0xLjRcbicsIG9mZnNldHM9WzBdOwogICAgZm9yKHZhciBuPTE7bjxvYmplY3RzLmxlbmd0aDtuKyspIHsgb2Zmc2V0c1tuXT1wZGYubGVuZ3RoOyBwZGYrPW4rJyAwIG9ialxuJytvYmplY3RzW25dKydcbmVuZG9ialxuJzsgfQogICAgdmFyIHhyZWY9cGRmLmxlbmd0aDsKICAgIHBkZis9J3hyZWZcbjAgJytvYmplY3RzLmxlbmd0aCsnXG4wMDAwMDAwMDAwIDY1NTM1IGYgXG4nOwogICAgZm9yKHZhciBvPTE7bzxvYmplY3RzLmxlbmd0aDtvKyspIHBkZis9U3RyaW5nKG9mZnNldHNbb10pLnBhZFN0YXJ0KDEwLCcwJykrJyAwMDAwMCBuIFxuJzsKICAgIHBkZis9J3RyYWlsZXJcbjw8IC9TaXplICcrb2JqZWN0cy5sZW5ndGgrJyAvUm9vdCAxIDAgUiA+Plxuc3RhcnR4cmVmXG4nK3hyZWYrJ1xuJSVFT0YnOwogICAgcmV0dXJuIG5ldyBCbG9iKFtwZGZdLHt0eXBlOidhcHBsaWNhdGlvbi9wZGYnfSk7CiAgfQoKICBmdW5jdGlvbiBkb2NIZWFkZXIobGluZXMsdGl0bGUpIHsKICAgIGxpbmVzLnB1c2goKCgkKCdidXNpbmVzc05hbWUnKS52YWx1ZS50cmltKCl8fCdBbHVtaW5pdW0gV2luZG93IENhbGN1bGF0b3InKSkudG9VcHBlckNhc2UoKSk7CiAgICB2YXIgcGhvbmU9JCgnYnVzaW5lc3NQaG9uZScpLnZhbHVlLnRyaW0oKSwgYWRkcj0kKCdidXNpbmVzc0FkZHJlc3MnKS52YWx1ZS50cmltKCk7CiAgICBpZihwaG9uZSkgbGluZXMucHVzaCgnUGhvbmU6ICcrcGhvbmUpOwogICAgaWYoYWRkcikgbGluZXMucHVzaChhZGRyKTsKICAgIGxpbmVzLnB1c2goJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJyk7CiAgICBsaW5lcy5wdXNoKHRpdGxlKTsKICAgIHZhciByZWY9JCgncXVvdGVSZWYnKS52YWx1ZS50cmltKCk7CiAgICB2YXIgZGF0ZVN0cj1uZXcgRGF0ZSgpLnRvTG9jYWxlRGF0ZVN0cmluZygnZW4tR0InLHtkYXk6JzItZGlnaXQnLG1vbnRoOidzaG9ydCcseWVhcjonbnVtZXJpYyd9KTsKICAgIGxpbmVzLnB1c2gocmVmID8gKCdSZWY6ICcrcmVmKycgICAgRGF0ZTogJytkYXRlU3RyKSA6ICgnRGF0ZTogJytkYXRlU3RyKSk7CiAgICB2YXIgY3VzdD0kKCdjdXN0b21lck5hbWUnKS52YWx1ZS50cmltKCksIHByb2o9JCgncHJvamVjdE5hbWUnKS52YWx1ZS50cmltKCk7CiAgICBpZihjdXN0KSBsaW5lcy5wdXNoKCdDdXN0b21lcjogJytjdXN0KTsKICAgIGlmKHByb2opIGxpbmVzLnB1c2goJ1Byb2plY3Q6ICcrcHJvaik7CiAgICBsaW5lcy5wdXNoKCcnKTsKICB9CgogIGZ1bmN0aW9uIGJpbGxMaW5lcygpIHsKICAgIHZhciByPXN0YXRlLmxhc3QsIGxpbmVzPVtdOwogICAgZG9jSGVhZGVyKGxpbmVzLCdCSUxMIC8gUVVPVEFUSU9OJyk7CiAgICBsaW5lcy5wdXNoKHR5cGVOYW1lKCkrJyAgfCAgUXR5OiAnK3IucSsnIHBjcycpOwogICAgbGluZXMucHVzaCgnU2l6ZTogJyttZWFzdXJlKHIudykrJyBXIHggJyttZWFzdXJlKHIudG90YWxIZWlnaHQpKycgSCcpOwogICAgbGluZXMucHVzaCgnU2VjdGlvbjogJytyLnRoaWNrbmVzcysnICB8ICAnK3IuY2F0ZWdvcnkpOwogICAgbGluZXMucHVzaCgnR2xhc3M6ICcrci5nbGFzc05hbWUrJyAgfCAgQXJlYTogJytkZWMoci5zcWZ0LDIpKycgc3EuZnQnKTsKICAgIGxpbmVzLnB1c2goJycsJ0NIQVJHRVMnKTsKICAgIGxpbmVzLnB1c2goJ0FsdW1pbml1bSBtYXRlcmlhbDogJyttb25leShyLm1hdGVyaWFsU3VidG90YWwpKTsKICAgIGlmKHIuZGlzY291bnQ+MCkgbGluZXMucHVzaCgnRGlzY291bnQ6IC0gJyttb25leShyLmRpc2NvdW50KSk7CiAgICBsaW5lcy5wdXNoKCdHbGFzcyAvIHNoZWV0OiAnK21vbmV5KHIuZ2xhc3NDb3N0KSk7CiAgICBsaW5lcy5wdXNoKCdIYXJkd2FyZTogJyttb25leShyLmhhcmR3YXJlQ29zdCkpOwogICAgbGluZXMucHVzaCgnTGFib3VyOiAnK21vbmV5KHIubGFib3JDb3N0KSk7CiAgICBpZihyLmFkZGl0aW9uYWw+MCkgbGluZXMucHVzaCgnQWRkaXRpb25hbCBjaGFyZ2VzOiAnK21vbmV5KHIuYWRkaXRpb25hbCkpOwogICAgbGluZXMucHVzaCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nKTsKICAgIGxpbmVzLnB1c2goJ0dSQU5EIFRPVEFMOiAnK21vbmV5KHIuZ3JhbmQpKTsKICAgIGxpbmVzLnB1c2goJ0F2ZXJhZ2UgcmF0ZTogJyttb25leShyLmF2ZXJhZ2UpKycgLyBzcS5mdCcpOwogICAgbGluZXMucHVzaCgnJywnVGhhbmsgeW91IGZvciB5b3VyIGJ1c2luZXNzIScpOwogICAgcmV0dXJuIGxpbmVzOwogIH0KCiAgZnVuY3Rpb24gbWF0ZXJpYWxMaW5lcygpIHsKICAgIHZhciByPXN0YXRlLmxhc3QsIGxpbmVzPVtdOwogICAgZG9jSGVhZGVyKGxpbmVzLCdBTFVNSU5JVU0gTUFURVJJQUwgTElTVCcpOwogICAgbGluZXMucHVzaCh0eXBlTmFtZSgpKycgIHwgIFF0eTogJytyLnErJyBwY3MnKTsKICAgIGxpbmVzLnB1c2goJ1NpemU6ICcrbWVhc3VyZShyLncpKycgVyB4ICcrbWVhc3VyZShyLnRvdGFsSGVpZ2h0KSsnIEgnKTsKICAgIGxpbmVzLnB1c2goJ1NlY3Rpb246ICcrci50aGlja25lc3MrJyAgfCAgJytyLmNhdGVnb3J5KTsKICAgIGxpbmVzLnB1c2goJycsJ01BVEVSSUFMJyk7CiAgICByLm1hdGVyaWFscy5mb3JFYWNoKGZ1bmN0aW9uKHJvdyl7bGluZXMucHVzaChyb3cuc2VjdGlvbisnOiAnK2RlYyhyb3cuZnQsMikrJyByLmZ0IHggJyttb25leShyb3cucmF0ZSkrJyA9ICcrbW9uZXkocm93LmFtb3VudCkpO30pOwogICAgbGluZXMucHVzaCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nKTsKICAgIGxpbmVzLnB1c2goJ1RvdGFsIGFsdW1pbml1bTogJytkZWMoci5tYXRlcmlhbEZ0LDEpKycgci5mdCcpOwogICAgbGluZXMucHVzaCgnTWF0ZXJpYWwgdG90YWw6ICcrbW9uZXkoci5tYXRlcmlhbFN1YnRvdGFsKSk7CiAgICBpZihyLmRpc2NvdW50PjApIGxpbmVzLnB1c2goJ0xlc3MgZGlzY291bnQ6IC0gJyttb25leShyLmRpc2NvdW50KSk7CiAgICByZXR1cm4gbGluZXM7CiAgfQoKICBmdW5jdGlvbiBmaWxlTmFtZShwcmVmaXgpIHsKICAgIHZhciByZWY9KCQoJ3F1b3RlUmVmJykudmFsdWUudHJpbSgpfHwnJykucmVwbGFjZSgvW15hLXpBLVowLTlfLV0rL2csJycpOwogICAgdmFyIGQ9bmV3IERhdGUoKSwgc3RhbXA9ZC5nZXRGdWxsWWVhcigpKygnMCcrKGQuZ2V0TW9udGgoKSsxKSkuc2xpY2UoLTIpKygnMCcrZC5nZXREYXRlKCkpLnNsaWNlKC0yKTsKICAgIHJldHVybiBwcmVmaXgrJy0nKyhyZWZ8fHN0YW1wKSsnLnBkZic7CiAgfQoKICBmdW5jdGlvbiBzYXZlUGRmKGxpbmVzLGZpbGVuYW1lKSB7CiAgICB2YXIgYmxvYj1tYWtlUGRmKGxpbmVzKSwgdXJsPVVSTC5jcmVhdGVPYmplY3RVUkwoYmxvYiksIGE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnYScpOwogICAgYS5ocmVmPXVybDsgYS5kb3dubG9hZD1maWxlbmFtZTsgZG9jdW1lbnQuYm9keS5hcHBlbmRDaGlsZChhKTsgYS5jbGljaygpOyBhLnJlbW92ZSgpOwogICAgd2luZG93LnNldFRpbWVvdXQoZnVuY3Rpb24oKXtVUkwucmV2b2tlT2JqZWN0VVJMKHVybCk7fSw1MDApOwogIH0KCiAgZnVuY3Rpb24gZG93bmxvYWRCaWxsUGRmKCkgewogICAgaWYoIXN0YXRlLmxhc3Qpe3Nob3dUb2FzdCgnUGVobGUgc2l6ZSBkYXJqIGthcmVpbicpO3JldHVybjt9CiAgICBzYXZlUGRmKGJpbGxMaW5lcygpLGZpbGVOYW1lKCdiaWxsJykpOyBzaG93VG9hc3QoJ0JpbGwgZG93bmxvYWQgaG8gZ2F5YScpOwogIH0KCiAgZnVuY3Rpb24gZG93bmxvYWRNYXRlcmlhbFBkZigpIHsKICAgIGlmKCFzdGF0ZS5sYXN0KXtzaG93VG9hc3QoJ1BlaGxlIHNpemUgZGFyaiBrYXJlaW4nKTtyZXR1cm47fQogICAgc2F2ZVBkZihtYXRlcmlhbExpbmVzKCksZmlsZU5hbWUoJ21hdGVyaWFsJykpOyBzaG93VG9hc3QoJ01hdGVyaWFsIGxpc3QgZG93bmxvYWQgaG8gZ2F5aScpOwogIH0KCiAgZnVuY3Rpb24gc2hvd1RvYXN0KHRleHQpIHsgJCgndG9hc3QnKS50ZXh0Q29udGVudD10ZXh0OyAkKCd0b2FzdCcpLmNsYXNzTGlzdC5hZGQoJ3Nob3cnKTsgd2luZG93LnNldFRpbWVvdXQoZnVuY3Rpb24oKXskKCd0b2FzdCcpLmNsYXNzTGlzdC5yZW1vdmUoJ3Nob3cnKTt9LDE4MDApOyB9CiAgZnVuY3Rpb24gZmFsbGJhY2tDb3B5KHRleHQpIHsgdmFyIGFyZWE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgndGV4dGFyZWEnKTsgYXJlYS52YWx1ZT10ZXh0OyBhcmVhLnN0eWxlLnBvc2l0aW9uPSdmaXhlZCc7IGFyZWEuc3R5bGUub3BhY2l0eT0nMCc7IGRvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYXJlYSk7IGFyZWEuc2VsZWN0KCk7IHRyeXtkb2N1bWVudC5leGVjQ29tbWFuZCgnY29weScpO3Nob3dUb2FzdCgnRXN0aW1hdGUgY29waWVkJyk7fWNhdGNoKGUpe3Nob3dUb2FzdCgnQ29weSBuYWhpIGh1YScpO30gYXJlYS5yZW1vdmUoKTsgfQoKICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCcudHlwZS10YWInKS5mb3JFYWNoKGZ1bmN0aW9uKHRhYil7dGFiLmFkZEV2ZW50TGlzdGVuZXIoJ2NsaWNrJyxmdW5jdGlvbigpe3NldFR5cGUodGFiLmRhdGFzZXQudHlwZSk7fSk7fSk7CiAgZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbCgnLnVuaXQtdG9nZ2xlIGJ1dHRvbicpLmZvckVhY2goZnVuY3Rpb24oYnV0dG9uKXtidXR0b24uYWRkRXZlbnRMaXN0ZW5lcignY2xpY2snLGZ1bmN0aW9uKCl7c2V0VW5pdChidXR0b24uZGF0YXNldC51bml0KTt9KTt9KTsKICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCdbZGF0YS12aWV3XScpLmZvckVhY2goZnVuY3Rpb24oYnV0dG9uKXtidXR0b24uYWRkRXZlbnRMaXN0ZW5lcignY2xpY2snLGZ1bmN0aW9uKCl7c2V0VmlldyhidXR0b24uZGF0YXNldC52aWV3KTt9KTt9KTsKICBkb2N1bWVudC5hZGRFdmVudExpc3RlbmVyKCdpbnB1dCcsZnVuY3Rpb24oZSl7CiAgICBpZihlLnRhcmdldC5pZD09PSdoYXNBcmNoJykgJCgnYXJjaEZpZWxkcycpLmNsYXNzTGlzdC50b2dnbGUoJ2lzLWhpZGRlbicsIWUudGFyZ2V0LmNoZWNrZWQpOwogICAgaWYoZS50YXJnZXQuaWQ9PT0ncmF0ZVNlYXJjaCcpIHJlbmRlclJhdGVMaXN0KCk7CiAgICBjYWxjdWxhdGUoKTsKICB9KTsKICBkb2N1bWVudC5hZGRFdmVudExpc3RlbmVyKCdjaGFuZ2UnLGZ1bmN0aW9uKGUpewogICAgaWYoZS50YXJnZXQuaWQ9PT0nYXJjaFR5cGUnKSAkKCdhcmNoSGVpZ2h0RmllbGQnKS5jbGFzc0xpc3QudG9nZ2xlKCdpcy1oaWRkZW4nLGUudGFyZ2V0LnZhbHVlIT09J0thbWFuaScpOwogICAgaWYoZS50YXJnZXQuaWQ9PT0ncmF0ZUNhdGVnb3J5JykgcmVuZGVyUmF0ZUxpc3QoKTsKICAgIGlmKGUudGFyZ2V0LmlkPT09J2NvbG9yQ2F0ZWdvcnknKSB7ICQoJ3JhdGVDYXRlZ29yeScpLnZhbHVlPWUudGFyZ2V0LnZhbHVlOyByZW5kZXJSYXRlTGlzdCgpOyB9CiAgICBjYWxjdWxhdGUoKTsKICB9KTsKICAkKCdjb3B5QnRuJykuYWRkRXZlbnRMaXN0ZW5lcignY2xpY2snLGZ1bmN0aW9uKCl7dmFyIHRleHQ9c3VtbWFyeVRleHQoKTtpZihuYXZpZ2F0b3IuY2xpcGJvYXJkJiZuYXZpZ2F0b3IuY2xpcGJvYXJkLndyaXRlVGV4dCl7bmF2aWdhdG9yLmNsaXBib2FyZC53cml0ZVRleHQodGV4dCkudGhlbihmdW5jdGlvbigpe3Nob3dUb2FzdCgnRXN0aW1hdGUgY29waWVkJyk7fSxmdW5jdGlvbigpe2ZhbGxiYWNrQ29weSh0ZXh0KTt9KTt9ZWxzZSBmYWxsYmFja0NvcHkodGV4dCk7fSk7CiAgJCgnYmlsbEJ0bicpLmFkZEV2ZW50TGlzdGVuZXIoJ2NsaWNrJyxkb3dubG9hZEJpbGxQZGYpOwogICQoJ21hdGVyaWFsQnRuJykuYWRkRXZlbnRMaXN0ZW5lcignY2xpY2snLGRvd25sb2FkTWF0ZXJpYWxQZGYpOwogICQoJ2NzdkJ0bicpLmFkZEV2ZW50TGlzdGVuZXIoJ2NsaWNrJyxmdW5jdGlvbigpewogICAgdmFyIHI9c3RhdGUubGFzdCwgcm93cz1bWydTZWN0aW9uJywnUmF0ZSAvIHIuZnQnLCdSdW5uaW5nIGZlZXQnLCdBbW91bnQnXV07CiAgICByLm1hdGVyaWFscy5mb3JFYWNoKGZ1bmN0aW9uKHJvdyl7cm93cy5wdXNoKFtyb3cuc2VjdGlvbixyb3cucmF0ZSxkZWMocm93LmZ0LDIpLE1hdGgucm91bmQocm93LmFtb3VudCldKTt9KTsKICAgIHJvd3MucHVzaChbJ01hdGVyaWFsIHN1YnRvdGFsJywnJywnJyxNYXRoLnJvdW5kKHIubWF0ZXJpYWxTdWJ0b3RhbCldLFsnR3JhbmQgdG90YWwnLCcnLCcnLE1hdGgucm91bmQoci5ncmFuZCldKTsKICAgIHZhciBjc3Y9cm93cy5tYXAoZnVuY3Rpb24ocm93KXtyZXR1cm4gcm93Lm1hcChmdW5jdGlvbih2KXtyZXR1cm4gJyInK1N0cmluZyh2KS5yZXBsYWNlKC8iL2csJyIiJykrJyInO30pLmpvaW4oJywnKTt9KS5qb2luKCdcbicpOwogICAgdmFyIGJsb2I9bmV3IEJsb2IoW2Nzdl0se3R5cGU6J3RleHQvY3N2O2NoYXJzZXQ9dXRmLTgnfSksdXJsPVVSTC5jcmVhdGVPYmplY3RVUkwoYmxvYiksYT1kb2N1bWVudC5jcmVhdGVFbGVtZW50KCdhJyk7YS5ocmVmPXVybDthLmRvd25sb2FkPSdhbHVtaW5pdW0tbWF0ZXJpYWwtZXN0aW1hdGUuY3N2Jztkb2N1bWVudC5ib2R5LmFwcGVuZENoaWxkKGEpO2EuY2xpY2soKTthLnJlbW92ZSgpO1VSTC5yZXZva2VPYmplY3RVUkwodXJsKTtzaG93VG9hc3QoJ0NTViBkb3dubG9hZGVkJyk7CiAgfSk7CgogICQoJ2FyY2hIZWlnaHRGaWVsZCcpLmNsYXNzTGlzdC5hZGQoJ2lzLWhpZGRlbicpOwogIHJlbmRlclJhdGVMaXN0KCk7CiAgc2V0VHlwZSgnc2xpZGluZycpOwp9KSgpOwo="></script>
+  <script type="text/plain" id="legacy-script">
+    (function () {
+      'use strict';
+      var state = { type: 'sliding', unit: 'imperial', last: null };
+      var $ = function (id) { return document.getElementById(id); };
+      var inputs = ['widthFt','widthIn','heightFt','heightIn','widthMm','heightMm','panelCount','aluminiumRate','glassRate','hardwareRate','wastage'];
 
-    <div class="summary-row">
-      <span>Item Discount</span>
-      <strong>${money(itemDiscount)}</strong>
-    </div>
+      function num(id) {
+        var value = parseFloat($(id).value);
+        return Number.isFinite(value) ? Math.max(0, value) : 0;
+      }
 
-    <div class="summary-row">
-      <span>Global Discount</span>
-      <strong>${money(gd)}</strong>
-    </div>
+      function dimensions() {
+        if (state.unit === 'metric') {
+          return { w: num('widthMm') / 304.8, h: num('heightMm') / 304.8 };
+        }
+        return { w: num('widthFt') + num('widthIn') / 12, h: num('heightFt') + num('heightIn') / 12 };
+      }
 
-    <div class="summary-row">
-      <span>Tax / GST</span>
-      <strong>${money(tax)}</strong>
-    </div>
+      function ftIn(feet) {
+        if (!Number.isFinite(feet) || feet <= 0) return '0′ 0″';
+        var whole = Math.floor(feet);
+        var inches = Math.round((feet - whole) * 12 * 4) / 4;
+        if (inches >= 12) { whole += 1; inches = 0; }
+        return whole + '′ ' + (inches % 1 ? inches.toFixed(2).replace(/0+$/, '').replace(/\.$/, '') : inches.toFixed(0)) + '″';
+      }
 
-    <div class="summary-row">
-      <span>Labour</span>
-      <strong>${money(getNumber("labour"))}</strong>
-    </div>
+      function mm(feet) { return Math.round(feet * 304.8) + ' mm'; }
+      function measure(feet) { return state.unit === 'metric' ? mm(feet) : ftIn(feet); }
+      function money(value) { return 'Rs ' + Math.round(value).toLocaleString('en-PK'); }
+      function decimal(value, places) { return value.toFixed(places).replace(/\.0+$/, ''); }
 
-    <div class="summary-row">
-      <span>Freight</span>
-      <strong>${money(getNumber("freight"))}</strong>
-    </div>
+      function config() {
+        var n = state.type === 'fixed' ? 1 : Math.max(1, parseInt($('panelCount').value, 10) || 1);
+        if (state.type === 'sliding') return { n: n, opening: Math.max(1, n - 1), name: n + '-panel sliding window', glassDeductW: .25, glassDeductH: 5/12 };
+        if (state.type === 'casement') return { n: n, opening: n, name: n + '-shutter casement window', glassDeductW: .25, glassDeductH: .25 };
+        return { n: 1, opening: 0, name: 'Fixed glass window', glassDeductW: .25, glassDeductH: .25 };
+      }
 
-    <div class="summary-row">
-      <span>Previous Balance</span>
-      <strong>${money(getNumber("previousBalance"))}</strong>
-    </div>
+      function calculate() {
+        var d = dimensions();
+        var c = config();
+        var valid = d.w >= .5 && d.h >= .5;
+        $('sizeError').textContent = valid ? '' : 'Width aur height kam az kam 6 inch honi chahiye.';
+        var w = Math.max(d.w, .5), h = Math.max(d.h, .5);
+        var panelW = w / c.n;
+        var cuts = [];
+        var frameLength = 2 * w + 2 * h;
+        var sashLength = 0;
+        var mullionLength = 0;
 
-    <div class="summary-row">
-      <span>Grand Total</span>
-      <strong>${money(grand)}</strong>
-    </div>
+        cuts.push({ name: 'Outer frame — top/bottom', note: 'Frame horizontal', qty: 2, length: w, total: 2*w });
+        cuts.push({ name: 'Outer frame — sides', note: 'Frame vertical', qty: 2, length: h, total: 2*h });
 
-    <div class="summary-row">
-      <span>Paid</span>
-      <strong>${money(paid)}</strong>
-    </div>
-
-    <div class="summary-row">
-      <span>Balance</span>
-      <strong>${money(balance)}</strong>
-    </div>
-
-  `;
-
-  openModal("summaryModal");
-}
-
-
-/* =========================================================
-   BACKUP / RESTORE
-========================================================= */
-
-function backupData(){
-
-  const data = {
-
-    rates,
-
-    customer,
-
-    company,
-
-    history:
-      JSON.parse(
-        localStorage.getItem("quotation_history") || "[]"
-      ),
-
-    draft:
-      JSON.parse(
-        localStorage.getItem("quotation_draft") || "{}"
-      )
-
-  };
-
-  const blob =
-    new Blob(
-      [JSON.stringify(data,null,2)],
-      {type:"application/json"}
-    );
-
-  const url =
-    URL.createObjectURL(blob);
-
-  const a =
-    document.createElement("a");
-
-  a.href = url;
-  a.download =
-    "aluminium-quotation-backup.json";
-
-  a.click();
-
-  URL.revokeObjectURL(url);
-}
-
-function restoreData(event){
-
-  const file =
-    event.target.files[0];
-
-  if(!file) return;
-
-  const reader =
-    new FileReader();
-
-  reader.onload = function(){
-
-    try{
-
-      const data =
-        JSON.parse(reader.result);
-
-      if(data.rates){
-
-        const parsed = normalizeRates(data.rates);
-
-        if(parsed && parsed.length > 0){
-
-          rates = parsed;
-
-          localStorage.setItem(
-            "aluminium_rates",
-            JSON.stringify(rates)
-          );
-
-        }else{
-
-          throw new Error("No valid rates in backup");
-
+        if (state.type === 'sliding') {
+          sashLength = 2 * w + 2 * c.n * h;
+          cuts.push({ name: 'Sash top/bottom rails', note: 'Har panel ke 2 horizontal', qty: 2*c.n, length: panelW, total: 2*w });
+          cuts.push({ name: 'Sash stiles / interlocks', note: 'Har panel ke 2 vertical', qty: 2*c.n, length: h, total: 2*c.n*h });
+        } else if (state.type === 'casement') {
+          sashLength = 2 * w + 2 * c.n * h;
+          mullionLength = Math.max(0, c.n - 1) * h;
+          cuts.push({ name: 'Shutter top/bottom rails', note: 'Har shutter ke 2 horizontal', qty: 2*c.n, length: panelW, total: 2*w });
+          cuts.push({ name: 'Shutter stiles', note: 'Har shutter ke 2 vertical', qty: 2*c.n, length: h, total: 2*c.n*h });
+          if (c.n > 1) cuts.push({ name: 'Frame mullion', note: 'Shutters ke darmiyan', qty: c.n-1, length: h, total: mullionLength });
         }
 
+        var glassW = Math.max(.01, panelW - c.glassDeductW);
+        var glassH = Math.max(.01, h - c.glassDeductH);
+        var glassArea = glassW * glassH * c.n;
+        cuts.push({ name: 'Glass', note: decimal(glassW, 3) + ' × ' + decimal(glassH, 3) + ' ft each', qty: c.n, size: measure(glassW) + ' × ' + measure(glassH), totalArea: glassArea });
+
+        var rawAlu = frameLength + sashLength + mullionLength;
+        var waste = Math.min(50, num('wastage'));
+        var orderAlu = rawAlu * (1 + waste/100);
+        var aluCost = orderAlu * num('aluminiumRate');
+        var glassCost = glassArea * num('glassRate');
+        var hardwareCost = c.opening * num('hardwareRate');
+        var total = aluCost + glassCost + hardwareCost;
+
+        state.last = { d: d, c: c, cuts: cuts, rawAlu: rawAlu, orderAlu: orderAlu, glassArea: glassArea, aluCost: aluCost, glassCost: glassCost, hardwareCost: hardwareCost, total: total, waste: waste };
+
+        $('visualWidth').textContent = measure(d.w);
+        $('visualHeight').textContent = measure(d.h);
+        $('windowDrawing').className = 'window-drawing ' + state.type;
+        $('resultTitle').textContent = c.name;
+        $('resultDesc').textContent = state.type === 'fixed' ? 'Outer frame aur fixed glass ka estimated material.' : 'Frame, ' + (state.type === 'sliding' ? 'sash' : 'shutter') + ' aur glass ka estimated material.';
+        $('grandTotal').textContent = money(total);
+        $('aluTotal').textContent = decimal(orderAlu, 1) + ' r.ft';
+        $('glassTotal').textContent = decimal(glassArea, 1) + ' sq.ft';
+        $('hardwareUnits').textContent = c.opening ? c.opening + (c.opening === 1 ? ' panel' : ' panels') : 'Not required';
+        $('aluCost').textContent = money(aluCost);
+        $('glassCost').textContent = money(glassCost);
+        $('hardwareCost').textContent = money(hardwareCost);
+        $('totalCost').textContent = money(total);
+
+        $('cutList').innerHTML = cuts.map(function (cut) {
+          return '<div class="cut-row"><div class="name">' + cut.name + '<small>' + cut.note + '</small></div><span class="qty">× ' + cut.qty + '</span><div class="measure">' + (cut.size || (measure(cut.length) + ' each')) + '</div></div>';
+        }).join('') + '<div class="cut-row"><div class="name">Aluminium order length<small>Raw ' + decimal(rawAlu, 1) + ' r.ft + ' + waste + '% wastage</small></div><span class="qty">total</span><div class="measure">' + decimal(orderAlu, 1) + ' r.ft</div></div>';
       }
 
-      if(data.customer){
-
-        customer = data.customer;
-
-        localStorage.setItem(
-          "quotation_customer",
-          JSON.stringify(customer)
-        );
-
+      function setType(type) {
+        state.type = type;
+        document.querySelectorAll('.type-tab').forEach(function (tab) { tab.setAttribute('aria-selected', String(tab.dataset.type === type)); });
+        var select = $('panelCount');
+        if (type === 'fixed') {
+          $('panelGroup').style.display = 'none';
+          $('hardwareField').style.display = 'none';
+        } else {
+          $('panelGroup').style.display = '';
+          $('hardwareField').style.display = '';
+          var current = parseInt(select.value, 10) || 2;
+          select.innerHTML = type === 'sliding'
+            ? '<option value="2">2 panels</option><option value="3">3 panels</option><option value="4">4 panels</option>'
+            : '<option value="1">1 shutter</option><option value="2">2 shutters</option><option value="3">3 shutters</option><option value="4">4 shutters</option>';
+          select.value = String(type === 'casement' ? Math.min(4, Math.max(1, current)) : Math.min(4, Math.max(2, current)));
+          $('panelLabel').textContent = type === 'sliding' ? 'Sliding panels' : 'Casement shutters';
+          $('hardwareLabel').textContent = type === 'sliding' ? 'Hardware per opening panel' : 'Hardware per shutter';
+          $('panelHelp').textContent = type === 'sliding' ? 'Opening panels ka hardware alag count hoga.' : 'Har shutter ke hinges aur handle ka aik hardware set maana gaya hai.';
+        }
+        calculate();
       }
 
-      if(data.company){
-
-        company = data.company;
-
-        localStorage.setItem(
-          "quotation_company",
-          JSON.stringify(company)
-        );
-
+      function setUnit(unit) {
+        var before = dimensions();
+        state.unit = unit;
+        document.querySelectorAll('.unit-toggle button').forEach(function (b) { b.classList.toggle('active', b.dataset.unit === unit); });
+        document.querySelector('.imperial-fields').style.display = unit === 'imperial' ? '' : 'none';
+        document.querySelector('.mm-fields').style.display = unit === 'metric' ? 'block' : 'none';
+        if (unit === 'metric') {
+          $('widthMm').value = Math.round(before.w * 304.8);
+          $('heightMm').value = Math.round(before.h * 304.8);
+        } else {
+          var wf = Math.floor(before.w), hf = Math.floor(before.h);
+          $('widthFt').value = wf; $('widthIn').value = Math.round((before.w-wf)*12*4)/4;
+          $('heightFt').value = hf; $('heightIn').value = Math.round((before.h-hf)*12*4)/4;
+        }
+        calculate();
       }
 
-      if(data.history){
-
-        localStorage.setItem(
-          "quotation_history",
-          JSON.stringify(data.history)
-        );
-
+      function summaryText() {
+        var r = state.last;
+        var lines = [
+          'ALUMINIUM WINDOW ESTIMATE',
+          r.c.name,
+          'Size: ' + measure(r.d.w) + ' W × ' + measure(r.d.h) + ' H',
+          '',
+          'CUT LIST'
+        ];
+        r.cuts.forEach(function (cut) { lines.push(cut.name + ': ' + cut.qty + ' × ' + (cut.size || measure(cut.length))); });
+        lines.push('', 'Aluminium raw: ' + decimal(r.rawAlu,1) + ' r.ft', 'Aluminium order (' + r.waste + '% wastage): ' + decimal(r.orderAlu,1) + ' r.ft', 'Glass: ' + decimal(r.glassArea,1) + ' sq.ft', 'Hardware sets: ' + r.c.opening, '', 'Estimated total: ' + money(r.total), 'Labour, rubber, screws, silicone aur transport shamil nahi.');
+        return lines.join('\n');
       }
 
-      if(data.draft){
-
-        localStorage.setItem(
-          "quotation_draft",
-          JSON.stringify(data.draft)
-        );
-
+      function showToast(text) {
+        $('toast').textContent = text; $('toast').classList.add('show');
+        window.setTimeout(function () { $('toast').classList.remove('show'); }, 1800);
       }
 
-      alert("Backup restored successfully.");
-
-      location.reload();
-
-    }catch(e){
-
-      alert("Invalid backup file.");
-
-    }
-
-  };
-
-  reader.readAsText(file);
-}
-
-
-/* =========================================================
-   PRINT
-========================================================= */
-
-function printQuotation(){
-
-  calculateTotals();
-
-  window.print();
-}
-
-
-/* =========================================================
-   WHATSAPP
-========================================================= */
-
-function sendWhatsApp(){
-
-  const grand =
-    document.getElementById("grandTotal").textContent;
-
-  const balance =
-    document.getElementById("balanceTotal").textContent;
-
-  let text =
-`ALUMINIUM QUOTATION
-
-Quotation: ${document.getElementById("quotationNo").textContent}
-
-Customer: ${customer.name || "Walk-in Customer"}
-Phone: ${customer.phone || "-"}
-
-ITEMS:
-`;
-
-  items.forEach((item,index)=>{
-
-    text +=
-`${index+1}. ${item.section} | ${item.colour} | ${item.thickness}mm | ${item.size} | Qty ${item.quantity} | ${money(item.afterDiscount)}
-`;
-
-  });
-
-  text +=
-`
-Grand Total: ${grand}
-Balance: ${balance}
-
-Thank you.`;
-
-  const url =
-    "https://wa.me/?text=" +
-    encodeURIComponent(text);
-
-  window.open(url,"_blank");
-}
-
-
-/* =========================================================
-   CHECK APP
-========================================================= */
-
-function checkApp(){
-
-  const tests = [];
-
-  function test(name,condition){
-
-    tests.push({
-      name,
-      ok:Boolean(condition)
-    });
-
-  }
-
-  /* Test 1 */
-  test(
-    "Rates loaded",
-    Array.isArray(rates) && rates.length > 0
-  );
-
-  /* Test 2 */
-  test(
-    "Sections available",
-    document.getElementById("section").options.length > 1
-  );
-
-  /* Test 3 */
-  test(
-    "Rate engine",
-    getRate("DC-26F","0.9") === 880
-  );
-
-  /* Test 4 */
-  test(
-    "Rate group 2",
-    getRate("DC-26F","1.5") === 1049
-  );
-
-  /* Test 5 */
-  test(
-    "Rate group 3",
-    getRate("DC-26F","1.9") === 1244
-  );
-
-  /* Test 6 */
-  test(
-    "Size 10 x 4",
-    parseSize("10 x 4") === 40
-  );
-
-  /* Test 7 */
-  test(
-    "Size 10 × 4",
-    parseSize("10 × 4") === 40
-  );
-
-  /* Test 8 */
-  test(
-    "Single size",
-    parseSize("10") === 10
-  );
-
-  /* Test 9 */
-  test(
-    "Money formatter",
-    money(1000).includes("1,000")
-  );
-
-  /* Test 10 */
-  test(
-    "Local storage",
-    typeof localStorage !== "undefined"
-  );
-
-  /* Test 11 */
-  test(
-    "Customer system",
-    typeof saveCustomer === "function"
-  );
-
-  /* Test 12 */
-  test(
-    "Backup system",
-    typeof backupData === "function"
-  );
-
-  /* Test 13 */
-  test(
-    "Print system",
-    typeof printQuotation === "function"
-  );
-
-  /* Test 14 */
-  test(
-    "WhatsApp system",
-    typeof sendWhatsApp === "function"
-  );
-
-  const passed =
-    tests.filter(t=>t.ok).length;
-
-  const total =
-    tests.length;
-
-  document.getElementById("checkBody").innerHTML = `
-
-    <div class="total-box" style="margin-bottom:8px">
-      <div class="total-label">CHECK RESULT</div>
-      <div class="total-value">
-        ${passed} / ${total} Passed
-      </div>
-    </div>
-
-    ${tests.map(t=>`
-
-      <div class="check-item">
-
-        <span>${escapeHtml(t.name)}</span>
-
-        <span class="${t.ok ? "pass":"fail"}">
-          ${t.ok ? "PASS":"FAIL"}
-        </span>
-
-      </div>
-
-    `).join("")}
-
-  `;
-
-  openModal("checkModal");
-}
-
-
-/* =========================================================
-   MODAL
-========================================================= */
-
-function openModal(id){
-
-  document.getElementById(id)
-    .classList.add("show");
-
-}
-
-function closeModal(id){
-
-  document.getElementById(id)
-    .classList.remove("show");
-
-}
-
-
-/* =========================================================
-   CLICK OUTSIDE MODAL
-========================================================= */
-
-document.querySelectorAll(".modal").forEach(modal=>{
-
-  modal.addEventListener("click",function(e){
-
-    if(e.target === modal){
-      modal.classList.remove("show");
-    }
-
-  });
-
-});
-
-
-/* =========================================================
-   KEYBOARD SHORTCUTS
-========================================================= */
-
-document.addEventListener("keydown",function(e){
-
-  if(e.ctrlKey && e.key.toLowerCase() === "s"){
-
-    e.preventDefault();
-
-    saveQuotation();
-
-  }
-
-  if(e.ctrlKey && e.key.toLowerCase() === "p"){
-
-    e.preventDefault();
-
-    printQuotation();
-
-  }
-
-});
-
-
-/* =========================================================
-   AUTO SAVE INPUTS
-========================================================= */
-
-[
-  "globalDiscount",
-  "tax",
-  "labour",
-  "freight",
-  "previousBalance",
-  "paid",
-  "notes"
-].forEach(id=>{
-
-  const el =
-    document.getElementById(id);
-
-  if(el){
-
-    el.addEventListener("input",calculateTotals);
-
-  }
-
-});
-
-
-</script>
-
+      document.querySelectorAll('.type-tab').forEach(function (tab) { tab.addEventListener('click', function () { setType(tab.dataset.type); }); });
+      document.querySelectorAll('.unit-toggle button').forEach(function (button) { button.addEventListener('click', function () { setUnit(button.dataset.unit); }); });
+      inputs.forEach(function (id) { $(id).addEventListener('input', calculate); $(id).addEventListener('change', calculate); });
+
+      $('copyBtn').addEventListener('click', function () {
+        var text = summaryText();
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function () { showToast('Estimate copied'); }, function () { fallbackCopy(text); });
+        } else fallbackCopy(text);
+      });
+
+      function fallbackCopy(text) {
+        var area = document.createElement('textarea'); area.value = text; area.style.position = 'fixed'; area.style.opacity = '0'; document.body.appendChild(area); area.select();
+        try { document.execCommand('copy'); showToast('Estimate copied'); } catch (e) { showToast('Copy nahi hua'); }
+        area.remove();
+      }
+
+      $('csvBtn').addEventListener('click', function () {
+        var r = state.last;
+        var rows = [['Item','Qty','Size','Total']];
+        r.cuts.forEach(function (cut) { rows.push([cut.name, cut.qty, cut.size || measure(cut.length), cut.totalArea ? decimal(cut.totalArea,2)+' sq.ft' : decimal(cut.total,2)+' r.ft']); });
+        rows.push(['Aluminium order',1,'Raw + '+r.waste+'% wastage',decimal(r.orderAlu,2)+' r.ft']);
+        rows.push(['Estimated cost',1,'PKR',Math.round(r.total)]);
+        var csv = rows.map(function (row) { return row.map(function (v) { return '"'+String(v).replace(/"/g,'""')+'"'; }).join(','); }).join('\n');
+        var blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+        var url = URL.createObjectURL(blob); var a = document.createElement('a'); a.href = url; a.download = 'window-estimate.csv'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url); showToast('CSV downloaded');
+      });
+
+      setType('sliding');
+    })();
+  </script>
 </body>
 </html>
